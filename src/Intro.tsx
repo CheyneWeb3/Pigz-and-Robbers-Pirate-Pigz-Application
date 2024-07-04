@@ -3,6 +3,10 @@ import { Box, Image, Flex, Text, Button, Link } from '@chakra-ui/react';
 import { css, keyframes } from '@emotion/react';
 import Footer from './Components/Footer/Footer';
 
+
+import ViewBsc from './Components/MintBsc/ViewCollectionBSC';
+    // <ViewBsc/>
+
 const NewPage = () => {
   const [tokenData, setTokenData] = useState<any>(null);
 
@@ -129,9 +133,19 @@ const NewPage = () => {
                 textAlign="center"
               >
                 <Text
-
-                mb="200px"
-                fontSize="xl"></Text>
+                fontSize="xl">
+Your PIGZ and ROBBERS on BSC
+                </Text>
+                 <ViewBsc/>
+                   <Text
+                   fontSize="xl">
+   Your Pirate PIGZ on Polygon
+                   </Text>
+                    <ViewBsc/>
+                   <Text
+                   mb="200px"
+                   fontSize="xl">
+                   </Text>
               </Box>
             </Box>
           </Box>

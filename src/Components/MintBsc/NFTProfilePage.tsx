@@ -78,7 +78,7 @@ const NFTProfilePage = () => {
           flex={1}
           p={0}
           m={0}
-          bg="rgba(0, 0, 0, 0.65)"
+          bg="rgba(0, 0, 0, 0.0)"
           display="flex"
           flexDirection="column"
           color="white"
@@ -86,6 +86,9 @@ const NFTProfilePage = () => {
           <Flex p="5px" bg="rgba(0, 0, 0, 0.61)" justifyContent="right" flexWrap="wrap">
             <w3m-button />
           </Flex>
+
+                                  <Flex bg="rgba(0, 0, 0, 0.65)" borderRadius="2xl" p={4} m={2} h="140px" justifyContent="center" flexWrap="wrap">
+                                  </Flex>
           <Box
             flex={1}
             p={0}
@@ -101,33 +104,36 @@ const NFTProfilePage = () => {
               flex={1}
               p={4}
               m={2}
-              bg="rgba(0, 0, 0, 0.2)"
-              borderRadius="md"
+              bg="rgba(0, 0, 0, 0.65)"
+              borderRadius="2xl"
               boxShadow="md"
               textAlign="center"
             >
-              <Image src={`https://ipfs.io/ipfs/${nftData.image.split('ipfs://')[1]}`} alt={nftData.name} width="100%" />
+              <Image borderRadius="2xl" mx="auto" src={`https://ipfs.io/ipfs/${nftData.image.split('ipfs://')[1]}`} alt={nftData.name} width="75%" />
+
             </Box>
             <Box
               flex={1}
               p={4}
               m={2}
-              bg="rgba(0, 0, 0, 0.2)"
-              borderRadius="md"
+              bg="rgba(0, 0, 0, 0.65)"
+              borderRadius="2xl"
               boxShadow="md"
             >
-              <Text fontSize="2xl" mb={4} css={textShadowStyle}>{nftData.name}</Text>
+              <Text fontSize="4xl" mb={4} css={textShadowStyle}>{nftData.name}</Text>
               <Text fontSize="md" mb={4}>{nftData.description}</Text>
               {nftData.attributes.map((attribute, index) => (
                 <Text key={index} fontSize="3xl" mb={2} css={textShadowStyle}>
                   {attribute.trait_type}: {attribute.value}
                 </Text>
               ))}
-              <Flex p="5px" bg="rgba(0, 0, 0, 0)" justifyContent="center" flexWrap="wrap">
-              <MiniMintBsc/>
-              </Flex>
             </Box>
           </Box>
+
+            <Flex bg="rgba(0, 0, 0, 0.65)" borderRadius="2xl" p={4} m={2} h="340px" justifyContent="center" flexWrap="wrap">
+            <MiniMintBsc/>
+            </Flex>
+
         </Box>
       </Box>
       <Footer />

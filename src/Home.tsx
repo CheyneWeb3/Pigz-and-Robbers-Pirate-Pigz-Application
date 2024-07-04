@@ -3,6 +3,15 @@ import { Box, Image, Flex, Text, Button, Link } from '@chakra-ui/react';
 import { css, keyframes } from '@emotion/react';
 import Footer from './Components/Footer/Footer';
 
+
+import ViewBsc from './Components/MintBsc/ViewCollectionBSC';
+
+
+
+
+
+
+
 const NewPage = () => {
   const [tokenData, setTokenData] = useState<any>(null);
 
@@ -162,6 +171,7 @@ const NewPage = () => {
               textAlign="center"
             >
               <Text mb="750px" fontSize="xl">Full Width Box</Text>
+              <ViewBsc/>
             </Box>
           </Box>
         </Box>
