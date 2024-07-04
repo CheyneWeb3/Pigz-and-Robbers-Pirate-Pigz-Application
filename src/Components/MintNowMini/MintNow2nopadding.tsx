@@ -1,0 +1,238 @@
+import React, { useState, useEffect } from 'react';
+import {
+  Box,
+  Flex,
+  Image,
+  Text,
+  Button,
+  keyframes,
+  useDisclosure,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton,
+} from '@chakra-ui/react';
+import { useToast } from '@chakra-ui/react';
+import {
+  useWeb3Modal,
+  useWeb3ModalState,
+  useWeb3ModalProvider,
+} from '@web3modal/ethers/react';
+import { ethers, parseEther, BrowserProvider } from 'ethers';
+import axios from 'axios';
+import nftMintAbi from './nftMintAbi.json';
+
+const glow = keyframes`
+  10% { border-color: white; box-shadow: 0 0 5px white; }
+  50% { border-color: white; box-shadow: 0 0 20px white; }
+  100% { border-color: white; box-shadow: 0 0 50px white; }
+`;
+
+const NFTMINT_CONTRACT_ADDRESS = '0xAC40d2487295C6AcdCAbe317B3042b1A15380a0C';
+
+const NftMintSingle = () => {
+  const { open } = useWeb3Modal();
+  const { selectedNetworkId } = useWeb3ModalState();
+  const { walletProvider } = useWeb3ModalProvider();
+  const toast = useToast();
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const [modalContent, setModalContent] = useState<{ status: string, tokenId: number | null, txHash: string | null }>({ status: 'Awaiting transaction confirmation...', tokenId: null, txHash: null });
+  const [transactionHash, setTransactionHash] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isConnected, setIsConnected] = useState(false);
+  const [account, setAccount] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (walletProvider) {
+      setIsConnected(true);
+      const getAccount = async () => {
+        const accounts = await walletProvider.request({ method: 'eth_requestAccounts' });
+        setAccount(accounts[0]);
+      };
+      getAccount();
+    } else {
+      setIsConnected(false);
+    }
+  }, [walletProvider]);
+
+  const switchToBSC = async () => {
+    if (walletProvider?.request) {
+      try {
+        await walletProvider.request({
+          method: 'wallet_switchEthereumChain',
+          params: [{ chainId: '0x38' }], // Chain ID for BSC Mainnet
+        });
+      } catch (switchError) {
+        if ((switchError as { code: number }).code === 4902) {
+          try {
+            await walletProvider.request({
+              method: 'wallet_addEthereumChain',
+              params: [
+                {
+                  chainId: '0x38',
+                  chainName: 'Binance Smart Chain',
+                  nativeCurrency: {
+                    name: 'BNB',
+                    symbol: 'BNB',
+                    decimals: 18,
+                  },
+                  rpcUrls: ['https://bsc-dataseed.binance.org/'],
+                  blockExplorerUrls: ['https://bscscan.com/'],
+                },
+              ],
+            });
+          } catch (addError) {
+            console.error(addError);
+          }
+        }
+      }
+    }
+  };
+
+  const onMintClick = async () => {
+    if (!isConnected) {
+      open();
+      toast({
+        title: 'Wallet Not Connected',
+        description: 'Please connect your wallet to mint an NFT.',
+        status: 'warning',
+        duration: 5000,
+        isClosable: true,
+      });
+      return;
+    }
+
+    try {
+      await switchToBSC();
+      onOpen();
+      setModalContent({ status: 'Awaiting transaction confirmation...', tokenId: null, txHash: null });
+
+      const provider = new BrowserProvider(walletProvider);
+      const signer = provider.getSigner();
+      const contract = new ethers.Contract(NFTMINT_CONTRACT_ADDRESS, nftMintAbi, signer);
+
+      const transaction = await contract.airDrop(account, 1); // Mint 1 NFT to the connected wallet address
+
+      setTransactionHash(transaction.hash);
+      setIsLoading(true);
+
+      const receipt = await transaction.wait();
+      setIsLoading(false);
+
+      setModalContent({ status: 'Transaction confirmed. Processing mint...', tokenId: null, txHash: transaction.hash });
+
+      const tokenId = receipt.logs[0].topics[3];
+      const tokenIdInt = parseInt(tokenId, 16);
+      const imageUrl = `https://pigzandrobbers.meta.rareboard.com/api/${tokenIdInt}.json`;
+      postToTwitter(imageUrl);
+
+      setModalContent({
+        status: `You Just Minted a Pigz and Robbers NFT! #${tokenIdInt}`,
+        tokenId: tokenIdInt,
+        txHash: transaction.hash,
+      });
+
+      toast({
+        title: 'NFT Minted',
+        description: 'Your NFT has been successfully minted!',
+        status: 'success',
+        duration: 5000,
+        isClosable: true,
+      });
+    } catch (error) {
+      toast({
+        title: 'Minting Error',
+        description: 'An error occurred during the minting process.',
+        status: 'error',
+        duration: 5000,
+        isClosable: true,
+      });
+      setModalContent({ status: 'Minting error. Please try again.', tokenId: null, txHash: null });
+    }
+  };
+
+  return (
+    <>
+      <Box
+        p={15}
+        bg="rgba(0, 0, 0, 0.65)"
+        borderRadius="2xl"
+        boxShadow="xl"
+        border="5px"
+        borderColor="blue.400"
+        animation={`${glow} 2s infinite`}
+        maxH="500px"
+        marginBottom="25px"
+        marginTop="25px"
+        width="100%"
+        textAlign="center"
+        maxWidth="600px"
+      >
+        <Flex color="white" alignItems="center" mb="1">
+          <Image src="https://cosmicrichpigz.netlify.app/images/pigznrobbers.png" alt="" boxSize="120px" borderRadius="xl" mr="5" />
+          <Box textAlign="left">
+            <Text fontSize="md" fontWeight="semibold" textAlign="left">
+            Mint another Here Real Fast!
+            </Text>
+            <Text fontSize="2xl" fontWeight="semibold" textAlign="left">
+              Mint 1 now for 0.09 BNB
+            </Text>
+            <a
+              href="https://element.market/collections/aplhadawgz-NFT"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                marginTop: '25px',
+                color: 'white',
+              }}
+            >View on Element Market
+            </a>
+          </Box>
+        </Flex>
+        <Button
+          mt="2"
+          ml="2"
+          width="70%"
+          bg="#d19a19"
+          textColor="white"
+          _hover={{ bg: '#be439e' }}
+          onClick={onMintClick}
+        >
+          Mint another PIGZandROBBERS!
+        </Button>
+        <Box mt="1" textAlign="center">
+
+        </Box>
+      </Box>
+
+      <Modal isOpen={isOpen} onClose={onClose}>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>{modalContent.status}</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>
+            {modalContent.tokenId && (
+              <>
+                <Image src={`https://pigzandrobbers.meta.rareboard.com/api/${modalContent.tokenId}.json`} alt="Minted NFT" />
+                <Text mt="4">You Just Minted a Pigz and Robbers NFT! #{modalContent.tokenId}</Text>
+                <a href={`https://bscscan.com/tx/${modalContent.txHash}`} target="_blank" rel="noopener noreferrer" style={{ color: 'blue', textDecoration: 'underline' }}>
+                  View on BscScan
+                </a>
+              </>
+            )}
+          </ModalBody>
+          <ModalFooter>
+            <Button colorScheme="blue" mr={3} onClick={onClose}>
+              Back to Page
+            </Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
+    </>
+  );
+};
+
+export default NftMintSingle;
