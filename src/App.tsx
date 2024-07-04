@@ -4,6 +4,8 @@ import './styles.css';
 
 import Home from './Home';
 import Intro from './Intro';
+import MintPoly from './MintPoly';
+import MintBsc from './MintBsc';
 
 import Wallet from './Components/WalletComponent/WalletMain';
 
@@ -153,6 +155,8 @@ const modal = createWeb3Modal({
         <Route path="/" element={<Intro />} />
           <Route path="/wallet" element={<Wallet />} />
             <Route path="/home" element={<Home />} />
+              <Route path="/mintbsc" element={<MintBsc />} />
+                <Route path="/mintpoly" element={<MintPoly />} />
       </Routes>
     </Router>
   );
