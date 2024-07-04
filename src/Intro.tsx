@@ -131,7 +131,7 @@ const NewPage = () => {
                 <Text
 
                 mb="200px"
-                fontSize="xl">Small paragram or instruct here to word up with project</Text>
+                fontSize="xl"></Text>
               </Box>
             </Box>
           </Box>
