@@ -218,22 +218,7 @@ function MyNfts() {
         display="flex"
         flexDirection="column"
       >
-        <video
-          autoPlay
-          loop
-          muted
-          style={{
-            position: 'fixed',
-            width: '100%',
-            height: '100%',
-            top: 0,
-            left: 0,
-            objectFit: 'cover',
-            zIndex: -1
-          }}
-        >
-          <source src="/images/bggrass_animation.mp4" type="video/mp4" />
-        </video>
+
         <Box
           flex={1}
           p={0}
@@ -252,8 +237,11 @@ function MyNfts() {
           >
           </Box>
           <Grid templateColumns={{ base: '1fr', md: '1fr 2fr 1fr' }} width="100%" mx="auto" marginTop="10px">
-            <GridItem></GridItem>
+            <GridItem>
+            </GridItem>
             <GridItem display="flex" justifyContent="center">
+            Your PIGZ and ROBBERS on BSC
+
             </GridItem>
             <GridItem display={{ base: 'flex', md: 'block' }} justifyContent="center">
               {/* Placeholder for any additional elements */}
@@ -312,8 +300,8 @@ function MyNfts() {
                     <Box
                       bg="rgba(0, 0, 0, 0)"
                       p="4"
-                      mt={4}
-                      mb={4}
+                      mt={2}
+                      mb={2}
 
                       borderRadius="2xl"
                       position="relative"
@@ -327,10 +315,13 @@ function MyNfts() {
                       }}
                     >
                       <Image
+                      mt={9}
+                      mb={9}
+
                         src={imageUrl}
                         alt={`NFT ${tokenId}`}
-                        width="80%"  // Adjust image width to 80%
-                        height="80%"  // Adjust image height to 80%
+                        width="100%"  // Adjust image width to 80%
+                        height="100%"  // Adjust image height to 80%
                         borderRadius="2xl"
                         objectFit="cover"
                         mx="auto"  // Center the image
@@ -361,25 +352,25 @@ function MyNfts() {
                         transition="opacity 0.3s ease-in-out"
                       >
                         <Text mt="2" color="white" textAlign="center">
-                          Pigsnrobbers TokenId {tokenId}
+                          PIGZ and ROBBERS TokenId {tokenId}
                         </Text>
                         <Link href={getMarketplaceLink(tokenId)} isExternal>
                           <Button
                             mt="2"
                             width="160px"
-                            bg="#56aa70"
+                            bg="#893c59"
                             textColor="white"
-                            _hover={{ bg: '#227140' }}
+                            _hover={{ bg: '#c45b79' }}
                           >
-                            Element Market
+                            Marketplace
                           </Button>
                         </Link>
                         <Button
                           mt="2"
                           width="160px"
-                          bg="#56aa70"
+                          bg="#893c59"
                           textColor="white"
-                          _hover={{ bg: '#227140' }}
+                          _hover={{ bg: '#c45b79' }}
                           onClick={() => addNftToWallet(tokenId, imageUrl)}
                         >
                           Add to Wallet
@@ -387,9 +378,9 @@ function MyNfts() {
                         <Button
                           mt="2"
                           width="160px"
-                          bg="#56aa70"
+                          bg="#893c59"
                           textColor="white"
-                          _hover={{ bg: '#227140' }}
+                          _hover={{ bg: '#c45b79' }}
                           onClick={() => {
                             setSelectedImage(imageUrl);
                             onOpen();
@@ -400,9 +391,9 @@ function MyNfts() {
                         <Button
                           mt="2"
                           width="160px"
-                          bg="#56aa70"
+                          bg="#893c59"
                           textColor="white"
-                          _hover={{ bg: '#227140' }}
+                          _hover={{ bg: '#c45b79' }}
                           onClick={() => navigate(`/nft/${tokenId}`)}
                         >
                           View Details

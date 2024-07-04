@@ -5,7 +5,7 @@ import Footer from './Components/Footer/Footer';
 
 
 import ViewBsc from './Components/MintBsc/ViewCollectionBSC';
-
+    // <ViewBsc/>
 
 
 

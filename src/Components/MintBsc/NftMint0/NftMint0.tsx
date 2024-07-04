@@ -3,38 +3,25 @@ import { ethers } from 'ethers';
 import {
   Box,
   Button,
-  Image,
   Text,
   Link,
   useToast,
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalBody,
-  ModalCloseButton,
   useDisclosure,
-  Center,
-  Wrap,
-  WrapItem,
 } from '@chakra-ui/react';
 import { useNavigate } from 'react-router-dom';
-import Footer from '../Footer/Footer';
-import ClaimToast from '../Claim/ClaimToast';
+import Footer from '../../Footer/Footer';
 import {
   useWeb3Modal,
   useWeb3ModalAccount,
   useWeb3ModalProvider,
 } from '@web3modal/ethers/react';
-
-import './mintNftStyles.css';
 import nftMintAbi from './nftMintAbi.json';
 
-const MINT_PRICE = 0.04;
-const MINT_SUPPLY = 150;
-
-const NFTMINT_CONTRACT_ADDRESS = '0x466cc282a58333F3CD94690a520b5aFAD30506cD'; // Testnet contract address
-const RPC_PROVIDER = 'https://data-seed-prebsc-1-s3.binance.org:8545'; // Testnet RPC
-const EXPLORER_LINK = 'https://testnet.bscscan.com'; // Testnet explorer
+const MINT_PRICE = 0.09;
+const MINT_SUPPLY = 3333;
+const NFTMINT_CONTRACT_ADDRESS = '0xAC40d2487295C6AcdCAbe317B3042b1A15380a0C';
+const RPC_PROVIDER = 'https://data-seed-prebsc-1-s3.binance.org:8545';
+const EXPLORER_LINK = 'https://testnet.bscscan.com';
 
 const getExplorerLink = (tokenId: number) => `${EXPLORER_LINK}/token/${NFTMINT_CONTRACT_ADDRESS}?a=${tokenId}`;
 const getMarketplaceLink = (tokenId: number) => `https://element.market/assets/bsc/${NFTMINT_CONTRACT_ADDRESS}/${tokenId}`;
@@ -57,6 +44,7 @@ function NftMint() {
   const [loading, setLoading] = useState<boolean>(true);
   const [mintAmount, setMintQuantity] = useState<number>(1);
   const [mintLoading, setMintLoading] = useState<boolean>(false);
+  const [mintError, setMintError] = useState<ContractError | null>(null);
 
   useEffect(() => {
     fetchContractData();
@@ -65,17 +53,6 @@ function NftMint() {
   }, []);
 
   const fetchContractData = async () => {
-    if (!window.ethereum) {
-      toast({
-        title: 'Error',
-        description: 'Ethereum object not found, make sure you have MetaMask!',
-        status: 'error',
-        duration: 5000,
-        isClosable: true,
-      });
-      return;
-    }
-
     try {
       setLoading(true);
       const provider = new ethers.JsonRpcProvider(RPC_PROVIDER);
@@ -111,10 +88,15 @@ function NftMint() {
 
     setMintLoading(true);
     try {
+      if (!walletProvider) {
+        throw new Error('Wallet provider is not available');
+      }
+
       const provider = new ethers.BrowserProvider(walletProvider);
-      const signer = provider.getSigner();
+      const signer = await provider.getSigner();
       const contract = new ethers.Contract(NFTMINT_CONTRACT_ADDRESS, nftMintAbi, signer);
-      const tx = await contract.mint(mintAmount, {
+
+      const tx = await contract.mint(address, mintAmount, {
         value: ethers.parseEther((MINT_PRICE * mintAmount).toString()),
       });
       await tx.wait();
@@ -122,6 +104,7 @@ function NftMint() {
     } catch (error) {
       console.error('Minting error:', error);
       const contractError = error as ContractError;
+      setMintError(contractError);
       const errorMessage = contractError.data ? contractError.data.message : 'An unknown error occurred.';
       toast({
         title: 'Minting Error',
@@ -135,8 +118,48 @@ function NftMint() {
     }
   };
 
+  const switchToBSC = async () => {
+    if (walletProvider?.request) {
+      try {
+        console.log('Switching to BSC Testnet...');
+        await walletProvider.request({
+          method: 'wallet_switchEthereumChain',
+          params: [{ chainId: '0x61' }], // Chain ID for BSC Testnet
+        });
+        console.log('Switched to BSC Testnet');
+      } catch (switchError) {
+        if ((switchError as { code: number }).code === 4902) {
+          console.log('BSC Testnet not found. Adding network...');
+          try {
+            await walletProvider.request({
+              method: 'wallet_addEthereumChain',
+              params: [
+                {
+                  chainId: '0x61',
+                  chainName: 'Binance Smart Chain Testnet',
+                  nativeCurrency: {
+                    name: 'tBNB',
+                    symbol: 'tBNB',
+                    decimals: 18,
+                  },
+                  rpcUrls: ['https://data-seed-prebsc-1-s3.binance.org:8545'],
+                  blockExplorerUrls: ['https://testnet.bscscan.com'],
+                },
+              ],
+            });
+            console.log('Added and switched to BSC Testnet');
+          } catch (addError) {
+            console.error('Error adding BSC Testnet:', addError);
+          }
+        } else {
+          console.error('Error switching to BSC Testnet:', switchError);
+        }
+      }
+    }
+  };
+
   const handleIncrement = () => {
-    setMintQuantity((prev) => Math.min(prev + 1, 5));
+    setMintQuantity((prev) => Math.min(prev + 1, 25));
   };
 
   const handleDecrement = () => {
@@ -236,23 +259,13 @@ function NftMint() {
 
   return (
     <>
-      <header>
-        <div className="header-logo">
-          <Link href="/" isExternal>
-            <Image src="/images/logotoast.png" alt="Toast Logo" width="150px" />
-          </Link>
-        </div>
-        <div className="connect-button">
-          <w3m-button />
-        </div>
-      </header>
       <Box
         flex={1}
         p={0}
         m={0}
         display="flex"
         flexDirection="column"
-        bg="rgba(0, 0, 0, 1)"
+        bg="rgba(0, 0, 0, 0)"
         bgImage="url('/images/bg2.png')"
         bgPosition="center"
         bgRepeat="no-repeat"
@@ -264,23 +277,11 @@ function NftMint() {
           m={0}
           display="flex"
           flexDirection="column"
-          bg="rgba(0, 0, 0, 0.2)"
+          bg="rgba(0, 0, 0, 0.0)"
           bgPosition="center"
           bgRepeat="no-repeat"
           bgSize="cover"
         >
-          <Box
-            bg="rgba(0,0,0,0)"
-            padding="5px"
-            width="100%"
-            mx="auto"
-            marginTop="0px"
-          ></Box>
-
-          <Box display="flex" justifyContent="center">
-            <ClaimToast />
-          </Box>
-
           <Box
             marginBottom="40px"
             bg="rgba(0,0,0,0.6)"
@@ -360,205 +361,9 @@ function NftMint() {
             )}
             {mintError && <Text color="red.500" mt="4">Error: {mintError.message}</Text>}
           </Box>
-
-          <Box
-            marginTop="60px"
-            bg="rgba(0,0,0,0.6)"
-            borderRadius="2xl"
-            padding="20px"
-            mx="auto"
-            my="10px"
-            boxShadow="xl"
-            maxWidth="800px"
-            width="100%"
-            textAlign="center"
-            border="1px"
-            borderColor="#a7801a"
-          >
-            <Text
-              className="pricecosthead"
-              style={{
-                color: 'white',
-                textAlign: 'center',
-                fontWeight: 'bolder',
-              }}
-            >
-              My Toasties
-            </Text>
-            {loading ? (
-              <Text
-                className="totalSupply"
-                style={{
-                  marginBottom: '40px',
-                  color: 'white',
-                  padding: '10px',
-                  textAlign: 'center',
-                  fontWeight: 'bold',
-                }}
-              >
-                Please be patient while Loading...
-              </Text>
-            ) : nfts.length === 0 ? (
-              <Text
-                className="totalSupply"
-                style={{
-                  color: 'white',
-                  padding: '10px',
-                  textAlign: 'center',
-                  fontWeight: 'bold',
-                }}
-              >
-                No Toasties found.
-              </Text>
-            ) : (
-              <Wrap justify="center" spacing="10px">
-                {nfts.map((tokenId) => (
-                  <WrapItem key={tokenId}>
-                    <Box
-                      bg="rgba(0, 0, 0, 1)"
-                      p="4"
-                      borderRadius="2xl"
-                      position="relative"
-                      overflow="hidden"
-                      border="1px"
-                      borderColor="#a7801a"
-                      _hover={{
-                        '.overlay': {
-                          opacity: 1,
-                        },
-                      }}
-                    >
-                      <Image
-                        src={`/images/nfts/${tokenId}.png`}
-                        alt={`NFT ${tokenId}`}
-                        width="80%"
-                        height="80%"
-                        borderRadius="2xl"
-                        objectFit="cover"
-                        mx="auto"
-                        my="auto"
-                        onError={(e) => {
-                          const target = e.target as HTMLImageElement;
-                          target.onerror = null;
-                          target.src = 'https://via.placeholder.com/250';
-                        }}
-                        onClick={() => {
-                          setSelectedImage(imageUrl);
-                          onOpen();
-                        }}
-                      />
-                      <Box
-                        className="overlay"
-                        position="absolute"
-                        top="0"
-                        left="0"
-                        width="100%"
-                        height="100%"
-                        bg="rgba(0, 0, 0, 0.7)"
-                        opacity="0"
-                        display="flex"
-                        flexDirection="column"
-                        alignItems="center"
-                        justifyContent="center"
-                        transition="opacity 0.3s ease-in-out"
-                      >
-                        <Text mt="2" color="white" textAlign="center">
-                          Toasties TokenId {tokenId}
-                        </Text>
-                        <Link href={getMarketplaceLink(tokenId)} isExternal>
-                          <Button
-                            mt="2"
-                            width="150px"
-                            bg="#e8bf72"
-                            textColor="white"
-                            _hover={{ bg: '#a7801a' }}
-                          >
-                            Marketplace
-                          </Button>
-                        </Link>
-                        <Button
-                          mt="2"
-                          width="150px"
-                          bg="#e8bf72"
-                          textColor="white"
-                          _hover={{ bg: '#a7801a' }}
-                          onClick={() => addNftToWallet(tokenId)}
-                        >
-                          Add to Wallet
-                        </Button>
-                        <Button
-                          mt="2"
-                          width="150px"
-                          bg="#e8bf72"
-                          textColor="white"
-                          _hover={{ bg: '#a7801a' }}
-                          onClick={() => handleViewNft(tokenId)}
-                        >
-                          View Fullscreen
-                        </Button>
-                        <Link
-                          style={{
-                            marginTop: '40px',
-                            color: 'white',
-                            padding: '10px',
-                            textAlign: 'center',
-                            fontWeight: 'bold',
-                          }}
-                          href={getExplorerLink(tokenId)}
-                          isExternal
-                          mt="2"
-                          color="white"
-                          textAlign="center"
-                        >
-                          View on BSCScan
-                        </Link>
-                      </Box>
-                    </Box>
-                  </WrapItem>
-                ))}
-              </Wrap>
-            )}
-          </Box>
-          <Box
-            bg="rgba(0,0,0,0)"
-            padding="20px"
-            width="100%"
-            mx="auto"
-            marginTop="30px"
-          >
-            <Image
-              marginBottom="40px"
-              src="/images/toastmanImage.png"
-              mx="auto"
-              alt="Toast Man"
-              width="220px"
-            />
-          </Box>
-
           <Footer />
         </Box>
       </Box>
-
-      {selectedNft !== null && (
-        <Modal isOpen={isOpen} onClose={onClose} size="full">
-          <ModalOverlay />
-          <ModalContent bg="black">
-            <ModalCloseButton color="white" />
-            <ModalBody display="flex" alignItems="center" justifyContent="center">
-              <Center>
-                <Image
-                  src={`/images/nfts/${selectedNft}.png`}
-                  alt={`NFT ${selectedNft}`}
-                  maxHeight="90vh"
-                  maxWidth="90vw"
-                  objectFit="contain"
-                />
-              </Center>
-            </ModalBody>
-          </ModalContent>
-        </Modal>
-      )}
-      <ToastContainer />
     </>
   );
 }

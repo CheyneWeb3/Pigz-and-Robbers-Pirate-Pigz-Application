@@ -31,7 +31,7 @@ const glow = keyframes`
   100% { border-color: white; box-shadow: 0 0 50px white; }
 `;
 
-const NFTMINT_CONTRACT_ADDRESS = '0xAC40d2487295C6AcdCAbe317B3042b1A15380a0C';
+const NFTMINT_CONTRACT_ADDRESS = '0xAC40d2487295C6AcdCAbe317B3042b1A15380a0C'; // Contract address for BSC Testnet
 
 const NftMintSingle = () => {
   const { open } = useWeb3Modal();
@@ -51,6 +51,7 @@ const NftMintSingle = () => {
       const getAccount = async () => {
         const accounts = await walletProvider.request({ method: 'eth_requestAccounts' });
         setAccount(accounts[0]);
+        console.log('Account connected:', accounts[0]);
       };
       getAccount();
     } else {
@@ -61,32 +62,38 @@ const NftMintSingle = () => {
   const switchToBSC = async () => {
     if (walletProvider?.request) {
       try {
+        console.log('Switching to BSC Testnet...');
         await walletProvider.request({
           method: 'wallet_switchEthereumChain',
-          params: [{ chainId: '0x38' }], // Chain ID for BSC Mainnet
+          params: [{ chainId: '0x61' }], // Chain ID for BSC Testnet
         });
+        console.log('Switched to BSC Testnet');
       } catch (switchError) {
         if ((switchError as { code: number }).code === 4902) {
+          console.log('BSC Testnet not found. Adding network...');
           try {
             await walletProvider.request({
               method: 'wallet_addEthereumChain',
               params: [
                 {
-                  chainId: '0x38',
-                  chainName: 'Binance Smart Chain',
+                  chainId: '0x61',
+                  chainName: 'Binance Smart Chain Testnet',
                   nativeCurrency: {
-                    name: 'BNB',
-                    symbol: 'BNB',
+                    name: 'tBNB',
+                    symbol: 'tBNB',
                     decimals: 18,
                   },
-                  rpcUrls: ['https://bsc-dataseed.binance.org/'],
-                  blockExplorerUrls: ['https://bscscan.com/'],
+                  rpcUrls: ['https://data-seed-prebsc-1-s3.binance.org:8545'],
+                  blockExplorerUrls: ['https://testnet.bscscan.com'],
                 },
               ],
             });
+            console.log('Added and switched to BSC Testnet');
           } catch (addError) {
-            console.error(addError);
+            console.error('Error adding BSC Testnet:', addError);
           }
+        } else {
+          console.error('Error switching to BSC Testnet:', switchError);
         }
       }
     }
@@ -111,22 +118,36 @@ const NftMintSingle = () => {
       setModalContent({ status: 'Awaiting transaction confirmation...', tokenId: null, txHash: null });
 
       const provider = new BrowserProvider(walletProvider);
-      const signer = provider.getSigner();
+      const signer = await provider.getSigner();
+      console.log('Signer:', signer);
       const contract = new ethers.Contract(NFTMINT_CONTRACT_ADDRESS, nftMintAbi, signer);
+      console.log('Contract:', contract);
 
-      const transaction = await contract.airDrop(account, 1); // Mint 1 NFT to the connected wallet address
+      // Verify mint function
+      const mintAmount = 1;
+      const value = parseEther('0.09');
+      console.log(`Minting ${mintAmount} NFTs with value ${value.toString()}`);
+
+      const transaction = await contract.mint(mintAmount, { value });
+      console.log('Transaction:', transaction);
 
       setTransactionHash(transaction.hash);
       setIsLoading(true);
 
       const receipt = await transaction.wait();
+      console.log('Transaction receipt:', receipt);
       setIsLoading(false);
 
       setModalContent({ status: 'Transaction confirmed. Processing mint...', tokenId: null, txHash: transaction.hash });
 
       const tokenId = receipt.logs[0].topics[3];
       const tokenIdInt = parseInt(tokenId, 16);
-      const imageUrl = `https://pigzandrobbers.meta.rareboard.com/api/${tokenIdInt}.json`;
+      console.log('Token ID:', tokenIdInt);
+      const metadataUrl = `https://pigzandrobbers.meta.rareboard.com/api/${tokenIdInt}.json`;
+      const metadataResponse = await fetch(metadataUrl);
+      const metadata = await metadataResponse.json();
+      const imageUrl = metadata.image.replace('ipfs://', 'https://ipfs.io/ipfs/');
+      console.log('Image URL:', imageUrl);
       postToTwitter(imageUrl);
 
       setModalContent({
@@ -143,6 +164,7 @@ const NftMintSingle = () => {
         isClosable: true,
       });
     } catch (error) {
+      console.error('Minting error:', error);
       toast({
         title: 'Minting Error',
         description: 'An error occurred during the minting process.',
@@ -172,10 +194,10 @@ const NftMintSingle = () => {
         maxWidth="600px"
       >
         <Flex color="white" alignItems="center" mb="1">
-          <Image src="https://cosmicrichpigz.netlify.app/images/pigznrobbers.png" alt="" boxSize="120px" borderRadius="xl" mr="5" />
+          <Image src="/images/minimnt.png" alt="" boxSize="120px" borderRadius="xl" mr="5" />
           <Box textAlign="left">
             <Text fontSize="md" fontWeight="semibold" textAlign="left">
-            Mint another Here Real Fast!
+              Mint another Here Real Fast!
             </Text>
             <Text fontSize="2xl" fontWeight="semibold" textAlign="left">
               Mint 1 now for 0.09 BNB
@@ -204,7 +226,6 @@ const NftMintSingle = () => {
           Mint another PIGZandROBBERS!
         </Button>
         <Box mt="1" textAlign="center">
-
         </Box>
       </Box>
 
@@ -216,9 +237,9 @@ const NftMintSingle = () => {
           <ModalBody>
             {modalContent.tokenId && (
               <>
-                <Image src={`https://pigzandrobbers.meta.rareboard.com/api/${modalContent.tokenId}.json`} alt="Minted NFT" />
+                <Image src={`https://ipfs.io/ipfs/${modalContent.tokenId}`} alt="Minted NFT" />
                 <Text mt="4">You Just Minted a Pigz and Robbers NFT! #{modalContent.tokenId}</Text>
-                <a href={`https://bscscan.com/tx/${modalContent.txHash}`} target="_blank" rel="noopener noreferrer" style={{ color: 'blue', textDecoration: 'underline' }}>
+                <a href={`https://testnet.bscscan.com/tx/${modalContent.txHash}`} target="_blank" rel="noopener noreferrer" style={{ color: 'blue', textDecoration: 'underline' }}>
                   View on BscScan
                 </a>
               </>

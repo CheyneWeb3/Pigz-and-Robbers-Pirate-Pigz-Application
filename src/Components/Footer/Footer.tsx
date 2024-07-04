@@ -36,7 +36,6 @@ const Footer: React.FC = () => {
   return (
     <footer style={{ backgroundColor: 'rgba(0, 0, 0, 0.95)', color: 'white', textAlign: 'center', fontFamily: 'Comic Sans MS, Comic Sans, cursive' }}>
       <Box>
-        <Image src="images/friends.png" mx="auto" alt="header" minW="390px" width="620px" />
 
         <Text fontSize="3xl" mb={2}>&copy; {currentYear} Pigz</Text>
 
@@ -58,11 +57,7 @@ const Footer: React.FC = () => {
           <w3m-network-button />
         </Flex>
 
-        <Flex justify="center" mt={2}>
-          <Link href="https://www.google.com" isExternal>
-            <Image src="images/footer.png" alt="header" minW="390px" width="620px" mb="25px" mt="5px" />
-          </Link>
-        </Flex>
+
         <a href="https://alpha7.live" target="_blank" rel="noopener noreferrer">
           <Image
             src="https://raw.githubusercontent.com/ArielRin/Alpha7-Public-Files-and-Assets/master/OldDapp/src/headerlogo.png"

@@ -2,9 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './styles.css';
 
-import Home from './Home';
 import Intro from './Intro';
-import MintPoly from './MintPoly';
+import MintBsc from './Components/MintBsc/NftMint0/NftMint0';
+
+
 
 
 import NFTProfilePage from './Components/MintBsc/NFTProfilePage';
@@ -158,11 +159,9 @@ const modal = createWeb3Modal({
     <Router>
       <Routes>
         <Route path="/" element={<Intro />} />
-          <Route path="/wallet" element={<Wallet />} />
-            <Route path="/home" element={<Home />} />
               <Route path="/viewbsc" element={<ViewCollectionBSC />} />
                 <Route path="/nft/:tokenId" element={<NFTProfilePage />} />
-                <Route path="/mintpoly" element={<MintPoly />} />
+                  <Route path="/mintbsc" element={<MintBsc />} />  
       </Routes>
     </Router>
   );

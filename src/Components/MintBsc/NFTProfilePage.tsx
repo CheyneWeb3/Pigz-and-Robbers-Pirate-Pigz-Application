@@ -78,12 +78,12 @@ const NFTProfilePage = () => {
           flex={1}
           p={0}
           m={0}
-          bg="rgba(0, 0, 0, 0.0)"
+          bg="rgba(0, 0, 0, 0.65)"
           display="flex"
           flexDirection="column"
           color="white"
         >
-          <Flex p="5px" bg="rgba(0, 0, 0, 0.61)" justifyContent="right" flexWrap="wrap">
+          <Flex p="5px" bg="rgba(0, 0, 0, 0.91)" justifyContent="right" flexWrap="wrap">
             <w3m-button />
           </Flex>
 

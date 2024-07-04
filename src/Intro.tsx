@@ -1,14 +1,26 @@
 import React, { useState, useEffect } from 'react';
-import { Box, Image, Flex, Text, Button, Link } from '@chakra-ui/react';
+import { Box, Image, Flex, Text, Button } from '@chakra-ui/react';
 import { css, keyframes } from '@emotion/react';
+import { Link } from 'react-router-dom'; // Import Link from react-router-dom
 import Footer from './Components/Footer/Footer';
 
-
 import ViewBsc from './Components/MintBsc/ViewCollectionBSC';
-    // <ViewBsc/>
+// <ViewBsc/>
+
+const imagePaths = [
+  '/images/robbers/1.jpeg',
+  '/images/robbers/2.jpeg',
+  '/images/robbers/3.jpeg',
+  '/images/robbers/4.jpeg',
+  '/images/robbers/5.jpeg',
+  '/images/robbers/6.jpeg',
+  '/images/robbers/7.jpeg',
+  '/images/robbers/8.jpeg',
+];
 
 const NewPage = () => {
   const [tokenData, setTokenData] = useState<any>(null);
+  const [currentImage, setCurrentImage] = useState<string>(imagePaths[0]);
 
   useEffect(() => {
     const fetchTokenData = async () => {
@@ -23,6 +35,14 @@ const NewPage = () => {
     };
 
     fetchTokenData();
+  }, []);
+
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      setCurrentImage(imagePaths[Math.floor(Math.random() * imagePaths.length)]);
+    }, 2000);
+
+    return () => clearInterval(intervalId);
   }, []);
 
   const glow = keyframes`
@@ -104,50 +124,61 @@ const NewPage = () => {
                 minW="300px"
                 m={2}
                 p={7}
-                borderRadius="md"
+                borderRadius="2xl"
                 boxShadow="md"
                 textAlign="center"
+                bg="rgba(0, 0, 0, 0.61)"
               >
-                <Image src="images/piratepigzsm.png" alt="header" mx="auto" width="60%" minW="200px" mt="28px" />
+
+              <Link to="/">
+                <Image src="images/piratepigztextlogo.png" alt="header" mx="auto" width="40%" minW="250px" mt="28px" />
+                <Flex justifyContent="center" flexWrap="wrap">
+                  <Text width="60%" textAlign="center" fontSize="lg" fontWeight="normal">
+                    Click to Enter Pirate Pigz Polygon Minting Page
+                  </Text>
+                </Flex>
+                <Image src={currentImage} alt="Pigz and Robbers" mx="auto" width="25%" minW="250" mt="28px" borderRadius="2xl" />
+              </Link>
+
               </Box>
               <Box
                 flex={1}
                 minW="300px"
                 m={2}
                 p={7}
-                borderRadius="md"
+                borderRadius="2xl"
                 boxShadow="md"
                 textAlign="center"
+                bg="rgba(0, 0, 0, 0.61)"
               >
-              <Image src="images/pigznrobbers.png" alt="header" mx="auto"  width="60%" minW="200px" mt="28px" />
+
+              <Link to="/mintbsc">
+                <Image src="images/pigzrobberstextlogo.png" alt="header" mx="auto" width="40%" minW="250px" mt="28px" />
+                <Flex justifyContent="center" flexWrap="wrap">
+                  <Text width="60%" textAlign="center" fontSize="lg" fontWeight="normal">
+                    Click to Enter Pigz and Robbers BSC Minting Page
+                  </Text>
+                </Flex>
+                <Image src={currentImage} alt="Pigz and Robbers" mx="auto" width="25%" minW="250px" mt="28px" borderRadius="2xl" />
+              </Link>
+
+
               </Box>
             </Flex>
-            <Box p={4}>
               <Box
                 flex={1}
                 m={2}
                 p={4}
-                bg="rgba(255, 20, 147, 0.0)"
+                bg="rgba(0, 0, 0, 0.61)"
                 borderRadius="md"
                 boxShadow="md"
                 textAlign="center"
               >
-                <Text
-                fontSize="xl">
-Your PIGZ and ROBBERS on BSC
+                <ViewBsc />
+                <ViewBsc />
+                <Text mb="200px" fontSize="xl">
                 </Text>
-                 <ViewBsc/>
-                   <Text
-                   fontSize="xl">
-   Your Pirate PIGZ on Polygon
-                   </Text>
-                    <ViewBsc/>
-                   <Text
-                   mb="200px"
-                   fontSize="xl">
-                   </Text>
               </Box>
-            </Box>
           </Box>
         </Box>
       </Box>
