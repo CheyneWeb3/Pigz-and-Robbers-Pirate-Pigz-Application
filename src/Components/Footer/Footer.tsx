@@ -32,47 +32,25 @@ const Footer: React.FC = () => {
     checkConnection();
   }, []);
 
-  useEffect(() => {
-    const fetchTokenData = async () => {
-      try {
-        const response = await fetch('https://api.geckoterminal.com/api/v2/networks/degenchain/pools/0x401cd27b11e64527cc09bcad1febcf8fcae8e945');
-        const data = await response.json();
-        console.log('API Response:', data);
-        setTokenData(data.data.attributes);
-      } catch (error) {
-        console.error('Error fetching token data:', error);
-      }
-    };
-
-    fetchTokenData();
-  }, []);
 
   return (
-    <footer style={{ backgroundColor: '#68268e', color: 'white', textAlign: 'center', fontFamily: 'Comic Sans MS, Comic Sans, cursive' }}>
+    <footer style={{ backgroundColor: 'rgba(0, 0, 0, 0.95)', color: 'white', textAlign: 'center', fontFamily: 'Comic Sans MS, Comic Sans, cursive' }}>
       <Box>
         <Image src="images/friends.png" mx="auto" alt="header" minW="390px" width="620px" />
 
-        <Text fontSize="3xl" mb={2}>&copy; {currentYear} Harold and the Purple Crayon.</Text>
-
-        <Flex justify="center" mt="2px">
-          <Link href="https://bridge.degen.tips" isExternal>
-            <Text color="white" fontSize="md">Bridge to Degen Chain? Click Here!</Text>
-          </Link>
-        </Flex>
+        <Text fontSize="3xl" mb={2}>&copy; {currentYear} Pigz</Text>
 
         <Flex mt="15px" justify="center" align="center" gap={4}>
-          <Link href="https://www.degenpurps.xyz/" isExternal>
+          <Link href="https://cosmicrichpigz.com/" isExternal>
             <FontAwesomeIcon icon={faGlobe} size="lg" />
           </Link>
-          <Link href="https://twitter.com/DegenPurp" isExternal>
+          <Link href="https://twitter.com/" isExternal>
             <FontAwesomeIcon icon={faXTwitter} size="lg" />
           </Link>
           <Link href="https://t.me/purpdegen" isExternal>
             <FontAwesomeIcon icon={faTelegram} size="lg" />
           </Link>
-          <Link href="https://dexscreener.com/degenchain/0x401cd27b11e64527cc09bcad1febcf8fcae8e945" isExternal>
-            <FontAwesomeIcon icon={faChartLine} size="lg" />
-          </Link>
+
         </Flex>
 
         <Text mt="25px" fontSize="sm" mb={2}>Currently Connected to</Text>

@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './styles.css';
 
 import Home from './Home';
+import Intro from './Intro';
 
 import Wallet from './Components/WalletComponent/WalletMain';
 
@@ -75,8 +76,8 @@ const modal = createWeb3Modal({
   enableAnalytics: true,
   themeMode: 'dark',
   themeVariables: {
-    '--w3m-color-mix': 'blue',
-    '--w3m-color-mix-strength': 25
+    '--w3m-color-mix': 'pink',
+    '--w3m-color-mix-strength': 42
   },
   chainImages: {
       56: 'https://thatdamndawg.com/images/networklogos/bsc.png',
@@ -149,8 +150,9 @@ const modal = createWeb3Modal({
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Intro />} />
           <Route path="/wallet" element={<Wallet />} />
+            <Route path="/home" element={<Home />} />
       </Routes>
     </Router>
   );

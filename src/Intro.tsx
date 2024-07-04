@@ -71,32 +71,17 @@ const NewPage = () => {
           <source src="/images/pigzbkg.mp4" type="video/mp4" />
         </video>
 
-          <Box
-            flex={1}
-            p={0}
-            m={0}
-            bg="rgba(0, 0, 0, 0.65)"
-            display="flex"
-            flexDirection="column"
-            color="white"
-          >
-        <Flex p="5px" bg="rgba(0, 0, 0, 0.61)" justifyContent="right" flexWrap="wrap">
-          <w3m-button />
-        </Flex>
         <Box
           flex={1}
           p={0}
           m={0}
+          bg="rgba(0, 0, 0, 0.65)"
           display="flex"
           flexDirection="column"
-          bgImage=""
-          bgPosition="center"
-          bgRepeat="no-repeat"
-          bgSize="cover"
           color="white"
         >
-          <Flex justifyContent="right" p={2} flexWrap="wrap" position="relative">
-            <Image src="images/headinglogo.png" alt="header" width="50%" minW="380px" mt="28px" />
+          <Flex p="5px" bg="rgba(0, 0, 0, 0.61)" justifyContent="right" flexWrap="wrap">
+            <w3m-button />
           </Flex>
           <Box
             flex={1}
@@ -104,68 +89,53 @@ const NewPage = () => {
             m={0}
             display="flex"
             flexDirection="column"
+            bgPosition="center"
+            bgRepeat="no-repeat"
+            bgSize="cover"
             color="white"
-            mb="2px"
           >
+            <Flex justifyContent="center" p={2} flexWrap="wrap" position="relative">
+              <Box
+                flex={1}
+                minW="300px"
+                m={2}
+                p={7}
+                borderRadius="md"
+                boxShadow="md"
+                textAlign="center"
+              >
+                <Image src="images/piratepigzsm.png" alt="header" mx="auto" width="60%" minW="200px" mt="28px" />
+              </Box>
+              <Box
+                flex={1}
+                minW="300px"
+                m={2}
+                p={7}
+                borderRadius="md"
+                boxShadow="md"
+                textAlign="center"
+              >
+              <Image src="images/pigznrobbers.png" alt="header" mx="auto"  width="60%" minW="200px" mt="28px" />
+              </Box>
+            </Flex>
+            <Box p={4}>
+              <Box
+                flex={1}
+                m={2}
+                p={4}
+                bg="rgba(255, 20, 147, 0.0)"
+                borderRadius="md"
+                boxShadow="md"
+                textAlign="center"
+              >
+                <Text
 
-            <Flex p={6} justifyContent="right">
-              <Link href="https://cosmicrichpigz.com/" isExternal>
-                <Button
-                  size="lg"
-                  colorScheme="brown"
-                  variant="solid"
-                  fontSize="2xl"
-                  fontFamily="Comic Sans MS, Comic Sans, cursive"
-                  css={glowStyle}
-                >
-                  Link to Website (temp @dev)
-                </Button>
-              </Link>
-            </Flex>
-          </Box>
-          <Box p={4}>
-            <Flex wrap="wrap" justify="space-between" align="center" m={4}>
-              <Box
-                flex={1}
-                minW="300px"
-                m={2}
-                p={4}
-                bg="rgba(0, 0, 0, 0.2)"
-                borderRadius="md"
-                boxShadow="md"
-                css={glowStyle}
-              >
-                <Text fontSize="xl" textAlign="center">Box 1</Text>
+                mb="200px"
+                fontSize="xl">Small paragram or instruct here to word up with project</Text>
               </Box>
-              <Box
-                flex={1}
-                minW="300px"
-                m={2}
-                p={4}
-                bg="rgba(0, 0, 0, 0.2)"
-                borderRadius="md"
-                boxShadow="md"
-                css={glowStyle}
-              >
-                <Text fontSize="xl" textAlign="center">Box 2</Text>
-              </Box>
-            </Flex>
-            <Box
-              mb="350px"
-              flex={1}
-              m={2}
-              p={4}
-              bg="rgba(0, 0, 0, 0.2)"
-              borderRadius="md"
-              boxShadow="md"
-              css={glowStyle}
-              textAlign="center"
-            >
-              <Text mb="750px" fontSize="xl">Full Width Box</Text>
             </Box>
           </Box>
         </Box>
-      </Box>
       </Box>
       <Footer />
     </>
