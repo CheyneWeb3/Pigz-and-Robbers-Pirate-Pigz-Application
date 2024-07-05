@@ -154,6 +154,7 @@ const modal = createWeb3Modal({
     <Router>
       <Routes>
         <Route path="/" element={<Intro />} />
+          <Route path="/home" element={<Intro />} />
               <Route path="/viewbsc" element={<ViewCollectionBSC />} />
                 <Route path="/nft/:tokenId" element={<NFTProfilePage />} />
                   <Route path="/nftpoly/:tokenId" element={<NFTProfilePagepoly />} />
