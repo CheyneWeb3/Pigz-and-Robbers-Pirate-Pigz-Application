@@ -17,7 +17,7 @@ interface NftData {
 }
 
 const NFTProfilePage = () => {
-  const { tokenId } = useParams<{ tokenId: string }>(); 
+  const { tokenId } = useParams<{ tokenId: string }>();
   const [nftData, setNftData] = useState<NftData | null>(null);
 
   useEffect(() => {
@@ -92,9 +92,12 @@ const NFTProfilePage = () => {
           flexDirection="column"
           color="white"
         >
-          <Flex p="5px" bg="rgba(0, 0, 0, 0.91)" justifyContent="right" flexWrap="wrap">
-            <w3m-button />
-          </Flex>
+        <Flex p="5px" bg="rgba(0, 0, 0, 0.61)" justify="space-between" align="center">
+        <Link to="/">
+        <Image ml="4" src="/images/banner.png" alt="Heading" width="140px" />
+        </Link>
+        <w3m-button />
+      </Flex>
 
           <Flex bg="rgba(0, 0, 0, 0.65)" borderRadius="2xl" p={4} m={2} h="140px" justifyContent="center" flexWrap="wrap">
           </Flex>

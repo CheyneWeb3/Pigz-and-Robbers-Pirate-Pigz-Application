@@ -34,20 +34,26 @@ const Footer: React.FC = () => {
 
 
   return (
-    <footer style={{ backgroundColor: 'rgba(0, 0, 0, 0.95)', color: 'white', textAlign: 'center', fontFamily: 'Comic Sans MS, Comic Sans, cursive' }}>
-      <Box>
+    <footer style={{ backgroundColor: 'rgba(0, 0, 0, 1)', color: 'white', textAlign: 'center' }}>
+      <Box
+      >  <Box
+          bg="rgba(0, 0, 0, 0.95)"
+          p={6}
+        >
+      </Box>
 
-        <Text fontSize="3xl" mb={2}>&copy; {currentYear} Pigz</Text>
+
+        <Text fontSize="3xl" mb={2}>&copy;  Cosmic Rich Pigz {currentYear} </Text>
 
         <Flex mt="15px" justify="center" align="center" gap={4}>
           <Link href="https://cosmicrichpigz.com/" isExternal>
-            <FontAwesomeIcon icon={faGlobe} size="lg" />
+            <FontAwesomeIcon icon={faGlobe} size="xl" />
           </Link>
           <Link href="https://twitter.com/" isExternal>
-            <FontAwesomeIcon icon={faXTwitter} size="lg" />
+            <FontAwesomeIcon icon={faXTwitter} size="xl" />
           </Link>
           <Link href="https://t.me/purpdegen" isExternal>
-            <FontAwesomeIcon icon={faTelegram} size="lg" />
+            <FontAwesomeIcon icon={faTelegram} size="xl" />
           </Link>
 
         </Flex>

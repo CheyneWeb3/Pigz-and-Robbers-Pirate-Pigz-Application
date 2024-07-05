@@ -162,9 +162,13 @@ const NewPage = () => {
           flexDirection="column"
           color="white"
         >
-          <Flex p="5px" bg="rgba(0, 0, 0, 0.61)" justifyContent="right" flexWrap="wrap">
-            <w3m-button />
-          </Flex>
+        <Flex p="5px" bg="rgba(0, 0, 0, 0.61)" justify="space-between" align="center">
+        <Link to="/">
+        <Image ml="4" src="/images/banner.png" alt="Heading" width="140px" />
+        </Link>
+        <w3m-button />
+
+      </Flex>
           <Box
             flex={1}
             p={0}
