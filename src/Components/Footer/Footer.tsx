@@ -43,8 +43,11 @@ const Footer: React.FC = () => {
       </Box>
 
 
-        <Text fontSize="3xl" mb={2}>&copy;  Cosmic Rich Pigz {currentYear} </Text>
+        <Text fontSize="xl" mb={2}>&copy;  Cosmic Rich Pigz {currentYear} </Text>
 
+                <Flex mt="15px" justify="center" align="center" gap={4}>
+                  <Image p={2} ml="4" src="/images/banner.png" alt="Heading" width="380px" />
+                </Flex>
         <Flex mt="15px" justify="center" align="center" gap={4}>
           <Link href="https://cosmicrichpigz.com/" isExternal>
             <FontAwesomeIcon icon={faGlobe} size="xl" />
