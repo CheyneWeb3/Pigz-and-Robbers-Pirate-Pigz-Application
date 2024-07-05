@@ -3,6 +3,7 @@ import { Box, Image, Flex, Text } from '@chakra-ui/react';
 import { useParams, Link } from 'react-router-dom';
 import { css, keyframes } from '@emotion/react';
 import Footer from '../Footer/Footer';
+import MiniMintPoly from '../MintNowMiniPoly/MintNow2nopadding';
 import MiniMintBsc from '../MintNowMini/MintNow2nopadding';
 
 interface NftData {
@@ -102,8 +103,6 @@ const NFTProfilePage = () => {
                   </Flex>
                   </Flex>
 
-          <Flex bg="rgba(0, 0, 0, 0.65)" borderRadius="2xl" p={4} m={2} h="140px" justifyContent="center" flexWrap="wrap">
-          </Flex>
           <Box
             flex={1}
             p={0}
@@ -144,9 +143,25 @@ const NFTProfilePage = () => {
             </Box>
           </Box>
 
-          <Flex bg="rgba(0, 0, 0, 0.65)" borderRadius="2xl" p={0} mb={0} h="340px" justifyContent="center" flexWrap="wrap">
-            <MiniMintBsc />
-          </Flex>
+
+                    <Flex  bg="rgba(0, 0, 0, 0.65)" borderRadius="2xl" p={0} mb={0} h="490px" justifyContent="center" flexWrap="wrap">
+
+
+                      <Box
+                        flex={1}
+                        p={4}
+                        m={2}
+                        mx="auto"
+                        borderRadius="2xl"
+                        boxShadow="md"
+                        justifyContent="center"
+                        align="center"
+                      >
+                      <MiniMintPoly />
+
+                    <MiniMintBsc />
+                      </Box>
+                    </Flex>
 
         </Box>
       </Box>
