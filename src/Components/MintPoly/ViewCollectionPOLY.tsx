@@ -31,7 +31,7 @@ const NFTMINT_CONTRACT_ADDRESS = '0x8Fc39D096204Ddc68f67aAfF0B63fE2207cB7738';
 const RPC_PROVIDER = 'https://polygon-rpc.com';
 const EXPLORER_LINK = 'https://polygonscan.com';
 const METADATA_BASE_URL = 'https://raw.githubusercontent.com/ArielRin/Pigz-and-Robbers-Pirate-Pigz-Application/master/public/137nftdata/Metadata/';
-const MAX_TOKEN_ID = 300; 
+const MAX_TOKEN_ID = 300;
 
 const getExplorerLink = (tokenId: number) => `${EXPLORER_LINK}/token/${NFTMINT_CONTRACT_ADDRESS}?a=${tokenId}`;
 const getMarketplaceLink = (tokenId: number) => `https://element.market/assets/bsc/${NFTMINT_CONTRACT_ADDRESS}/${tokenId}`;
@@ -111,7 +111,7 @@ function MyNfts() {
         try {
           const accounts: string[] = await provider.send("eth_requestAccounts", []);
           if (accounts.length > 0) {
-            setAddress(accounts[0]); // Ensure accounts[0] is a string
+            setAddress(accounts[0]);
             setIsConnected(true);
           }
         } catch (error) {
@@ -173,7 +173,6 @@ function MyNfts() {
                 nftList.push({ tokenId: i, imageUrl });
               }
             } catch (err) {
-              // Handle token fetch error (e.g., token not minted yet)
             }
           })()
         );
@@ -240,7 +239,7 @@ function MyNfts() {
             borderRadius="2xl"
             maxW="100%"
           >
-            Your BSC Mainnet Collection
+            Your Polygon Collection
           </Box>
 
           <Box
@@ -300,8 +299,8 @@ function MyNfts() {
                       borderRadius="2xl"
                       position="relative"
                       overflow="hidden"
-                      border="5px solid"  // Increase border size
-                      borderColor="white"  // Set border color to white
+                      border="5px solid"
+                      borderColor="white"
                       _hover={{
                         '.overlay': {
                           opacity: 1,
@@ -313,12 +312,12 @@ function MyNfts() {
                         mb={9}
                         src={imageUrl}
                         alt={`NFT ${tokenId}`}
-                        width="100%"  // Adjust image width to 80%
-                        height="100%"  // Adjust image height to 80%
+                        width="100%"
+                        height="100%"
                         borderRadius="2xl"
                         objectFit="cover"
-                        mx="auto"  // Center the image
-                        my="auto"  // Center the image
+                        mx="auto"
+                        my="auto"  
                         onError={(e) => {
                           const target = e.target as HTMLImageElement;
                           target.onerror = null;
@@ -396,7 +395,7 @@ function MyNfts() {
                           color="white"
                           textAlign="center"
                         >
-                          View on BscScan
+                          View on PolygonScan
                         </Link>
                       </Box>
                     </Box>
