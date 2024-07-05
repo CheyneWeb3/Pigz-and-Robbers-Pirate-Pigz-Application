@@ -17,7 +17,6 @@ import ViewCollectionBSC from './Components/MintBsc/ViewCollectionBSC';
 
 
 
-import Wallet from './Components/WalletComponent/WalletMain';
 
 import { ethers, BrowserProvider } from 'ethers';
 import {
