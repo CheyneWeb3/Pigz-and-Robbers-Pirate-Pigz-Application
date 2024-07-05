@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Box, Image, Flex, Text } from '@chakra-ui/react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { css, keyframes } from '@emotion/react';
 import Footer from '../Footer/Footer';
 import MiniMintPoly from '../MintNowMiniPoly/MintNow2nopadding';
