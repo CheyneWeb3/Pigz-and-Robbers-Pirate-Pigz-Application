@@ -99,7 +99,7 @@ const MintNow2nopadding = () => {
         console.log('Switching to Polygon Mainnet...');
         await walletProvider.request({
           method: 'wallet_switchEthereumChain',
-          params: [{ chainId: '0x89' }], 
+          params: [{ chainId: '0x89' }],
         });
         console.log('Switched to Polygon Mainnet');
       } catch (switchError) {
