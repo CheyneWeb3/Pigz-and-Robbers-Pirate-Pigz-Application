@@ -121,7 +121,7 @@ function MyNfts() {
             setIsConnected(true);
           }
         } catch (error) {
-          notify.error('Please connect to MetaMask.');
+          notify.error('Please connect to your Wallet.');
         }
 
         (window.ethereum as any).on('accountsChanged', async (accounts: string[]) => {

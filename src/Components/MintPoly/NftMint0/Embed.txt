@@ -59,7 +59,7 @@ function NftMint() {
     if (!window.ethereum) {
       toast({
         title: 'Error',
-        description: 'Ethereum object not found, make sure you have MetaMask!',
+        description: 'Ethereum object not found, make sure you have a Wallet!',
         status: 'error',
         duration: 5000,
         isClosable: true,

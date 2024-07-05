@@ -45,8 +45,8 @@ const RegisterNFT: React.FC = () => {
             console.log("Connected to wallet with address:", accounts[0]);
           }
         } catch (error) {
-          notify.error('Please connect to MetaMask.');
-          console.error("Error connecting to MetaMask:", error);
+          notify.error('Please connect to Your Wallet.');
+          console.error("Error connecting to Your Wallet:", error);
         }
 
         (window.ethereum as any).on('accountsChanged', async (accounts: string[]) => {

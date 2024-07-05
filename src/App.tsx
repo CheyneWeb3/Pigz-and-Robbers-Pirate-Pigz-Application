@@ -68,7 +68,6 @@ const ethersConfig = defaultConfig({
   rpcUrl: 'https://bsc-dataseed.binance.org',
   auth: {
     email: false,
-    socials: ['google'],
     showWallets: true,
     walletFeatures: true
   }
