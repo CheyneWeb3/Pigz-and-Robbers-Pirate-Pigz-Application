@@ -207,12 +207,19 @@ const NewPage = () => {
                 boxShadow="md"
                 textAlign="center"
                 bg="rgba(0, 0, 0, 0.61)"
+                flexDirection="column"
+                justifyContent="center"
+                alignItems="center"
               >
                 <Link to="/mintbsc">
                   <Flex justifyContent="center" flexWrap="wrap">
                     <Text width="60%" textAlign="center" fontSize="lg" fontWeight="normal"></Text>
                   </Flex>
-                  <Image src={currentImage} alt="Pigz and Robbers" mx="auto" width="75%" minW="250px" mt="90px" borderRadius="2xl" />
+                  <Image
+
+                  border="2px"
+                  borderColor="#d19a19"
+                  src={currentImage} alt="Pigz and Robbers" mx="auto" width="85%" minW="380px" mt="90px" borderRadius="2xl" />
                 </Link>
               </Box>
             </Flex>

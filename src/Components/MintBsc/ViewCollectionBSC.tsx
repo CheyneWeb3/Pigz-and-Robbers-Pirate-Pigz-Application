@@ -313,8 +313,8 @@ function MyNfts() {
                       borderRadius="2xl"
                       position="relative"
                       overflow="hidden"
-                      border="5px solid"  // Increase border size
-                      borderColor="white"  // Set border color to white
+                      border="5px solid"  
+                      borderColor="#d19a19"
                       _hover={{
                         '.overlay': {
                           opacity: 1,

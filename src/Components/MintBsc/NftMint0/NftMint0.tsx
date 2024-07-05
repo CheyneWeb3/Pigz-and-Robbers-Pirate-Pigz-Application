@@ -313,6 +313,7 @@ function NftMint() {
             my="10px"
             boxShadow="xl"
             maxWidth="800px"
+            minWidth="380px"    
             width="100%"
             textAlign="center"
             border="2px"
