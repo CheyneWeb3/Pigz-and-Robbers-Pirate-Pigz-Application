@@ -51,7 +51,7 @@ const Footer: React.FC = () => {
         </Flex>
 
 
-        <Flex mt="15px" justify="center" align="center" gap={4}>
+        <Flex mt="15px" mb="15px" justify="center" align="center" gap={4}>
           <Link href="https://cosmicrichpigz.com/" isExternal>
             <FontAwesomeIcon icon={faGlobe} size="xl" />
           </Link>
@@ -64,11 +64,24 @@ const Footer: React.FC = () => {
 
         </Flex>
 
+
+                        <a href="https://portfolio.metamask.io/bridge" target="_blank" rel="noopener noreferrer">
+
+
+                          <Flex justifyContent="center" flexWrap="wrap">
+                            <Text width="60%" textAlign="center" fontSize="xl" fontWeight="normal"  textDecoration="underline">
+                             Need to Bridge Tokens? Click Here.
+                            </Text>
+                          </Flex>
+                          <Flex justifyContent="center" flexWrap="wrap">
+
+                          </Flex>
+                        </a>
+
         <Text mt="25px" fontSize="sm" mb={2}>Currently Connected to</Text>
         <Flex mb={4} justifyContent="center" flexWrap="wrap">
           <w3m-network-button />
         </Flex>
-
 
         <a href="https://alpha7.live" target="_blank" rel="noopener noreferrer">
           <Image
