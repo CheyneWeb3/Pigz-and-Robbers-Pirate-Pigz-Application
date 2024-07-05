@@ -73,6 +73,7 @@ const modal = createWeb3Modal({
   themeMode: 'dark',
   themeVariables: {
     '--w3m-color-mix': 'grey',
+    '--w3m-accent': '#d19a19', // Set your desired background color
     '--w3m-color-mix-strength': 22
   },
   chainImages: {

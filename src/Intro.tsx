@@ -69,6 +69,8 @@ const NewPage = () => {
     animation: ${glow} 1.5s ease-in-out infinite alternate;
   `;
 
+
+
   return (
     <>
       <Box
@@ -105,15 +107,15 @@ const NewPage = () => {
           display="flex"
           flexDirection="column"
           color="white"
+          >
 
-      >
-      <Flex p="5px" bg="rgba(0, 0, 0, 0.61)" justify="space-between" align="center">
-      <Link to="/">
-      <Image ml="4" src="/images/banner.png" alt="Heading" width="140px" />
-      </Link>
-      <w3m-button />
+            <Flex p={2} bg="rgba(0, 0, 0, 0.61)" justify="space-between" align="center">
+              <Link to="/">
+                <Image p={2} ml="4" src="/images/banner.png" alt="Heading" width="220px" />
+              </Link>
+              <w3m-button />
+            </Flex>
 
-    </Flex>
           <Box
             flex={1}
             p={0}

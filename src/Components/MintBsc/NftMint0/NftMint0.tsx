@@ -316,7 +316,7 @@ function NftMint() {
             width="100%"
             textAlign="center"
             border="2px"
-            borderColor="#e8bf72"
+            borderColor="#d19a19"
           >
             <div>
               <Text fontSize="xl" style={{ color: 'white', textAlign: 'center', fontWeight: 'bolder' }}>
