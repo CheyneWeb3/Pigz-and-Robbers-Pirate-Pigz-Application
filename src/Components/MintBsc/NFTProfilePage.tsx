@@ -16,7 +16,7 @@ interface NftData {
 }
 
 const NFTProfilePage = () => {
-  const { tokenId } = useParams<{ tokenId: string }>(); // Assumes you're using react-router for navigation
+  const { tokenId } = useParams<{ tokenId: string }>(); 
   const [nftData, setNftData] = useState<NftData | null>(null);
 
   useEffect(() => {

@@ -24,14 +24,14 @@ import {
 } from '@chakra-ui/react';
 
 import { useNavigate } from 'react-router-dom';
-import Footer from '../Footer/Footer'; // Ensure this path is correct
+import Footer from '../Footer/Footer';
 import nftMintAbi from './mintBscAbi.json';
 
-const NFTMINT_CONTRACT_ADDRESS = '0x02BC73cCf37204Cca1E39aBbdc0916F338ffBdd6'; // Testnet contract address
+const NFTMINT_CONTRACT_ADDRESS = '0x8Fc39D096204Ddc68f67aAfF0B63fE2207cB7738';
 const RPC_PROVIDER = 'https://polygon-rpc.com';
 const EXPLORER_LINK = 'https://polygonscan.com';
 const METADATA_BASE_URL = 'https://raw.githubusercontent.com/ArielRin/Pigz-and-Robbers-Pirate-Pigz-Application/master/public/137nftdata/Metadata/';
-const MAX_TOKEN_ID = 300; // Adjust this to a reasonable maximum token ID
+const MAX_TOKEN_ID = 300; 
 
 const getExplorerLink = (tokenId: number) => `${EXPLORER_LINK}/token/${NFTMINT_CONTRACT_ADDRESS}?a=${tokenId}`;
 const getMarketplaceLink = (tokenId: number) => `https://element.market/assets/bsc/${NFTMINT_CONTRACT_ADDRESS}/${tokenId}`;

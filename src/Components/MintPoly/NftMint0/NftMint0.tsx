@@ -17,9 +17,9 @@ import {
 } from '@web3modal/ethers/react';
 import nftMintAbi from './nftMintAbi.json';
 
-const MINT_PRICE = 0.0001; // 6 MATIC
+const MINT_PRICE = 6;
 const MINT_SUPPLY = 300;
-const NFTMINT_CONTRACT_ADDRESS = '0x02BC73cCf37204Cca1E39aBbdc0916F338ffBdd6';
+const NFTMINT_CONTRACT_ADDRESS = '0x8Fc39D096204Ddc68f67aAfF0B63fE2207cB7738';
 const RPC_PROVIDER = 'https://polygon-rpc.com/';
 const EXPLORER_LINK = 'https://polygonscan.com';
 const METADATA_BASE_URL = 'https://raw.githubusercontent.com/ArielRin/Pigz-and-Robbers-Pirate-Pigz-Application/master/public/137nftdata/Metadata/';
@@ -80,7 +80,7 @@ function NftMint() {
         console.log('Switching to Polygon Chain...');
         await walletProvider.request({
           method: 'wallet_switchEthereumChain',
-          params: [{ chainId: '0x89' }], // Chain ID for Polygon Mainnet
+          params: [{ chainId: '0x89' }],
         });
         console.log('Switched to Polygon Chain');
       } catch (switchError) {
@@ -135,9 +135,8 @@ function NftMint() {
 
       let provider = new ethers.BrowserProvider(walletProvider);
       const network = await provider.getNetwork();
-      if (Number(network.chainId) !== 137) { // Chain ID for Polygon Mainnet
+      if (Number(network.chainId) !== 137) {
         await switchToPolygon();
-        // Recreate provider and signer after switching networks
         provider = new ethers.BrowserProvider(walletProvider);
       }
 

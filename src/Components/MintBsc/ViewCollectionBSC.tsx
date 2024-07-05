@@ -16,7 +16,6 @@ import {
   ModalBody,
   ModalCloseButton,
   useDisclosure,
-  VStack,
   Wrap,
   WrapItem,
   Grid,
@@ -30,14 +29,14 @@ import {
 } from '@web3modal/ethers/react';
 
 import { useNavigate } from 'react-router-dom';
-import Footer from '../Footer/Footer'; // Ensure this path is correct
+import Footer from '../Footer/Footer';
 import nftMintAbi from './mintBscAbi.json';
 
-const NFTMINT_CONTRACT_ADDRESS = '0xAC40d2487295C6AcdCAbe317B3042b1A15380a0C'; // Testnet contract address
-const RPC_PROVIDER = 'https://data-seed-prebsc-1-s3.binance.org:8545';
-const EXPLORER_LINK = 'https://testnet.bscscan.com';
+const NFTMINT_CONTRACT_ADDRESS = '0x8d3B760381c2CAfBFf2D973C8ca534e27bbf63Db';
+const RPC_PROVIDER = 'https://bsc-dataseed.binance.org/';
+const EXPLORER_LINK = 'https://bscscan.com';
 const METADATA_BASE_URL = 'https://pigzandrobbers.meta.rareboard.com/api/';
-const MAX_TOKEN_ID = 3333; // Adjust this to a reasonable maximum token ID
+const MAX_TOKEN_ID = 3333;
 
 const getExplorerLink = (tokenId: number) => `${EXPLORER_LINK}/token/${NFTMINT_CONTRACT_ADDRESS}?a=${tokenId}`;
 const getMarketplaceLink = (tokenId: number) => `https://element.market/assets/bsc/${NFTMINT_CONTRACT_ADDRESS}/${tokenId}`;
@@ -178,7 +177,6 @@ function MyNfts() {
                 nftList.push({ tokenId: i, imageUrl });
               }
             } catch (err) {
-              // Handle token fetch error (e.g., token not minted yet)
             }
           })()
         );

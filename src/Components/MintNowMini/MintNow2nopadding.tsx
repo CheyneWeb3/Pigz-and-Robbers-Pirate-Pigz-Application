@@ -30,7 +30,7 @@ const glow = keyframes`
   100% { border-color: white; box-shadow: 0 0 50px white; }
 `;
 
-const NFTMINT_CONTRACT_ADDRESS = '0xAC40d2487295C6AcdCAbe317B3042b1A15380a0C'; // Contract address for BSC Testnet
+const NFTMINT_CONTRACT_ADDRESS = '0x8d3B760381c2CAfBFf2D973C8ca534e27bbf63Db';
 
 const MintNow2nopadding = () => {
   const { open } = useWeb3Modal();
@@ -65,38 +65,38 @@ const MintNow2nopadding = () => {
   const switchToBSC = async () => {
     if (walletProvider?.request) {
       try {
-        console.log('Switching to BSC Testnet...');
+        console.log('Switching to BSC ...');
         await walletProvider.request({
           method: 'wallet_switchEthereumChain',
-          params: [{ chainId: '0x61' }], // Chain ID for BSC Testnet
+          params: [{ chainId: '0x38' }], 
         });
-        console.log('Switched to BSC Testnet');
+        console.log('Switched to BSC ');
       } catch (switchError) {
         if ((switchError as { code: number }).code === 4902) {
-          console.log('BSC Testnet not found. Adding network...');
+          console.log('BSC  not found. Adding network...');
           try {
             await walletProvider.request({
               method: 'wallet_addEthereumChain',
               params: [
                 {
-                  chainId: '0x61',
-                  chainName: 'Binance Smart Chain Testnet',
+                  chainId: '0x38',
+                  chainName: 'Binance Smart Chain',
                   nativeCurrency: {
-                    name: 'tBNB',
-                    symbol: 'tBNB',
+                    name: 'BNB',
+                    symbol: 'BNB',
                     decimals: 18,
                   },
-                  rpcUrls: ['https://data-seed-prebsc-1-s3.binance.org:8545'],
-                  blockExplorerUrls: ['https://testnet.bscscan.com'],
+                  rpcUrls: ['https://bsc-dataseed.binance.org/'],
+                  blockExplorerUrls: ['https://bscscan.com'],
                 },
               ],
             });
-            console.log('Added and switched to BSC Testnet');
+            console.log('Added and switched to BSC ');
           } catch (addError) {
-            console.error('Error adding BSC Testnet:', addError);
+            console.error('Error adding BSC :', addError);
           }
         } else {
-          console.error('Error switching to BSC Testnet:', switchError);
+          console.error('Error switching to BSC :', switchError);
         }
       }
     }

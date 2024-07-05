@@ -30,8 +30,8 @@ const glow = keyframes`
   100% { border-color: white; box-shadow: 0 0 50px white; }
 `;
 
-const NFTMINT_CONTRACT_ADDRESS = '0x02BC73cCf37204Cca1E39aBbdc0916F338ffBdd6'; // Contract address for Polygon Mainnet
-const MINT_PRICE = 0.0001; // 6 MATIC
+const NFTMINT_CONTRACT_ADDRESS = '0x8Fc39D096204Ddc68f67aAfF0B63fE2207cB7738';
+const MINT_PRICE = 6;
 
 const MintNow2nopadding = () => {
   const { open } = useWeb3Modal();
@@ -99,7 +99,7 @@ const MintNow2nopadding = () => {
         console.log('Switching to Polygon Mainnet...');
         await walletProvider.request({
           method: 'wallet_switchEthereumChain',
-          params: [{ chainId: '0x89' }], // Chain ID for Polygon Mainnet
+          params: [{ chainId: '0x89' }], 
         });
         console.log('Switched to Polygon Mainnet');
       } catch (switchError) {

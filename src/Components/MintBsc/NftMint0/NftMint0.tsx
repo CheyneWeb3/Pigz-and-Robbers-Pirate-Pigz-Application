@@ -19,9 +19,9 @@ import nftMintAbi from './nftMintAbi.json';
 
 const MINT_PRICE = 0.09;
 const MINT_SUPPLY = 3333;
-const NFTMINT_CONTRACT_ADDRESS = '0xAC40d2487295C6AcdCAbe317B3042b1A15380a0C';
-const RPC_PROVIDER = 'https://data-seed-prebsc-1-s3.binance.org:8545';
-const EXPLORER_LINK = 'https://testnet.bscscan.com';
+const NFTMINT_CONTRACT_ADDRESS = '0x8d3B760381c2CAfBFf2D973C8ca534e27bbf63Db';
+const RPC_PROVIDER = 'https://bsc-dataseed.binance.org/';
+const EXPLORER_LINK = 'https://bscscan.com';
 const METADATA_BASE_URL = 'https://raw.githubusercontent.com/ArielRin/Pigz-and-Robbers-Pirate-Pigz-Application/master/public/137nftdata/Metadata/';
 
 const getExplorerLink = (tokenId: number) => `${EXPLORER_LINK}/token/${NFTMINT_CONTRACT_ADDRESS}?a=${tokenId}`;
@@ -77,38 +77,38 @@ function NftMint() {
   const switchToBSC = async () => {
     if (walletProvider?.request) {
       try {
-        console.log('Switching to BSC Testnet...');
+        console.log('Switching to BSC Mainnet...');
         await walletProvider.request({
           method: 'wallet_switchEthereumChain',
-          params: [{ chainId: '0x61' }], // Chain ID for BSC Testnet
+          params: [{ chainId: '0x38' }],
         });
-        console.log('Switched to BSC Testnet');
+        console.log('Switched to BSC Mainnet');
       } catch (switchError) {
         if ((switchError as { code: number }).code === 4902) {
-          console.log('BSC Testnet not found. Adding network...');
+          console.log('BSC Mainnet not found. Adding network...');
           try {
             await walletProvider.request({
               method: 'wallet_addEthereumChain',
               params: [
                 {
-                  chainId: '0x61',
-                  chainName: 'Binance Smart Chain Testnet',
+                  chainId: '0x38',
+                  chainName: 'Binance Smart Chain Mainnet',
                   nativeCurrency: {
-                    name: 'tBNB',
-                    symbol: 'tBNB',
+                    name: 'BNB',
+                    symbol: 'BNB',
                     decimals: 18,
                   },
-                  rpcUrls: ['https://data-seed-prebsc-1-s3.binance.org:8545'],
-                  blockExplorerUrls: ['https://testnet.bscscan.com'],
+                  rpcUrls: ['https://bsc-dataseed.binance.org/'],
+                  blockExplorerUrls: ['https://bscscan.com'],
                 },
               ],
             });
-            console.log('Added and switched to BSC Testnet');
+            console.log('Added and switched to BSC Mainnet');
           } catch (addError) {
-            console.error('Error adding BSC Testnet:', addError);
+            console.error('Error adding BSC Mainnet:', addError);
           }
         } else {
-          console.error('Error switching to BSC Testnet:', switchError);
+          console.error('Error switching to BSC Mainnet:', switchError);
         }
       }
     }
@@ -135,9 +135,8 @@ function NftMint() {
 
       let provider = new ethers.BrowserProvider(walletProvider);
       const network = await provider.getNetwork();
-      if (Number(network.chainId) !== 97) { // Chain ID for BSC Testnet
+      if (Number(network.chainId) !== 56) {
         await switchToBSC();
-        // Recreate provider and signer after switching networks
         provider = new ethers.BrowserProvider(walletProvider);
       }
 
@@ -334,7 +333,7 @@ function NftMint() {
               <Link className="contractaddr" style={{ color: 'white', display: 'block', textAlign: 'center', fontWeight: 'bold', marginTop: '10px' }}>
                 {NFTMINT_CONTRACT_ADDRESS}
               </Link>
-              <Link isExternal href={`https://testnet.bscscan.com/token/${NFTMINT_CONTRACT_ADDRESS}`} className="contractaddr" style={{ color: 'white', display: 'block', textAlign: 'center', fontWeight: 'bold', marginTop: '10px' }}>
+              <Link isExternal href={`https://bscscan.com/token/${NFTMINT_CONTRACT_ADDRESS}`} className="contractaddr" style={{ color: 'white', display: 'block', textAlign: 'center', fontWeight: 'bold', marginTop: '10px' }}>
                 View on Explorer
               </Link>
             </div>

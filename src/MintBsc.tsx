@@ -34,7 +34,7 @@ const NewPage = () => {
         try {
           await walletProvider.request({
             method: 'wallet_switchEthereumChain',
-            params: [{ chainId: '0x61' }], // Chain ID for BSC Testnet
+            params: [{ chainId: '0x38' }], // Chain ID for BSC Testnet
           });
           console.log('Switched to BSC Testnet');
         } catch (switchError) {
@@ -45,15 +45,15 @@ const NewPage = () => {
                 method: 'wallet_addEthereumChain',
                 params: [
                   {
-                    chainId: '0x61',
-                    chainName: 'BSC Testnet',
+                    chainId: '0x38',
+                    chainName: 'BSC ',
                     nativeCurrency: {
                       name: 'Binance Coin',
                       symbol: 'BNB',
                       decimals: 18,
                     },
-                    rpcUrls: ['https://data-seed-prebsc-1-s1.binance.org:8545/'],
-                    blockExplorerUrls: ['https://testnet.bscscan.com'],
+                    rpcUrls: ['https://bsc-dataseed.binance.org/'],
+                    blockExplorerUrls: ['https://bscscan.com'],
                   },
                 ],
               });
