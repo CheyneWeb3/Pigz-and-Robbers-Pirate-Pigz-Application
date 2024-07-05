@@ -143,25 +143,23 @@ const NFTProfilePage = () => {
             </Box>
           </Box>
 
+          <Flex bg="rgba(0, 0, 0, 0.65)" borderRadius="2xl" p={0} mb={0} h="490px" justifyContent="center" alignItems="center">
+            <Box
+              flex={1}
+              p={4}
+              m={2}
+              borderRadius="2xl"
+              boxShadow="md"
+              display="flex"
+              flexDirection="column"
+              justifyContent="center"
+              alignItems="center"
+            >
+              <MiniMintPoly />
+              <MiniMintBsc />
+            </Box>
+          </Flex>
 
-                    <Flex  bg="rgba(0, 0, 0, 0.65)" borderRadius="2xl" p={0} mb={0} h="490px" justifyContent="center" flexWrap="wrap">
-
-
-                      <Box
-                        flex={1}
-                        p={4}
-                        m={2}
-                        mx="auto"
-                        borderRadius="2xl"
-                        boxShadow="md"
-                        justifyContent="center"
-                        alignItems="center"
-                      >
-                      <MiniMintPoly />
-
-                    <MiniMintBsc />
-                      </Box>
-                    </Flex>
 
         </Box>
       </Box>

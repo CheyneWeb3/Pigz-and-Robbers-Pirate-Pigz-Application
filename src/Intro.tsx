@@ -171,7 +171,7 @@ const NewPage = () => {
 
                   <Image src="/images/polygon.png" alt="header" mx="auto" width="20%" minW="180px"  mb={2} />
                     <Flex justifyContent="center" flexWrap="wrap">
-                      <Text width="60%" textAlign="center" fontSize="lg" fontWeight="normal">
+                      <Text mt="10px" width="60%" textAlign="center" fontSize="lg" fontWeight="normal">
                         Click to Enter
                       </Text>
                     </Flex>
@@ -181,7 +181,7 @@ const NewPage = () => {
                       Pirate Pigz Minting
                     </Text>
                   </Flex>
-                  <Image src={currentImagePirate} alt="Pirate Pigz" mx="auto" width="25%" minW="250px" mt="28px" borderRadius="2xl" />
+                  <Image src={currentImagePirate} alt="Pirate Pigz" mx="auto" width="40%" minW="250px" mt="28px" borderRadius="2xl" />
                 </Link>
               </Box>
               <Box
@@ -214,7 +214,7 @@ const NewPage = () => {
                     Pigz and Robbers Minting
                   </Text>
                 </Flex>
-                  <Image src={currentImage} alt="Pigz and Robbers" mx="auto" width="25%" minW="250px" mt="28px" borderRadius="2xl" />
+                  <Image src={currentImage} alt="Pigz and Robbers" mx="auto" width="40%" minW="250px" mt="28px" borderRadius="2xl" />
                 </Link>
               </Box>
             </Flex>
