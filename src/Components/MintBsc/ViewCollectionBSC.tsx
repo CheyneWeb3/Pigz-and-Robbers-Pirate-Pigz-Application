@@ -39,7 +39,8 @@ const METADATA_BASE_URL = 'https://pigzandrobbers.meta.rareboard.com/api/';
 const MAX_TOKEN_ID = 3333;
 
 const getExplorerLink = (tokenId: number) => `${EXPLORER_LINK}/token/${NFTMINT_CONTRACT_ADDRESS}?a=${tokenId}`;
-const getMarketplaceLink = (tokenId: number) => `https://element.market/assets/bsc/${NFTMINT_CONTRACT_ADDRESS}/${tokenId}`;
+const getMarketplaceLinkElement = (tokenId: number) => `https://element.market/assets/bsc/${NFTMINT_CONTRACT_ADDRESS}/${tokenId}`;
+const getMarketplaceLinkTofu = (tokenId: number) => `https://tofunft.com/nft/bsc/${NFTMINT_CONTRACT_ADDRESS}/${tokenId}`;
 
 declare global {
   interface Window {
@@ -360,7 +361,11 @@ function MyNfts() {
                         <Text mt="2" color="white" textAlign="center">
                           PIGZ and ROBBERS TokenId {tokenId}
                         </Text>
-                        <Link href={getMarketplaceLink(tokenId)} isExternal>
+
+
+
+
+                        <Link href={getMarketplaceLinkElement(tokenId)} isExternal>
                           <Button
                             mt="2"
                             width="160px"
@@ -368,7 +373,18 @@ function MyNfts() {
                             textColor="white"
                             _hover={{ bg: '#a7801a' }}
                           >
-                            Marketplace
+                            Element Market
+                          </Button>
+                        </Link>
+                        <Link href={getMarketplaceLinkTofu(tokenId)} isExternal>
+                          <Button
+                            mt="2"
+                            width="160px"
+                            bg="#d19a19"
+                            textColor="white"
+                            _hover={{ bg: '#a7801a' }}
+                          >
+                            Tofu NFT
                           </Button>
                         </Link>
                         <Button

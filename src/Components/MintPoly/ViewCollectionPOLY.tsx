@@ -34,7 +34,8 @@ const METADATA_BASE_URL = 'https://raw.githubusercontent.com/ArielRin/Pigz-and-R
 const MAX_TOKEN_ID = 300;
 
 const getExplorerLink = (tokenId: number) => `${EXPLORER_LINK}/token/${NFTMINT_CONTRACT_ADDRESS}?a=${tokenId}`;
-const getMarketplaceLink = (tokenId: number) => `https://element.market/assets/bsc/${NFTMINT_CONTRACT_ADDRESS}/${tokenId}`;
+const getMarketplaceLinkElement = (tokenId: number) => `https://element.market/assets/bsc/${NFTMINT_CONTRACT_ADDRESS}/${tokenId}`;
+const getMarketplaceLinkTofu = (tokenId: number) => `https://tofunft.com/nft/polygon/${NFTMINT_CONTRACT_ADDRESS}/${tokenId}`;
 
 declare global {
   interface Window {
@@ -317,7 +318,7 @@ function MyNfts() {
                         borderRadius="2xl"
                         objectFit="cover"
                         mx="auto"
-                        my="auto"  
+                        my="auto"
                         onError={(e) => {
                           const target = e.target as HTMLImageElement;
                           target.onerror = null;
@@ -346,7 +347,9 @@ function MyNfts() {
                         <Text mt="2" color="white" textAlign="center">
                           Pirate Pigz TokenId {tokenId}
                         </Text>
-                        <Link href={getMarketplaceLink(tokenId)} isExternal>
+
+
+                        <Link href={getMarketplaceLinkElement(tokenId)} isExternal>
                           <Button
                             mt="2"
                             width="160px"
@@ -354,9 +357,21 @@ function MyNfts() {
                             textColor="white"
                             _hover={{ bg: '#c45b79' }}
                           >
-                            Marketplace
+                            Element Market
                           </Button>
                         </Link>
+                        <Link href={getMarketplaceLinkTofu(tokenId)} isExternal>
+                          <Button
+                            mt="2"
+                            width="160px"
+                            bg="#7140d7"
+                            textColor="white"
+                            _hover={{ bg: '#c45b79' }}
+                          >
+                            Tofu NFT
+                          </Button>
+                        </Link>
+
                         <Button
                           mt="2"
                           width="160px"
