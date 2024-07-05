@@ -44,10 +44,13 @@ const Footer: React.FC = () => {
 
 
         <Text fontSize="xl" mb={2}>&copy;  Cosmic Rich Pigz {currentYear} </Text>
+        <Flex p={2} bg="rgba(0, 0, 0, 0.61)" mt="15px" justify="center" align="center" gap={4}>
 
-                <Flex mt="15px" justify="center" align="center" gap={4}>
-                  <Image p={2} ml="4" src="/images/banner.png" alt="Heading" width="380px" />
-                </Flex>
+          <Image p={2} ml="4" src="/images/banner.png" alt="Heading" width="380px" />
+
+        </Flex>
+
+
         <Flex mt="15px" justify="center" align="center" gap={4}>
           <Link href="https://cosmicrichpigz.com/" isExternal>
             <FontAwesomeIcon icon={faGlobe} size="xl" />
@@ -62,7 +65,7 @@ const Footer: React.FC = () => {
         </Flex>
 
         <Text mt="25px" fontSize="sm" mb={2}>Currently Connected to</Text>
-        <Flex mb="5px" justifyContent="center" flexWrap="wrap">
+        <Flex mb={4} justifyContent="center" flexWrap="wrap">
           <w3m-network-button />
         </Flex>
 
@@ -71,7 +74,7 @@ const Footer: React.FC = () => {
           <Image
             src="https://raw.githubusercontent.com/ArielRin/Alpha7-Public-Files-and-Assets/master/OldDapp/src/headerlogo.png"
             alt="Logo"
-            width="40px"
+            width="60px"
             mx="auto"
           />
 
