@@ -3,10 +3,14 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './styles.css';
 
 import Intro from './Intro';
-import MintBsc from './Components/MintBsc/NftMint0/NftMint0';
+import MintBsc from './MintBsc';
+import MintPoly from './MintPoly';
 
 
 
+
+
+import NFTProfilePagepoly from './Components/MintPoly/NFTProfilePage';
 
 import NFTProfilePage from './Components/MintBsc/NFTProfilePage';
 import ViewCollectionBSC from './Components/MintBsc/ViewCollectionBSC';
@@ -50,13 +54,6 @@ const chains = [
     currency: 'tBNB',
     explorerUrl: 'https://testnet.bscscan.com',
     rpcUrl: 'https://data-seed-prebsc-1-s3.binance.org:8545'
-  },
-  {
-    chainId: 80002,
-    name: 'Amoy Testnet',
-    currency: 'MATIC',
-    explorerUrl: 'https://www.oklink.com/amoy',
-    rpcUrl: 'https://80002.rpc.thirdweb.com/'
   }
 ];
 
@@ -70,8 +67,8 @@ const ethersConfig = defaultConfig({
   defaultChainId: 56,
   rpcUrl: 'https://bsc-dataseed.binance.org',
   auth: {
-    email: true,
-    socials: ['google', 'x', 'apple'],
+    email: false,
+    socials: ['google'],
     showWallets: true,
     walletFeatures: true
   }
@@ -84,8 +81,8 @@ const modal = createWeb3Modal({
   enableAnalytics: true,
   themeMode: 'dark',
   themeVariables: {
-    '--w3m-color-mix': 'pink',
-    '--w3m-color-mix-strength': 42
+    '--w3m-color-mix': 'grey',
+    '--w3m-color-mix-strength': 22
   },
   chainImages: {
       56: 'https://thatdamndawg.com/images/networklogos/bsc.png',
@@ -161,7 +158,9 @@ const modal = createWeb3Modal({
         <Route path="/" element={<Intro />} />
               <Route path="/viewbsc" element={<ViewCollectionBSC />} />
                 <Route path="/nft/:tokenId" element={<NFTProfilePage />} />
-                  <Route path="/mintbsc" element={<MintBsc />} />  
+                  <Route path="/nftpoly/:tokenId" element={<NFTProfilePagepoly />} />
+                  <Route path="/mintbsc" element={<MintBsc />} />
+                    <Route path="/mintpoly" element={<MintPoly />} />
       </Routes>
     </Router>
   );

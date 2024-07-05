@@ -240,13 +240,21 @@ function MyNfts() {
             <GridItem>
             </GridItem>
             <GridItem display="flex" justifyContent="center">
-            Your PIGZ and ROBBERS on BSC
+            <Image src="/images/pigzrobberstextside.png" alt="header" mx="auto" width="45%" minW="100px" mt="18px" />
 
             </GridItem>
             <GridItem display={{ base: 'flex', md: 'block' }} justifyContent="center">
               {/* Placeholder for any additional elements */}
             </GridItem>
           </Grid>
+
+            <Box
+              bg="rgba(0,0,0,0.0)"
+              borderRadius="2xl"
+              maxW="100%"
+            >
+            Your BSC Collection
+            </Box>
 
           <Box
             bgPos="center"
@@ -296,7 +304,7 @@ function MyNfts() {
             ) : (
               <Wrap spacing="10px" justify="center">
                 {nfts.map(({ tokenId, imageUrl }) => (
-                  <WrapItem key={tokenId} flexBasis={{ base: '100%', sm: '48%', md: '31%', lg: '24%'}}>
+                  <WrapItem key={tokenId} flexBasis={{ base: '100%', sm: '48%', md: '31%', lg: '12%'}}>
                     <Box
                       bg="rgba(0, 0, 0, 0)"
                       p="4"
@@ -358,9 +366,9 @@ function MyNfts() {
                           <Button
                             mt="2"
                             width="160px"
-                            bg="#893c59"
+                            bg="#d19a19"
                             textColor="white"
-                            _hover={{ bg: '#c45b79' }}
+                            _hover={{ bg: '#a7801a' }}
                           >
                             Marketplace
                           </Button>
@@ -368,19 +376,9 @@ function MyNfts() {
                         <Button
                           mt="2"
                           width="160px"
-                          bg="#893c59"
+                          bg="#d19a19"
                           textColor="white"
-                          _hover={{ bg: '#c45b79' }}
-                          onClick={() => addNftToWallet(tokenId, imageUrl)}
-                        >
-                          Add to Wallet
-                        </Button>
-                        <Button
-                          mt="2"
-                          width="160px"
-                          bg="#893c59"
-                          textColor="white"
-                          _hover={{ bg: '#c45b79' }}
+                          _hover={{ bg: '#a7801a' }}
                           onClick={() => {
                             setSelectedImage(imageUrl);
                             onOpen();
@@ -391,9 +389,9 @@ function MyNfts() {
                         <Button
                           mt="2"
                           width="160px"
-                          bg="#893c59"
+                          bg="#d19a19"
                           textColor="white"
-                          _hover={{ bg: '#c45b79' }}
+                          _hover={{ bg: '#a7801a' }}
                           onClick={() => navigate(`/nft/${tokenId}`)}
                         >
                           View Details

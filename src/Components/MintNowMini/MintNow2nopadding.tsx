@@ -14,15 +14,14 @@ import {
   ModalFooter,
   ModalBody,
   ModalCloseButton,
+  useToast,
 } from '@chakra-ui/react';
-import { useToast } from '@chakra-ui/react';
 import {
   useWeb3Modal,
   useWeb3ModalState,
   useWeb3ModalProvider,
 } from '@web3modal/ethers/react';
 import { ethers, parseEther, BrowserProvider } from 'ethers';
-import axios from 'axios';
 import nftMintAbi from './nftMintAbi.json';
 
 const glow = keyframes`
@@ -33,13 +32,17 @@ const glow = keyframes`
 
 const NFTMINT_CONTRACT_ADDRESS = '0xAC40d2487295C6AcdCAbe317B3042b1A15380a0C'; // Contract address for BSC Testnet
 
-const NftMintSingle = () => {
+const MintNow2nopadding = () => {
   const { open } = useWeb3Modal();
   const { selectedNetworkId } = useWeb3ModalState();
   const { walletProvider } = useWeb3ModalProvider();
   const toast = useToast();
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [modalContent, setModalContent] = useState<{ status: string, tokenId: number | null, txHash: string | null }>({ status: 'Awaiting transaction confirmation...', tokenId: null, txHash: null });
+  const [modalContent, setModalContent] = useState<{ status: string; tokenId: number | null; txHash: string | null }>({
+    status: 'Awaiting transaction confirmation...',
+    tokenId: null,
+    txHash: null,
+  });
   const [transactionHash, setTransactionHash] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [isConnected, setIsConnected] = useState(false);
@@ -123,12 +126,11 @@ const NftMintSingle = () => {
       const contract = new ethers.Contract(NFTMINT_CONTRACT_ADDRESS, nftMintAbi, signer);
       console.log('Contract:', contract);
 
-      // Verify mint function
       const mintAmount = 1;
       const value = parseEther('0.09');
       console.log(`Minting ${mintAmount} NFTs with value ${value.toString()}`);
 
-      const transaction = await contract.mint(mintAmount, { value });
+      const transaction = await contract.mint(account, mintAmount, { value });
       console.log('Transaction:', transaction);
 
       setTransactionHash(transaction.hash);
@@ -148,7 +150,6 @@ const NftMintSingle = () => {
       const metadata = await metadataResponse.json();
       const imageUrl = metadata.image.replace('ipfs://', 'https://ipfs.io/ipfs/');
       console.log('Image URL:', imageUrl);
-      postToTwitter(imageUrl);
 
       setModalContent({
         status: `You Just Minted a Pigz and Robbers NFT! #${tokenIdInt}`,
@@ -184,10 +185,9 @@ const NftMintSingle = () => {
         borderRadius="2xl"
         boxShadow="xl"
         border="5px"
-        borderColor="blue.400"
+        borderColor="purple"
         animation={`${glow} 2s infinite`}
-        maxH="500px"
-        marginBottom="25px"
+        h="200px"
         marginTop="25px"
         width="100%"
         textAlign="center"
@@ -210,7 +210,8 @@ const NftMintSingle = () => {
                 marginTop: '25px',
                 color: 'white',
               }}
-            >View on Element Market
+            >
+              View on Element Market
             </a>
           </Box>
         </Flex>
@@ -225,19 +226,21 @@ const NftMintSingle = () => {
         >
           Mint another PIGZandROBBERS!
         </Button>
-        <Box mt="1" textAlign="center">
-        </Box>
+        <Box mt="1" textAlign="center"></Box>
       </Box>
 
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
-        <ModalContent>
+        <ModalContent
+      color="white"
+
+        bg="rgba(0, 0, 0, 0.65)"
+        >
           <ModalHeader>{modalContent.status}</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
             {modalContent.tokenId && (
               <>
-                <Image src={`https://ipfs.io/ipfs/${modalContent.tokenId}`} alt="Minted NFT" />
                 <Text mt="4">You Just Minted a Pigz and Robbers NFT! #{modalContent.tokenId}</Text>
                 <a href={`https://testnet.bscscan.com/tx/${modalContent.txHash}`} target="_blank" rel="noopener noreferrer" style={{ color: 'blue', textDecoration: 'underline' }}>
                   View on BscScan
@@ -256,4 +259,4 @@ const NftMintSingle = () => {
   );
 };
 
-export default NftMintSingle;
+export default MintNow2nopadding;

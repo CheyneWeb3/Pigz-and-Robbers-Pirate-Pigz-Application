@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { Box, Image, Flex, Text, Button } from '@chakra-ui/react';
+import { Box, Image, Flex, Text } from '@chakra-ui/react';
 import { css, keyframes } from '@emotion/react';
 import { Link } from 'react-router-dom'; // Import Link from react-router-dom
 import Footer from './Components/Footer/Footer';
-
 import ViewBsc from './Components/MintBsc/ViewCollectionBSC';
-// <ViewBsc/>
+import ViewPoly from './Components/MintPoly/ViewCollectionPOLY';
 
 const imagePaths = [
   '/images/robbers/1.jpeg',
@@ -16,26 +15,30 @@ const imagePaths = [
   '/images/robbers/6.jpeg',
   '/images/robbers/7.jpeg',
   '/images/robbers/8.jpeg',
+  '/images/robbers/9.jpeg',
+  '/images/robbers/10.jpeg',
+  '/images/robbers/11.jpeg',
+  '/images/robbers/12.jpeg',
+];
+
+const imagePathsPirates = [
+  '/images/pirates/256.png',
+  '/images/pirates/257.png',
+  '/images/pirates/258.png',
+  '/images/pirates/259.png',
+  '/images/pirates/260.png',
+  '/images/pirates/261.png',
+  '/images/pirates/262.png',
+  '/images/pirates/263.png',
+  '/images/pirates/264.png',
+  '/images/pirates/265.png',
+  '/images/pirates/266.png',
+  '/images/pirates/267.png',
 ];
 
 const NewPage = () => {
-  const [tokenData, setTokenData] = useState<any>(null);
   const [currentImage, setCurrentImage] = useState<string>(imagePaths[0]);
-
-  useEffect(() => {
-    const fetchTokenData = async () => {
-      try {
-        const response = await fetch('https://api.geckoterminal.com/api/v2/networks/degenchain/pools/0x401cd27b11e64527cc09bcad1febcf8fcae8e945');
-        const data = await response.json();
-        console.log('API Response:', data);
-        setTokenData(data.data.attributes);
-      } catch (error) {
-        console.error('Error fetching token data:', error);
-      }
-    };
-
-    fetchTokenData();
-  }, []);
+  const [currentImagePirate, setCurrentImagePirate] = useState<string>(imagePathsPirates[0]);
 
   useEffect(() => {
     const intervalId = setInterval(() => {
@@ -43,6 +46,14 @@ const NewPage = () => {
     }, 2000);
 
     return () => clearInterval(intervalId);
+  }, []);
+
+  useEffect(() => {
+    const intervalIdPirate = setInterval(() => {
+      setCurrentImagePirate(imagePathsPirates[Math.floor(Math.random() * imagePathsPirates.length)]);
+    }, 2000);
+
+    return () => clearInterval(intervalIdPirate);
   }, []);
 
   const glow = keyframes`
@@ -56,15 +67,6 @@ const NewPage = () => {
 
   const glowStyle = css`
     animation: ${glow} 1.5s ease-in-out infinite alternate;
-  `;
-
-  const formatPrice = (price: string) => parseFloat(price).toFixed(8);
-  const usdPrice = (price: string) => {
-    return parseFloat(price).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-  };
-
-  const textShadowStyle = css`
-    text-shadow: 1px 1px 2px pink, 0 0 1em pink, 0 0 0.2em pink;
   `;
 
   return (
@@ -129,17 +131,16 @@ const NewPage = () => {
                 textAlign="center"
                 bg="rgba(0, 0, 0, 0.61)"
               >
-
-              <Link to="/">
-                <Image src="images/piratepigztextlogo.png" alt="header" mx="auto" width="40%" minW="250px" mt="28px" />
-                <Flex justifyContent="center" flexWrap="wrap">
-                  <Text width="60%" textAlign="center" fontSize="lg" fontWeight="normal">
-                    Click to Enter Pirate Pigz Polygon Minting Page
-                  </Text>
-                </Flex>
-                <Image src={currentImage} alt="Pigz and Robbers" mx="auto" width="25%" minW="250" mt="28px" borderRadius="2xl" />
-              </Link>
-
+                <Link to="/mintpoly">
+                  <Image src="/images/piratepigztextlogo.png" alt="header" mx="auto" width="40%" minW="250px" mt="28px" />
+                  <Image src="/images/polygon.png" alt="header" mx="auto" width="20%" minW="100px" mt="18px" />
+                  <Flex justifyContent="center" flexWrap="wrap">
+                    <Text width="60%" textAlign="center" fontSize="lg" fontWeight="normal">
+                      Click to Enter Pirate Pigz Polygon Minting Page
+                    </Text>
+                  </Flex>
+                  <Image src={currentImagePirate} alt="Pirate Pigz" mx="auto" width="25%" minW="250px" mt="28px" borderRadius="2xl" />
+                </Link>
               </Box>
               <Box
                 flex={1}
@@ -151,34 +152,33 @@ const NewPage = () => {
                 textAlign="center"
                 bg="rgba(0, 0, 0, 0.61)"
               >
+                <Link to="/mintbsc">
+                    <Image src="/images/pigzrobberstextlogo.png" alt="header" mx="auto" width="40%" minW="250px" mt="28px" />
+                    <Image src="/images/binance.png" alt="header" mx="auto" width="20%" minW="100px" mt="28px" />
 
-              <Link to="/mintbsc">
-                <Image src="images/pigzrobberstextlogo.png" alt="header" mx="auto" width="40%" minW="250px" mt="28px" />
-                <Flex justifyContent="center" flexWrap="wrap">
-                  <Text width="60%" textAlign="center" fontSize="lg" fontWeight="normal">
-                    Click to Enter Pigz and Robbers BSC Minting Page
-                  </Text>
-                </Flex>
-                <Image src={currentImage} alt="Pigz and Robbers" mx="auto" width="25%" minW="250px" mt="28px" borderRadius="2xl" />
-              </Link>
-
-
+                  <Flex justifyContent="center" flexWrap="wrap">
+                    <Text width="60%" textAlign="center" fontSize="lg" fontWeight="normal">
+                      Click to Enter Pigz and Robbers BSC Minting Page
+                    </Text>
+                  </Flex>
+                  <Image src={currentImage} alt="Pigz and Robbers" mx="auto" width="25%" minW="250px" mt="28px" borderRadius="2xl" />
+                </Link>
               </Box>
             </Flex>
-              <Box
-                flex={1}
-                m={2}
-                p={4}
-                bg="rgba(0, 0, 0, 0.61)"
-                borderRadius="md"
-                boxShadow="md"
-                textAlign="center"
-              >
-                <ViewBsc />
-                <ViewBsc />
-                <Text mb="200px" fontSize="xl">
-                </Text>
-              </Box>
+            <Box
+              flex={1}
+              m={2}
+              p={4}
+              bg="rgba(0, 0, 0, 0.61)"
+              borderRadius="md"
+              boxShadow="md"
+              textAlign="center"
+            >
+              <ViewBsc />
+              <ViewPoly />
+              <Text mb="200px" fontSize="xl">
+              </Text>
+            </Box>
           </Box>
         </Box>
       </Box>

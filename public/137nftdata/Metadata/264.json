@@ -1,0 +1,16 @@
+{
+    "name": "Pirate Polygon Pigz",
+    "description": "Pigz search Taverns, Islands, and the Seven Seas to find their friends",
+    "image": "https://aqua-deep-dragon-777.mypinata.cloud/ipfs/QmUCLndbg5poXKdPBCF3Bh3tHc5c6foHDBXyssFocToec3/aqua-deep-dragon-777.mypinata.cloud/ipfs/Qmf7k6YBfZQk6y6wyjk5oEncL3TkPPeNLCxB4BnzseVtZZ/264.png",
+    "tokenid": 264,
+    "attributes": [
+        {
+            "trait_type": "Rarity",
+            "value": "Common"
+        },
+        {
+            "trait_type": "Background",
+            "value": "Tavern"
+        }
+    ]
+}
