@@ -133,7 +133,7 @@ const NewPage = () => {
           <Flex
   flex={1}
   mt={2}
-  p={2}
+  p={4}
   borderRadius="2xl"
   textAlign="center"
   bg="rgba(0, 0, 0, 0.61)"
@@ -142,7 +142,7 @@ const NewPage = () => {
   justifyContent="space-between" // Use this to space items correctly
   h="100px" // Adjust height as needed to see the centering effect
 >
-  <Text mb={2} ml={4} textAlign="left" fontSize="lg" fontWeight="normal">
+  <Text mb={2} ml={4} textAlign="left" fontSize="lg" fontWeight="bolder">
     Welcome to Cosmic Rich Pigz NFT's!  Choose one of our "Pigz" collections below and start minting.
   </Text>
 
