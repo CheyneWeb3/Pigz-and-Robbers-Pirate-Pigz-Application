@@ -109,12 +109,15 @@ const NewPage = () => {
           color="white"
           >
 
-            <Flex p={2} bg="rgba(0, 0, 0, 0.61)" justify="space-between" align="center">
-              <Link to="/">
-                <Image p={2} ml="4" src="/images/banner.png" alt="Heading" width="220px" />
-              </Link>
-              <w3m-button />
-            </Flex>
+                    <Flex p={2} bg="rgba(0, 0, 0, 0.61)" justify="space-between" align="center">
+                      <Link to="/">
+                        <Image p={2} ml="4" src="/images/banner.png" alt="Heading" width="220px" />
+                      </Link>
+                      <Flex   align="right">
+
+                      <w3m-button />
+                    </Flex>
+                    </Flex>
 
           <Box
             flex={1}
@@ -127,7 +130,28 @@ const NewPage = () => {
             bgSize="cover"
             color="white"
           >
-            <Flex justifyContent="center" p={2} flexWrap="wrap" position="relative">
+          <Flex
+  flex={1}
+  mt={2}
+  p={2}
+  borderRadius="2xl"
+  textAlign="center"
+  bg="rgba(0, 0, 0, 0.61)"
+  flexWrap="wrap"
+  alignItems="center"
+  justifyContent="space-between" // Use this to space items correctly
+  h="100px" // Adjust height as needed to see the centering effect
+>
+  <Text mb={2} ml={4} textAlign="left" fontSize="lg" fontWeight="normal">
+    Welcome to Rich Pigz NFT's!  Choose one of the collections below to start minting.
+  </Text>
+
+  <w3m-network-button ml="auto" />
+</Flex>
+
+
+
+            <Flex justifyContent="center" p={0} flexWrap="wrap" position="relative">
               <Box
                 flex={1}
                 minW="300px"
@@ -140,10 +164,21 @@ const NewPage = () => {
               >
                 <Link to="/mintpoly">
                   <Image src="/images/piratepigztextlogo.png" alt="header" mx="auto" width="40%" minW="250px" mt="28px" />
-                  <Image src="/images/polygon.png" alt="header" mx="auto" width="20%" minW="100px" mt="18px" />
-                  <Flex justifyContent="center" flexWrap="wrap">
+
+                    <Text textAlign="center" fontSize="lg" fontWeight="normal">
+                        On
+                    </Text>
+
+                  <Image src="/images/polygon.png" alt="header" mx="auto" width="20%" minW="180px"  mb={2} />
+                    <Flex justifyContent="center" flexWrap="wrap">
+                      <Text width="60%" textAlign="center" fontSize="lg" fontWeight="normal">
+                        Click to Enter
+                      </Text>
+                    </Flex>
+
+                    <Flex justifyContent="center" flexWrap="wrap">
                     <Text width="60%" textAlign="center" fontSize="lg" fontWeight="normal">
-                      Click to Enter Pirate Pigz Polygon Minting Page
+                      Pirate Pigz Minting
                     </Text>
                   </Flex>
                   <Image src={currentImagePirate} alt="Pirate Pigz" mx="auto" width="25%" minW="250px" mt="28px" borderRadius="2xl" />
@@ -161,13 +196,24 @@ const NewPage = () => {
               >
                 <Link to="/mintbsc">
                     <Image src="/images/pigzrobberstextlogo.png" alt="header" mx="auto" width="40%" minW="250px" mt="28px" />
-                    <Image src="/images/binance.png" alt="header" mx="auto" width="20%" minW="100px" mt="28px" />
+
+                      <Text textAlign="center" fontSize="lg" fontWeight="normal">
+                          On
+                      </Text>
+
+                    <Image src="/images/binance.png" alt="header" mx="auto" width="20%" minW="180px"  mb={2}  />
 
                   <Flex justifyContent="center" flexWrap="wrap">
                     <Text width="60%" textAlign="center" fontSize="lg" fontWeight="normal">
-                      Click to Enter Pigz and Robbers BSC Minting Page
+                      Click to Enter
                     </Text>
                   </Flex>
+
+                <Flex justifyContent="center" flexWrap="wrap">
+                  <Text width="60%" textAlign="center" fontSize="lg" fontWeight="normal">
+                    Pigz and Robbers Minting
+                  </Text>
+                </Flex>
                   <Image src={currentImage} alt="Pigz and Robbers" mx="auto" width="25%" minW="250px" mt="28px" borderRadius="2xl" />
                 </Link>
               </Box>

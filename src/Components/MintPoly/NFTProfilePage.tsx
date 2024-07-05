@@ -93,12 +93,15 @@ const NFTProfilePage = () => {
           color="white"
         >
 
-          <Flex p={2} bg="rgba(0, 0, 0, 0.61)" justify="space-between" align="center">
-            <Link to="/">
-              <Image p={2} ml="4" src="/images/banner.png" alt="Heading" width="220px" />
-            </Link>
-            <w3m-button />
-          </Flex>
+                  <Flex p={2} bg="rgba(0, 0, 0, 0.61)" justify="space-between" align="center">
+                    <Link to="/">
+                      <Image p={2} ml="4" src="/images/banner.png" alt="Heading" width="220px" />
+                    </Link>
+                    <Flex   align="right">
+
+                    <w3m-button />
+                  </Flex>
+                  </Flex>
 
           <Flex bg="rgba(0, 0, 0, 0.65)" borderRadius="2xl" p={4} m={2} h="140px" justifyContent="center" flexWrap="wrap">
           </Flex>

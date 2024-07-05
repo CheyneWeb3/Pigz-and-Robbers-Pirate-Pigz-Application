@@ -165,12 +165,15 @@ const NewPage = () => {
           color="white"
         >
 
-          <Flex p={2} bg="rgba(0, 0, 0, 0.61)" justify="space-between" align="center">
-            <Link to="/">
-              <Image p={2} ml="4" src="/images/banner.png" alt="Heading" width="220px" />
-            </Link>
-            <w3m-button />
-          </Flex>
+                  <Flex p={2} bg="rgba(0, 0, 0, 0.61)" justify="space-between" align="center">
+                    <Link to="/">
+                      <Image p={2} ml="4" src="/images/banner.png" alt="Heading" width="220px" />
+                    </Link>
+                    <Flex   align="right">
+
+                    <w3m-button />
+                  </Flex>
+                  </Flex>
           <Box
             flex={1}
             p={0}
