@@ -146,7 +146,7 @@ const NewPage = () => {
     Welcome to Rich Pigz NFT's!  Choose one of the collections below to start minting.
   </Text>
 
-  <w3m-network-button ml="auto" />
+  <w3m-network-button  />
 </Flex>
 
 
