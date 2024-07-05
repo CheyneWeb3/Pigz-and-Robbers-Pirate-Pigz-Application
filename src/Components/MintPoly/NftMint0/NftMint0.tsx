@@ -17,7 +17,7 @@ import {
 } from '@web3modal/ethers/react';
 import nftMintAbi from './nftMintAbi.json';
 
-const MINT_PRICE = 6; 
+const MINT_PRICE = 6;
 const MINT_SUPPLY = 300;
 const NFTMINT_CONTRACT_ADDRESS = '0x8Fc39D096204Ddc68f67aAfF0B63fE2207cB7738';
 const RPC_PROVIDER = 'https://polygon-rpc.com/';
@@ -330,9 +330,12 @@ function NftMint() {
               <Text className="remainingSupply" style={{ color: 'white', padding: '10px', textAlign: 'center', fontWeight: 'bold' }}>
                 {loading ? 'Loading...' : `Remaining Supply: ${remainingSupply}`}
               </Text>
-              <Link className="contractaddr" style={{ color: 'white', display: 'block', textAlign: 'center', fontWeight: 'bold', marginTop: '10px' }}>
+              <Text className="contractaddr" style={{ color: 'white', display: 'block', textAlign: 'center', fontWeight: 'bold', marginTop: '10px' }}>
+                Contract
+              </Text>
+              <Text fontSize="lg" style={{ color: 'white', display: 'block', textAlign: 'center', fontWeight: 'bold', marginTop: '10px' }}>
                 {NFTMINT_CONTRACT_ADDRESS}
-              </Link>
+              </Text>
               <Link isExternal href={`https://polygonscan.com/token/${NFTMINT_CONTRACT_ADDRESS}`} className="contractaddr" style={{ color: 'white', display: 'block', textAlign: 'center', fontWeight: 'bold', marginTop: '10px' }}>
                 View on Explorer
               </Link>

@@ -194,7 +194,7 @@ const NewPage = () => {
                 textAlign="center"
                 bg="rgba(0, 0, 0, 0.61)"
               >
-                <Image src="images/pigzrobberstextlogo.png" alt="header" mx="auto" width="60%" minW="250px" mb="28px" mt="28px" />
+                <Image src="images/pigzrobberstextlogo.png" alt="header" mx="auto" width="40%" minW="250px" mb="28px" mt="28px" />
                 <MintBsc />
               </Box>
 

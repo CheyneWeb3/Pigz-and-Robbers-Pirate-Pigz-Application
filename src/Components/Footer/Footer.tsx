@@ -79,8 +79,11 @@ const Footer: React.FC = () => {
                         </a>
 
         <Text mt="25px" fontSize="sm" mb={2}>Currently Connected to</Text>
-        <Flex mb={4} justifyContent="center" flexWrap="wrap">
+        <Flex mb={2} justifyContent="center" flexWrap="wrap">
           <w3m-network-button />
+        </Flex>
+        <Flex mb={4} justifyContent="center" flexWrap="wrap">
+          <w3m-button />
         </Flex>
 
         <a href="https://alpha7.live" target="_blank" rel="noopener noreferrer">
