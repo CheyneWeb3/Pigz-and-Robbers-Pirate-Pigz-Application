@@ -46,13 +46,6 @@ const chains = [
     currency: 'MATIC',
     explorerUrl: 'https://polygonscan.com',
     rpcUrl: 'https://polygon-rpc.com/'
-  },
-  {
-    chainId: 97,
-    name: 'BSC Testnet',
-    currency: 'tBNB',
-    explorerUrl: 'https://testnet.bscscan.com',
-    rpcUrl: 'https://data-seed-prebsc-1-s3.binance.org:8545'
   }
 ];
 

@@ -17,7 +17,7 @@ import {
 } from '@web3modal/ethers/react';
 import nftMintAbi from './nftMintAbi.json';
 
-const MINT_PRICE = 6;
+const MINT_PRICE = 6; 
 const MINT_SUPPLY = 300;
 const NFTMINT_CONTRACT_ADDRESS = '0x8Fc39D096204Ddc68f67aAfF0B63fE2207cB7738';
 const RPC_PROVIDER = 'https://polygon-rpc.com/';
