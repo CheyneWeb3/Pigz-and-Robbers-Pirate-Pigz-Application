@@ -155,7 +155,7 @@ const NFTProfilePage = () => {
                         borderRadius="2xl"
                         boxShadow="md"
                         justifyContent="center"
-                        align="center"
+                        alignItems="center"
                       >
                       <MiniMintPoly />
 
