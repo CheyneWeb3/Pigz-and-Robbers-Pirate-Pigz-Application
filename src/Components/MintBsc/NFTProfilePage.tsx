@@ -5,11 +5,19 @@ import { css, keyframes } from '@emotion/react';
 import Footer from '../Footer/Footer';
 import MiniMintBsc from '../MintNowMini/MintNow2nopadding';
 
-
+interface NftData {
+  name: string;
+  description: string;
+  image: string;
+  attributes: Array<{
+    trait_type: string;
+    value: string;
+  }>;
+}
 
 const NFTProfilePage = () => {
-  const { tokenId } = useParams(); // Assumes you're using react-router for navigation
-  const [nftData, setNftData] = useState(null);
+  const { tokenId } = useParams<{ tokenId: string }>(); // Assumes you're using react-router for navigation
+  const [nftData, setNftData] = useState<NftData | null>(null);
 
   useEffect(() => {
     const fetchNFTData = async () => {
@@ -87,8 +95,8 @@ const NFTProfilePage = () => {
             <w3m-button />
           </Flex>
 
-                                  <Flex bg="rgba(0, 0, 0, 0.65)" borderRadius="2xl" p={4} m={2} h="140px" justifyContent="center" flexWrap="wrap">
-                                  </Flex>
+          <Flex bg="rgba(0, 0, 0, 0.65)" borderRadius="2xl" p={4} m={2} h="140px" justifyContent="center" flexWrap="wrap">
+          </Flex>
           <Box
             flex={1}
             p={0}
@@ -110,7 +118,6 @@ const NFTProfilePage = () => {
               textAlign="center"
             >
               <Image borderRadius="2xl" mx="auto" src={`https://ipfs.io/ipfs/${nftData.image.split('ipfs://')[1]}`} alt={nftData.name} width="75%" />
-
             </Box>
             <Box
               flex={1}
@@ -131,8 +138,8 @@ const NFTProfilePage = () => {
           </Box>
 
           <Flex bg="rgba(0, 0, 0, 0.65)" borderRadius="2xl" p={0} mb={0} h="340px" justifyContent="center" flexWrap="wrap">
-            <MiniMintBsc/>
-            </Flex>
+            <MiniMintBsc />
+          </Flex>
 
         </Box>
       </Box>

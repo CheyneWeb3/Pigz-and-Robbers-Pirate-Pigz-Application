@@ -30,7 +30,7 @@ import {
 } from '@web3modal/ethers/react';
 
 import { useNavigate } from 'react-router-dom';
-import Footer from './Components/Footer/Footer';
+import Footer from '../Footer/Footer'; // Ensure this path is correct
 import nftMintAbi from './mintBscAbi.json';
 
 const NFTMINT_CONTRACT_ADDRESS = '0xAC40d2487295C6AcdCAbe317B3042b1A15380a0C'; // Testnet contract address
@@ -138,7 +138,7 @@ function MyNfts() {
           const network = await provider.getNetwork();
           const accounts = await provider.listAccounts();
           if (network.chainId && accounts.length > 0) {
-            setAddress(accounts[0]);
+            setAddress(accounts[0].address);
           }
         });
       } else {

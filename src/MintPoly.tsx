@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { Box, Image, Flex, Text, Button } from '@chakra-ui/react';
+import { Box, Image, Flex, Text } from '@chakra-ui/react';
 import { css, keyframes } from '@emotion/react';
 import { Link } from 'react-router-dom'; // Import Link from react-router-dom
 import Footer from './Components/Footer/Footer';
 
 import ViewPoly from './Components/MintPoly/ViewCollectionPOLY';
 
-import MintBsc from './Components/MintPoly/NftMint0/NftMint0';
-
-// <ViewBsc/>
+import MintPoly from './Components/MintPoly/NftMint0/NftMint0';
+import { useWeb3ModalProvider, useWeb3ModalAccount } from '@web3modal/ethers/react';
 
 const imagePaths = [
   '/images/pirates/256.png',
@@ -28,6 +27,60 @@ const imagePaths = [
 const NewPage = () => {
   const [tokenData, setTokenData] = useState<any>(null);
   const [currentImage, setCurrentImage] = useState<string>(imagePaths[0]);
+  const { walletProvider } = useWeb3ModalProvider();
+  const { isConnected } = useWeb3ModalAccount();
+
+  useEffect(() => {
+    const switchToPolygonMainnet = async () => {
+      if (walletProvider?.request) {
+        try {
+          await walletProvider.request({
+            method: 'wallet_switchEthereumChain',
+            params: [{ chainId: '0x89' }], // Chain ID for Polygon Mainnet
+          });
+          console.log('Switched to Polygon Mainnet');
+        } catch (switchError) {
+          if ((switchError as { code: number }).code === 4902) {
+            console.log('Polygon Mainnet not found. Adding network...');
+            try {
+              await walletProvider.request({
+                method: 'wallet_addEthereumChain',
+                params: [
+                  {
+                    chainId: '0x89',
+                    chainName: 'Polygon Mainnet',
+                    nativeCurrency: {
+                      name: 'MATIC',
+                      symbol: 'MATIC',
+                      decimals: 18,
+                    },
+                    rpcUrls: ['https://polygon-rpc.com/'],
+                    blockExplorerUrls: ['https://polygonscan.com'],
+                  },
+                ],
+              });
+              console.log('Added and switched to Polygon Mainnet');
+            } catch (addError) {
+              console.error('Error adding Polygon Mainnet:', addError);
+            }
+          } else {
+            console.error('Error switching to Polygon Mainnet:', switchError);
+          }
+        }
+      }
+    };
+
+    if (isConnected) {
+      switchToPolygonMainnet();
+    } else {
+      // Listen for when the user connects the wallet and then switch
+      (window as any).ethereum?.on('connect', switchToPolygonMainnet);
+    }
+
+    return () => {
+      (window as any).ethereum?.removeListener('connect', switchToPolygonMainnet);
+    };
+  }, [isConnected, walletProvider]);
 
   useEffect(() => {
     const fetchTokenData = async () => {
@@ -126,25 +179,19 @@ const NewPage = () => {
             color="white"
           >
             <Flex justifyContent="center" p={2} flexWrap="wrap" position="relative">
-
-            <Box
-              flex={1}
-              minW="300px"
-              m={2}
-              p={7}
-              borderRadius="2xl"
-              boxShadow="md"
-              textAlign="center"
-              bg="rgba(0, 0, 0, 0.61)"
-            >
-            <Image src="images/piratepigztextlogo.png" alt="header" mx="auto" width="60%" minW="250px" mb="28px" mt="28px" />
-
-          <MintBsc/>
-
-
-
-            </Box>
-
+              <Box
+                flex={1}
+                minW="300px"
+                m={2}
+                p={7}
+                borderRadius="2xl"
+                boxShadow="md"
+                textAlign="center"
+                bg="rgba(0, 0, 0, 0.61)"
+              >
+                <Image src="images/piratepigztextlogo.png" alt="header" mx="auto" width="60%" minW="250px" mb="28px" mt="28px" />
+                <MintPoly />
+              </Box>
 
               <Box
                 flex={1}
@@ -156,38 +203,27 @@ const NewPage = () => {
                 textAlign="center"
                 bg="rgba(0, 0, 0, 0.61)"
               >
-
-              <Link to="/mintpoly">
-                <Flex justifyContent="center" flexWrap="wrap">
-                  <Text width="60%" textAlign="center" fontSize="lg" fontWeight="normal">
-
-                  </Text>
-                </Flex>
-                <Image src={currentImage} alt="Pirate Pigz" mx="auto" width="75%" minW="250px" mt="90px" borderRadius="2xl" />
-              </Link>
-
-
+                <Link to="/mintpoly">
+                  <Flex justifyContent="center" flexWrap="wrap">
+                    <Text width="60%" textAlign="center" fontSize="lg" fontWeight="normal"></Text>
+                  </Flex>
+                  <Image src={currentImage} alt="Pirate Pigz" mx="auto" width="75%" minW="250px" mt="90px" borderRadius="2xl" />
+                </Link>
               </Box>
-
-
             </Flex>
 
-
-              <Box
-                flex={1}
-                m={2}
-                p={4}
-                bg="rgba(0, 0, 0, 0.61)"
-                borderRadius="md"
-                boxShadow="md"
-                textAlign="center"
-              >
-
-
-                <ViewPoly />
-                <Text mb="200px" fontSize="xl">
-                </Text>
-              </Box>
+            <Box
+              flex={1}
+              m={2}
+              p={4}
+              bg="rgba(0, 0, 0, 0.61)"
+              borderRadius="md"
+              boxShadow="md"
+              textAlign="center"
+            >
+              <ViewPoly />
+              <Text mb="200px" fontSize="xl"></Text>
+            </Box>
           </Box>
         </Box>
       </Box>

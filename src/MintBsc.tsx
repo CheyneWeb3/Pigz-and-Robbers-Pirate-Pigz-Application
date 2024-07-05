@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'; // Import Link from react-router-dom
 import Footer from './Components/Footer/Footer';
 import ViewBsc from './Components/MintBsc/ViewCollectionBSC';
 import MintBsc from './Components/MintBsc/NftMint0/NftMint0';
-import { useWeb3ModalProvider, useWeb3ModalState } from '@web3modal/ethers/react';
+import { useWeb3ModalProvider, useWeb3ModalAccount } from '@web3modal/ethers/react';
 
 const imagePaths = [
   '/images/robbers/1.jpeg',
@@ -26,7 +26,7 @@ const NewPage = () => {
   const [tokenData, setTokenData] = useState<any>(null);
   const [currentImage, setCurrentImage] = useState<string>(imagePaths[0]);
   const { walletProvider } = useWeb3ModalProvider();
-  const { isConnected } = useWeb3ModalState();
+  const { isConnected } = useWeb3ModalAccount();
 
   useEffect(() => {
     const switchToBscTestnet = async () => {
@@ -72,11 +72,11 @@ const NewPage = () => {
       switchToBscTestnet();
     } else {
       // Listen for when the user connects the wallet and then switch
-      walletProvider?.on('connect', switchToBscTestnet);
+      (window as any).ethereum?.on('connect', switchToBscTestnet);
     }
 
     return () => {
-      walletProvider?.removeListener('connect', switchToBscTestnet);
+      (window as any).ethereum?.removeListener('connect', switchToBscTestnet);
     };
   }, [isConnected, walletProvider]);
 

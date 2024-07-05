@@ -23,20 +23,14 @@ import {
   GridItem,
 } from '@chakra-ui/react';
 
-import {
-  useWeb3Modal,
-  useWeb3ModalState,
-  useWeb3ModalProvider,
-} from '@web3modal/ethers/react';
-
 import { useNavigate } from 'react-router-dom';
-import Footer from './Components/Footer/Footer';
+import Footer from '../Footer/Footer'; // Ensure this path is correct
 import nftMintAbi from './mintBscAbi.json';
 
 const NFTMINT_CONTRACT_ADDRESS = '0x02BC73cCf37204Cca1E39aBbdc0916F338ffBdd6'; // Testnet contract address
 const RPC_PROVIDER = 'https://polygon-rpc.com';
 const EXPLORER_LINK = 'https://polygonscan.com';
-const METADATA_BASE_URL = 'https://pigzandrobbers.meta.rareboard.com/api/';
+const METADATA_BASE_URL = 'https://raw.githubusercontent.com/ArielRin/Pigz-and-Robbers-Pirate-Pigz-Application/master/public/137nftdata/Metadata/';
 const MAX_TOKEN_ID = 300; // Adjust this to a reasonable maximum token ID
 
 const getExplorerLink = (tokenId: number) => `${EXPLORER_LINK}/token/${NFTMINT_CONTRACT_ADDRESS}?a=${tokenId}`;
@@ -84,7 +78,7 @@ const fetchMetadata = async (tokenId: number) => {
     const response = await fetch(`${METADATA_BASE_URL}${tokenId}.json`);
     if (response.ok) {
       const metadata = await response.json();
-      const imageUrl = metadata.image.replace('ipfs://', 'https://ipfs.io/ipfs/');
+      const imageUrl = `https://raw.githubusercontent.com/ArielRin/Pigz-and-Robbers-Pirate-Pigz-Application/master/public/137nftdata/Images/${tokenId}.png`;
       return imageUrl;
     } else {
       throw new Error('Failed to fetch metadata');
@@ -115,9 +109,9 @@ function MyNfts() {
       if (window.ethereum) {
         const provider = new ethers.BrowserProvider(window.ethereum as any);
         try {
-          const accounts = await provider.send("eth_requestAccounts", []);
+          const accounts: string[] = await provider.send("eth_requestAccounts", []);
           if (accounts.length > 0) {
-            setAddress(accounts[0]);
+            setAddress(accounts[0]); // Ensure accounts[0] is a string
             setIsConnected(true);
           }
         } catch (error) {
@@ -138,7 +132,8 @@ function MyNfts() {
           const network = await provider.getNetwork();
           const accounts = await provider.listAccounts();
           if (network.chainId && accounts.length > 0) {
-            setAddress(accounts[0]);
+            const accountAddresses = await Promise.all(accounts.map((account) => account.getAddress()));
+            setAddress(accountAddresses[0]);
           }
         });
       } else {
@@ -218,7 +213,6 @@ function MyNfts() {
         display="flex"
         flexDirection="column"
       >
-
         <Box
           flex={1}
           p={0}
@@ -231,33 +225,23 @@ function MyNfts() {
           bgSize="cover"
         >
           <Grid templateColumns={{ base: '1fr', md: '1fr 2fr 1fr' }} width="100%" mx="auto" marginTop="10px">
-            <GridItem>
-            </GridItem>
+            <GridItem></GridItem>
             <GridItem display="flex" justifyContent="center">
-            <Image src="/images/piratepigztextlogoside.png" alt="header" mx="auto" width="45%" minW="100px" mt="18px" />
-
-
-
-
+              <Image src="/images/piratepigztextlogoside.png" alt="header" mx="auto" width="45%" minW="100px" mt="18px" />
             </GridItem>
-            <GridItem display="flex" justifyContent="center">
-
-
-
-
-            </GridItem>
+            <GridItem display="flex" justifyContent="center"></GridItem>
             <GridItem display={{ base: 'flex', md: 'block' }} justifyContent="center">
               {/* Placeholder for any additional elements */}
             </GridItem>
           </Grid>
 
-            <Box
-              bg="rgba(0,0,0,0.0)"
-              borderRadius="2xl"
-              maxW="100%"
-            >
-            Your Polygon Collection
-            </Box>
+          <Box
+            bg="rgba(0,0,0,0.0)"
+            borderRadius="2xl"
+            maxW="100%"
+          >
+            Your BSC Mainnet Collection
+          </Box>
 
           <Box
             bgPos="center"
@@ -265,8 +249,8 @@ function MyNfts() {
             borderRadius="2xl"
             maxH="500px"
             width="600px"
-          >
-          </Box>
+          ></Box>
+
           <Box
             bg="rgba(0,0,0,0.0)"
             maxW="90%"
@@ -277,8 +261,8 @@ function MyNfts() {
               bg="rgba(0,0,0,0)"
               width="100%"
               mx="auto"
-            >
-            </Box>
+            ></Box>
+
             {loading ? (
               <Text
                 className="totalSupply"
@@ -307,13 +291,12 @@ function MyNfts() {
             ) : (
               <Wrap spacing="10px" justify="center">
                 {nfts.map(({ tokenId, imageUrl }) => (
-                  <WrapItem key={tokenId} flexBasis={{ base: '100%', sm: '48%', md: '31%', lg: '12%'}}>
+                  <WrapItem key={tokenId} flexBasis={{ base: '100%', sm: '48%', md: '31%', lg: '12%' }}>
                     <Box
                       bg="rgba(0, 0, 0, 0)"
                       p="4"
                       mt={2}
                       mb={2}
-
                       borderRadius="2xl"
                       position="relative"
                       overflow="hidden"
@@ -326,9 +309,8 @@ function MyNfts() {
                       }}
                     >
                       <Image
-                      mt={9}
-                      mb={9}
-
+                        mt={9}
+                        mb={9}
                         src={imageUrl}
                         alt={`NFT ${tokenId}`}
                         width="100%"  // Adjust image width to 80%
@@ -414,7 +396,7 @@ function MyNfts() {
                           color="white"
                           textAlign="center"
                         >
-                          View on PolygonScan
+                          View on BscScan
                         </Link>
                       </Box>
                     </Box>
@@ -424,7 +406,6 @@ function MyNfts() {
             )}
           </Box>
         </Box>
-
       </Box>
 
       <Modal isOpen={isOpen} onClose={onClose} size="full">

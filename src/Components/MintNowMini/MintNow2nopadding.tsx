@@ -120,6 +120,10 @@ const MintNow2nopadding = () => {
       onOpen();
       setModalContent({ status: 'Awaiting transaction confirmation...', tokenId: null, txHash: null });
 
+      if (!walletProvider) {
+        throw new Error('Wallet provider is not available');
+      }
+
       const provider = new BrowserProvider(walletProvider);
       const signer = await provider.getSigner();
       console.log('Signer:', signer);
@@ -231,11 +235,7 @@ const MintNow2nopadding = () => {
 
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
-        <ModalContent
-      color="white"
-
-        bg="rgba(0, 0, 0, 0.65)"
-        >
+        <ModalContent color="white" bg="rgba(0, 0, 0, 0.65)">
           <ModalHeader>{modalContent.status}</ModalHeader>
           <ModalCloseButton />
           <ModalBody>

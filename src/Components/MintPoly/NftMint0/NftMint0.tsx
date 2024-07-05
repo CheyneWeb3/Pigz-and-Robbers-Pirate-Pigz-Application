@@ -22,6 +22,7 @@ const MINT_SUPPLY = 300;
 const NFTMINT_CONTRACT_ADDRESS = '0x02BC73cCf37204Cca1E39aBbdc0916F338ffBdd6';
 const RPC_PROVIDER = 'https://polygon-rpc.com/';
 const EXPLORER_LINK = 'https://polygonscan.com';
+const METADATA_BASE_URL = 'https://raw.githubusercontent.com/ArielRin/Pigz-and-Robbers-Pirate-Pigz-Application/master/public/137nftdata/Metadata/';
 
 const getExplorerLink = (tokenId: number) => `${EXPLORER_LINK}/token/${NFTMINT_CONTRACT_ADDRESS}?a=${tokenId}`;
 const getMarketplaceLink = (tokenId: number) => `https://element.market/assets/matic/${NFTMINT_CONTRACT_ADDRESS}/${tokenId}`;
@@ -35,7 +36,7 @@ interface ContractError extends Error {
 function NftMint() {
   const { open } = useWeb3Modal();
   const { address, isConnected } = useWeb3ModalAccount();
-  const { walletProvider }  = useWeb3ModalProvider();
+  const { walletProvider } = useWeb3ModalProvider();
   const toast = useToast();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const navigate = useNavigate();
@@ -134,7 +135,7 @@ function NftMint() {
 
       let provider = new ethers.BrowserProvider(walletProvider);
       const network = await provider.getNetwork();
-      if (network.chainId !== 137) { // Chain ID for Polygon Mainnet
+      if (Number(network.chainId) !== 137) { // Chain ID for Polygon Mainnet
         await switchToPolygon();
         // Recreate provider and signer after switching networks
         provider = new ethers.BrowserProvider(walletProvider);
@@ -204,13 +205,28 @@ function NftMint() {
       });
 
       if (wasAdded) {
-        notify.success('NFT added to wallet!');
+        toast({
+          title: 'NFT added to wallet!',
+          status: 'success',
+          duration: 5000,
+          isClosable: true,
+        });
       } else {
-        notify.error('NFT addition rejected');
+        toast({
+          title: 'NFT addition rejected',
+          status: 'error',
+          duration: 5000,
+          isClosable: true,
+        });
       }
     } catch (error) {
       console.error('Error adding NFT to wallet', error);
-      notify.error('Error adding NFT to wallet');
+      toast({
+        title: 'Error adding NFT to wallet',
+        status: 'error',
+        duration: 5000,
+        isClosable: true,
+      });
     }
   };
 
@@ -363,9 +379,9 @@ function NftMint() {
                   </Button>
                 </Box>
 
-                                                    <Text className="contractaddr" style={{ color: 'white', textAlign: 'center', fontWeight: 'bolder', marginTop: '20px' }}>
-                                                      Will Switch to Polygon Chain automattically on mint (If not already connected).
-                                                    </Text>
+                <Text className="contractaddr" style={{ color: 'white', textAlign: 'center', fontWeight: 'bolder', marginTop: '20px' }}>
+                  Will Switch to Polygon Chain automatically on mint (If not already connected).
+                </Text>
               </>
             ) : (
               <Text className="pricecost" style={{ color: 'white', textAlign: 'center', fontWeight: 'bolder', marginTop: '20px' }}>

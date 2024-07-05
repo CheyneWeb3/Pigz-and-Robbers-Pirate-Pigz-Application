@@ -151,6 +151,10 @@ const MintNow2nopadding = () => {
       onOpen();
       setModalContent({ status: 'Awaiting transaction confirmation...', tokenId: null, txHash: null });
 
+      if (!walletProvider) {
+        throw new Error('Wallet provider is not available');
+      }
+
       const provider = new BrowserProvider(walletProvider);
       const signer = await provider.getSigner();
       console.log('Signer:', signer);
@@ -254,27 +258,22 @@ const MintNow2nopadding = () => {
           </Box>
         </Flex>
 
-            <Box  marginBottom="1" display="flex" alignItems="center" justifyContent="center">
-              <Button
-                onClick={onMintClick}
-                disabled={!isConnected || isLoading || remainingSupply === 0}
-                textColor="white"
-                bg="#7140d7"
-                _hover={{ bg: '#824fff' }}
-              >
-                Mint another Pirate Pigz NFT!
-              </Button>
-            </Box>
-
+        <Box marginBottom="1" display="flex" alignItems="center" justifyContent="center">
+          <Button
+            onClick={onMintClick}
+            disabled={!isConnected || isLoading || remainingSupply === 0}
+            textColor="white"
+            bg="#7140d7"
+            _hover={{ bg: '#824fff' }}
+          >
+            Mint another Pirate Pigz NFT!
+          </Button>
+        </Box>
       </Box>
 
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
-        <ModalContent
-      color="white"
-
-        bg="rgba(0, 0, 0, 0.65)"
-        >
+        <ModalContent color="white" bg="rgba(0, 0, 0, 0.65)">
           <ModalHeader>{modalContent.status}</ModalHeader>
           <ModalCloseButton />
           <ModalBody>

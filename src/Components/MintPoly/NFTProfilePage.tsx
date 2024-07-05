@@ -5,17 +5,26 @@ import { css, keyframes } from '@emotion/react';
 import Footer from '../Footer/Footer';
 import MiniMintPoly from '../MintNowMiniPoly/MintNow2nopadding';
 
+interface NftAttribute {
+  trait_type: string;
+  value: string;
+}
 
+interface NftData {
+  name: string;
+  description: string;
+  attributes: NftAttribute[];
+}
 
 const NFTProfilePage = () => {
-  const { tokenId } = useParams(); // Assumes you're using react-router for navigation
-  const [nftData, setNftData] = useState(null);
+  const { tokenId } = useParams<{ tokenId: string }>(); // Assumes you're using react-router for navigation
+  const [nftData, setNftData] = useState<NftData | null>(null);
 
   useEffect(() => {
     const fetchNFTData = async () => {
       try {
-        const response = await fetch(`https://pigzandrobbers.meta.rareboard.com/api/${tokenId}.json`);
-        const data = await response.json();
+        const response = await fetch(`https://raw.githubusercontent.com/ArielRin/Pigz-and-Robbers-Pirate-Pigz-Application/master/public/137nftdata/Metadata/${tokenId}.json`);
+        const data: NftData = await response.json();
         setNftData(data);
       } catch (error) {
         console.error('Error fetching NFT data:', error);
@@ -87,8 +96,9 @@ const NFTProfilePage = () => {
             <w3m-button />
           </Flex>
 
-                                  <Flex bg="rgba(0, 0, 0, 0.65)" borderRadius="2xl" p={4} m={2} h="140px" justifyContent="center" flexWrap="wrap">
-                                  </Flex>
+          <Flex bg="rgba(0, 0, 0, 0.65)" borderRadius="2xl" p={4} m={2} h="140px" justifyContent="center" flexWrap="wrap">
+          </Flex>
+
           <Box
             flex={1}
             p={0}
@@ -109,8 +119,13 @@ const NFTProfilePage = () => {
               boxShadow="md"
               textAlign="center"
             >
-              <Image borderRadius="2xl" mx="auto" src={`https://ipfs.io/ipfs/${nftData.image.split('ipfs://')[1]}`} alt={nftData.name} width="75%" />
-
+              <Image
+                borderRadius="2xl"
+                mx="auto"
+                src={`https://raw.githubusercontent.com/ArielRin/Pigz-and-Robbers-Pirate-Pigz-Application/master/public/137nftdata/Images/${tokenId}.png`}
+                alt={nftData.name}
+                width="75%"
+              />
             </Box>
             <Box
               flex={1}
@@ -122,7 +137,7 @@ const NFTProfilePage = () => {
             >
               <Text fontSize="4xl" mb={4} css={textShadowStyle}>{nftData.name}</Text>
               <Text fontSize="md" mb={4}>{nftData.description}</Text>
-              {nftData.attributes.map((attribute, index) => (
+              {nftData.attributes.map((attribute: NftAttribute, index: number) => (
                 <Text key={index} fontSize="3xl" mb={2} css={textShadowStyle}>
                   {attribute.trait_type}: {attribute.value}
                 </Text>
@@ -130,9 +145,9 @@ const NFTProfilePage = () => {
             </Box>
           </Box>
 
-            <Flex bg="rgba(0, 0, 0, 0.65)" borderRadius="2xl" p={0} mb={0} h="340px" justifyContent="center" flexWrap="wrap">
-            <MiniMintPoly/>
-            </Flex>
+          <Flex bg="rgba(0, 0, 0, 0.65)" borderRadius="2xl" p={0} mb={0} h="340px" justifyContent="center" flexWrap="wrap">
+            <MiniMintPoly />
+          </Flex>
 
         </Box>
       </Box>
