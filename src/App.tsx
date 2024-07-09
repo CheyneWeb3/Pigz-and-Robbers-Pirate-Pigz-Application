@@ -5,6 +5,10 @@ import './styles.css';
 import Intro from './Intro';
 import MintBsc from './MintBsc';
 import MintPoly from './MintPoly';
+import UserCollectionPOLY from './Components/MintPoly/UserCollectionPOLY';
+
+
+
 
 
 
@@ -150,6 +154,7 @@ const modal = createWeb3Modal({
         <Route path="/" element={<Intro />} />
           <Route path="/home" element={<Intro />} />
               <Route path="/viewbsc" element={<ViewCollectionBSC />} />
+                  <Route path="/userpoly" element={<UserCollectionPOLY />} />
                 <Route path="/nft/:tokenId" element={<NFTProfilePage />} />
                   <Route path="/nftpoly/:tokenId" element={<NFTProfilePagepoly />} />
                   <Route path="/mintbsc" element={<MintBsc />} />
