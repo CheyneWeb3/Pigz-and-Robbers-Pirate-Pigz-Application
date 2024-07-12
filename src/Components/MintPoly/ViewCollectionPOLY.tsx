@@ -291,7 +291,7 @@ function MyNfts() {
             ) : (
               <Wrap spacing="10px" justify="center">
                 {nfts.map(({ tokenId, imageUrl }) => (
-                  <WrapItem key={tokenId} flexBasis={{ base: '100%', sm: '48%', md: '31%', lg: '15%' }}>
+                  <WrapItem key={tokenId} flexBasis={{ base: '100%', sm: '48%', md: '31%', lg: '12%' }}>
                     <Box
                       bg="rgba(0, 0, 0, 0)"
                       p="4"
