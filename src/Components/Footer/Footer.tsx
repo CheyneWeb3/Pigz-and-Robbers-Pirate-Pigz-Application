@@ -55,10 +55,10 @@ const Footer: React.FC = () => {
           <Link href="https://cosmicrichpigz.com/" isExternal>
             <FontAwesomeIcon icon={faGlobe} size="xl" />
           </Link>
-          <Link href="https://twitter.com/" isExternal>
+          <Link href="https://x.com/RichPigz?t=MrpKHHsdH3z3zsU20GlFgQ&s=09" isExternal>
             <FontAwesomeIcon icon={faXTwitter} size="xl" />
           </Link>
-          <Link href="https://t.me/purpdegen" isExternal>
+          <Link href="https://t.me/Cosmic_Rich_BSC_Pigz" isExternal>
             <FontAwesomeIcon icon={faTelegram} size="xl" />
           </Link>
 

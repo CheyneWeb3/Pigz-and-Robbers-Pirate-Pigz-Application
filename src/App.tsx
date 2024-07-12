@@ -6,6 +6,8 @@ import Intro from './Intro';
 import MintBsc from './MintBsc';
 import MintPoly from './MintPoly';
 import UserCollectionPOLY from './Components/MintPoly/UserCollectionPOLY';
+import ClaimPage from './Components/MintPoly/ClaimPage';
+import Register from './Components/MintPoly/RegisterPigz';
 
 
 
@@ -159,6 +161,8 @@ const modal = createWeb3Modal({
                   <Route path="/nftpoly/:tokenId" element={<NFTProfilePagepoly />} />
                   <Route path="/mintbsc" element={<MintBsc />} />
                     <Route path="/mintpoly" element={<MintPoly />} />
+                      <Route path="/claim" element={<ClaimPage />} />
+                        <Route path="/register" element={<Register />} />    
       </Routes>
     </Router>
   );
