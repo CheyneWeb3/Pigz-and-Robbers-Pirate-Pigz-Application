@@ -301,7 +301,6 @@ function MyNfts() {
                       position="relative"
                       overflow="hidden"
                       border="5px solid"
-                      border="5px solid"
                       borderColor="#7140d7"
                       _hover={{
                         '.overlay': {
