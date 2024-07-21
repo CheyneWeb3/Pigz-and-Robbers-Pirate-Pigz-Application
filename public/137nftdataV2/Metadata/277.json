@@ -1,0 +1,16 @@
+{
+    "name": "Pirate Pigz on Polygon V2",
+    "description": "Pigz search Taverns, Islands, the Seven Seas, Markets, and Treasure Chests to find their friends for Cashback. Find our Rare Pirates and enjoy 25% discount off Pigz and Robbers Collection. Hunt for the 1/1 NFTs and get 20% boost on your passive income",
+    "image": "https://aqua-deep-dragon-777.mypinata.cloud/ipfs/QmQrWgUBGCgjhTUNacHeT547HiHgRj2VvSFkxa8bB4aFAq/277.png",
+    "tokenid": 277,
+    "attributes": [
+        {
+            "trait_type": "Rarity",
+            "value": "Common"
+        },
+        {
+            "trait_type": "Background",
+            "value": "Tavern"
+        }
+    ]
+}

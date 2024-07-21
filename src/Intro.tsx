@@ -6,6 +6,13 @@ import Footer from './Components/Footer/Footer';
 import ViewBsc from './Components/MintBsc/ViewCollectionBSC';
 import ViewPoly from './Components/MintPoly/ViewCollectionPOLY';
 
+
+const flash = keyframes`
+  0% { opacity: 1; }
+  50% { opacity: 0; }
+  100% { opacity: 1; }
+`;
+
 const imagePaths = [
   '/images/robbers/1.jpeg',
   '/images/robbers/2.jpeg',
@@ -36,9 +43,17 @@ const imagePathsPirates = [
   '/images/pirates/267.png',
 ];
 
+
+const imagePathsPiratesV2 = [
+  '/images/v2pirates/256.png',
+  '/images/v2pirates/257.png',
+  '/images/v2pirates/258.png',
+];
+
 const NewPage = () => {
   const [currentImage, setCurrentImage] = useState<string>(imagePaths[0]);
   const [currentImagePirate, setCurrentImagePirate] = useState<string>(imagePathsPirates[0]);
+  const [currentImagePirateV2, setCurrentImagePirateV2] = useState<string>(imagePathsPiratesV2[0]);
 
   useEffect(() => {
     const intervalId = setInterval(() => {
@@ -55,6 +70,14 @@ const NewPage = () => {
 
     return () => clearInterval(intervalIdPirate);
   }, []);
+
+    useEffect(() => {
+      const intervalIdPirateV2 = setInterval(() => {
+        setCurrentImagePirateV2(imagePathsPiratesV2[Math.floor(Math.random() * imagePathsPiratesV2.length)]);
+      }, 2000);
+
+      return () => clearInterval(intervalIdPirateV2);
+    }, []);
 
   const glow = keyframes`
     from {
@@ -152,38 +175,40 @@ const NewPage = () => {
 
 
             <Flex justifyContent="center" p={0} flexWrap="wrap" position="relative">
-              <Box
-                flex={1}
-                minW="300px"
-                m={2}
-                p={7}
-                borderRadius="2xl"
-                boxShadow="md"
-                textAlign="center"
-                bg="rgba(0, 0, 0, 0.61)"
-              >
-                <Link to="/mintpoly">
-                  <Image src="/images/piratepigztextlogo.png" alt="header" mx="auto" width="40%" minW="250px" mt="28px" />
+            <Box
+              flex={1}
+              minW="300px"
+              m={2}
+              p={7}
+              borderRadius="2xl"
+              boxShadow="md"
+              textAlign="center"
+              bg="rgba(0, 0, 0, 0.61)"
+            >
+              <Link to="/mintpolyV2">
+                <Image src="/images/piratepigztextlogoV2.png" alt="header" mx="auto" width="40%" minW="250px" mt="28px" />
 
-                    <Text textAlign="center" fontSize="lg" fontWeight="normal">
-                        On
-                    </Text>
+                  <Text textAlign="center" fontSize="lg" fontWeight="normal">
+                      On
+                  </Text>
 
-                  <Image src="/images/polygon.png" alt="header" mx="auto" width="20%" minW="180px"  mb={2} />
-                    <Flex justifyContent="center" flexWrap="wrap">
-                      <Text mt="10px" width="60%" textAlign="center" fontSize="lg" fontWeight="normal">
-                        Click to Enter
-                      </Text>
-                    </Flex>
-
-                    <Flex justifyContent="center" flexWrap="wrap">
-                    <Text width="60%" textAlign="center" fontSize="lg" fontWeight="normal">
-                      Pirate Pigz Minting
+                <Image src="/images/polygon.png" alt="header" mx="auto" width="20%" minW="180px"  mb={2} />
+                  <Flex justifyContent="center" flexWrap="wrap">
+                    <Text mt="10px" width="60%" textAlign="center" fontSize="lg" fontWeight="normal">
+                      Click to Enter
                     </Text>
                   </Flex>
-                  <Image src={currentImagePirate} alt="Pirate Pigz" mx="auto" width="40%" minW="250px" mt="28px" borderRadius="2xl" />
-                </Link>
-              </Box>
+
+                  <Flex justifyContent="center" flexWrap="wrap">
+                  <Text width="60%" textAlign="center" fontSize="lg" fontWeight="normal">
+                    Pirate Pigz V2 Minting
+                  </Text>
+                </Flex>
+                <Image src={currentImagePirateV2} alt="Pirate Pigz" mx="auto" width="40%" minW="250px" mt="28px" borderRadius="2xl" />
+              </Link>
+            </Box>
+{/*///////////////////////////////*/}
+
               <Box
                 flex={1}
                 minW="300px"
@@ -217,6 +242,47 @@ const NewPage = () => {
                   <Image src={currentImage} alt="Pigz and Robbers" mx="auto" width="40%" minW="250px" mt="28px" borderRadius="2xl" />
                 </Link>
               </Box>
+
+              <Box
+                flex={1}
+                minW="300px"
+                m={2}
+                p={7}
+                borderRadius="2xl"
+                boxShadow="md"
+                textAlign="center"
+                bg="rgba(0, 0, 0, 0.61)"
+              >
+                <Link to="/mintpoly">
+                  <Image src="/images/piratepigztextlogo.png" alt="header" mx="auto" width="40%" minW="250px" mt="28px" />
+
+                  <Text
+            textAlign="center"
+            fontSize="lg"
+            fontWeight="normal"
+            animation={`${flash} 1s infinite`}
+            >
+            Collection Minted in Full
+            </Text>
+
+
+                  <Image src="/images/polygon.png" alt="header" mx="auto" width="20%" minW="180px"  mb={2} />
+                    <Flex justifyContent="center" flexWrap="wrap">
+                      <Text mt="10px" width="60%" textAlign="center" fontSize="lg" fontWeight="normal">
+                        Click to View
+                      </Text>
+                    </Flex>
+
+                    <Flex justifyContent="center" flexWrap="wrap">
+                    <Text width="60%" textAlign="center" fontSize="lg" fontWeight="normal">
+                      Pirate Pigz V1 Collection
+                    </Text>
+                  </Flex>
+                  <Image src={currentImagePirate} alt="Pirate Pigz" mx="auto" width="40%" minW="250px" mt="28px" borderRadius="2xl" />
+                </Link>
+              </Box>
+
+
             </Flex>
             <Box
               flex={1}
