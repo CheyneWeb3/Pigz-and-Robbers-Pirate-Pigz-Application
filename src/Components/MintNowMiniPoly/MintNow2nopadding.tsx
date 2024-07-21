@@ -181,7 +181,7 @@ const MintNow2nopadding = () => {
       console.log('Token ID:', tokenIdInt);
 
       setModalContent({
-        status: `You Just Minted a Pigz and Robbers NFT! #${tokenIdInt}`,
+        status: `You Just Minted a Pirate Pigz NFT! #${tokenIdInt}`,
         tokenId: tokenIdInt,
         txHash: transaction.hash,
       });
@@ -244,17 +244,7 @@ const MintNow2nopadding = () => {
             <Text fontSize="2xl" fontWeight="semibold" textAlign="left">
               Mint 1 now for 6 MATIC
             </Text>
-            <a
-              href="https://element.market/collections/aplhadawgz-NFT"
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{
-                marginTop: '25px',
-                color: 'white',
-              }}
-            >
-              View on Element Market
-            </a>
+          
           </Box>
         </Flex>
 

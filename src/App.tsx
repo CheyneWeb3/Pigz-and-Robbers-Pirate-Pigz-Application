@@ -11,6 +11,9 @@ import MintPolyV2 from './MintPolyV2';
 
 
 
+import NFTProfilePagepolyV2 from './Components/MintPolyV2/NFTProfilePage';
+import ViewCollectionPolyV2 from './Components/MintPolyV2/ViewCollectionPOLY';
+
 import NFTProfilePagepoly from './Components/MintPoly/NFTProfilePage';
 
 import NFTProfilePage from './Components/MintBsc/NFTProfilePage';
@@ -151,8 +154,10 @@ const modal = createWeb3Modal({
         <Route path="/" element={<Intro />} />
           <Route path="/home" element={<Intro />} />
               <Route path="/viewbsc" element={<ViewCollectionBSC />} />
+                  <Route path="/viewpolyv2" element={<ViewCollectionPolyV2 />} />
                 <Route path="/nft/:tokenId" element={<NFTProfilePage />} />
                   <Route path="/nftpoly/:tokenId" element={<NFTProfilePagepoly />} />
+                    <Route path="/nftpolyv2/:tokenId" element={<NFTProfilePagepolyV2 />} />
                   <Route path="/mintbsc" element={<MintBsc />} />
                     <Route path="/mintpoly" element={<MintPoly />} />
                       <Route path="/mintpolyv2" element={<MintPolyV2 />} />

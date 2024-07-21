@@ -4,24 +4,24 @@ import { css, keyframes } from '@emotion/react';
 import { Link } from 'react-router-dom'; // Import Link from react-router-dom
 import Footer from './Components/Footer/Footer';
 
-import ViewPoly from './Components/MintPoly/ViewCollectionPOLY';
+import ViewPoly from './Components/MintPolyV2/ViewCollectionPOLY';
 
 import MintPoly from './Components/MintPolyV2/NftMint0/NftMint0';
 import { useWeb3ModalProvider, useWeb3ModalAccount } from '@web3modal/ethers/react';
 
 const imagePaths = [
-  '/images/pirates/256.png',
-  '/images/pirates/257.png',
-  '/images/pirates/258.png',
-  '/images/pirates/259.png',
-  '/images/pirates/260.png',
-  '/images/pirates/261.png',
-  '/images/pirates/262.png',
-  '/images/pirates/263.png',
-  '/images/pirates/264.png',
-  '/images/pirates/265.png',
-  '/images/pirates/266.png',
-  '/images/pirates/267.png',
+  '/images/v2pirates/256.png',
+  '/images/v2pirates/257.png',
+  '/images/v2pirates/258.png',
+  '/images/v2pirates/259.png',
+  '/images/v2pirates/260.png',
+  '/images/v2pirates/261.png',
+  '/images/v2pirates/262.png',
+  '/images/v2pirates/263.png',
+  '/images/v2pirates/264.png',
+  '/images/v2pirates/265.png',
+  '/images/v2pirates/266.png',
+  '/images/v2pirates/267.png',
 ];
 
 const NewPage = () => {
@@ -196,7 +196,7 @@ const NewPage = () => {
                 textAlign="center"
                 bg="rgba(0, 0, 0, 0.61)"
               >
-                <Image src="images/piratepigztextlogo.png" alt="header" mx="auto" width="40%" minW="250px" mb="28px" mt="28px" />
+                <Image src="images/piratepigztextlogoV2.png" alt="header" mx="auto" width="40%" minW="250px" mb="28px" mt="28px" />
                 <MintPoly />
               </Box>
 

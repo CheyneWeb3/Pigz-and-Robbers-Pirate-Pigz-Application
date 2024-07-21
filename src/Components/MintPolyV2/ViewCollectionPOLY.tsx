@@ -26,11 +26,11 @@ import {
 import { useNavigate } from 'react-router-dom';
 import Footer from '../Footer/Footer';
 import nftMintAbi from './mintBscAbi.json';
-
-const NFTMINT_CONTRACT_ADDRESS = '0x721761446D1595346475A9F0d7dc13a1B93Ffcc3';
+// original live version = 0x721761446D1595346475A9F0d7dc13a1B93Ffcc3
+const NFTMINT_CONTRACT_ADDRESS = '0xA4F64d98ad39A25975D19AC174F9E7a35209369A';
 const RPC_PROVIDER = 'https://polygon-rpc.com';
 const EXPLORER_LINK = 'https://polygonscan.com';
-const METADATA_BASE_URL = 'https://raw.githubusercontent.com/ArielRin/Pigz-and-Robbers-Pirate-Pigz-Application/master/public/137nftdataV2/Metadata/';
+const METADATA_BASE_URL = 'https://raw.githubusercontent.com/ArielRin/Pigz-and-Robbers-Pirate-Pigz-Application/fixfoot/public/137nftdataV2/Metadata/';
 const MAX_TOKEN_ID = 300;
 
 const getExplorerLink = (tokenId: number) => `${EXPLORER_LINK}/token/${NFTMINT_CONTRACT_ADDRESS}?a=${tokenId}`;
@@ -79,7 +79,7 @@ const fetchMetadata = async (tokenId: number) => {
     const response = await fetch(`${METADATA_BASE_URL}${tokenId}.json`);
     if (response.ok) {
       const metadata = await response.json();
-      const imageUrl = `https://raw.githubusercontent.com/ArielRin/Pigz-and-Robbers-Pirate-Pigz-Application/master/public/137nftdataV2/Images/${tokenId}.png`;
+      const imageUrl = `https://raw.githubusercontent.com/ArielRin/Pigz-and-Robbers-Pirate-Pigz-Application/fixfoot/public/137nftdataV2/Images/${tokenId}.png`;
       return imageUrl;
     } else {
       throw new Error('Failed to fetch metadata');
@@ -227,7 +227,7 @@ function MyNfts() {
           <Grid templateColumns={{ base: '1fr', md: '1fr 2fr 1fr' }} width="100%" mx="auto" marginTop="10px">
             <GridItem></GridItem>
             <GridItem display="flex" justifyContent="center">
-              <Image src="/images/piratepigztextlogoside.png" alt="header" mx="auto" width="45%" minW="100px" mt="18px" />
+              <Image src="/images/piratepigztextlogosideV2.png" alt="header" mx="auto" width="45%" minW="100px" mt="18px" />
             </GridItem>
             <GridItem display="flex" justifyContent="center"></GridItem>
             <GridItem display={{ base: 'flex', md: 'block' }} justifyContent="center">
@@ -391,7 +391,7 @@ function MyNfts() {
                           bg="#7140d7"
                           textColor="white"
                           _hover={{ bg: '#c45b79' }}
-                          onClick={() => navigate(`/nftpoly/${tokenId}`)}
+                          onClick={() => navigate(`/nftpolyv2/${tokenId}`)}
                         >
                           View Details
                         </Button>

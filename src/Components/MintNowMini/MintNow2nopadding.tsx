@@ -68,7 +68,7 @@ const MintNow2nopadding = () => {
         console.log('Switching to BSC ...');
         await walletProvider.request({
           method: 'wallet_switchEthereumChain',
-          params: [{ chainId: '0x38' }], 
+          params: [{ chainId: '0x38' }],
         });
         console.log('Switched to BSC ');
       } catch (switchError) {
@@ -206,17 +206,7 @@ const MintNow2nopadding = () => {
             <Text fontSize="2xl" fontWeight="semibold" textAlign="left">
               Mint 1 now for 0.09 BNB
             </Text>
-            <a
-              href="https://element.market/collections/aplhadawgz-NFT"
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{
-                marginTop: '25px',
-                color: 'white',
-              }}
-            >
-              View on Element Market
-            </a>
+        
           </Box>
         </Flex>
         <Button

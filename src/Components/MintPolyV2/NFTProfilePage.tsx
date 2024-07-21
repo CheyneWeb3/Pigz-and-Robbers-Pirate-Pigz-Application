@@ -3,7 +3,7 @@ import { Box, Image, Flex, Text } from '@chakra-ui/react';
 import { useParams, Link } from 'react-router-dom';
 import { css, keyframes } from '@emotion/react';
 import Footer from '../Footer/Footer';
-import MiniMintPoly from '../MintNowMiniPoly/MintNow2nopadding';
+import MiniMintPoly from '../MintNowMiniPolyV2/MintNow2nopadding';
 import MiniMintBsc from '../MintNowMini/MintNow2nopadding';
 
 interface NftAttribute {
@@ -24,7 +24,7 @@ const NFTProfilePage = () => {
   useEffect(() => {
     const fetchNFTData = async () => {
       try {
-        const response = await fetch(`https://raw.githubusercontent.com/ArielRin/Pigz-and-Robbers-Pirate-Pigz-Application/master/public/137nftdataV2/Metadata/${tokenId}.json`);
+        const response = await fetch(`https://raw.githubusercontent.com/ArielRin/Pigz-and-Robbers-Pirate-Pigz-Application/fixfoot/public/137nftdataV2/Metadata/${tokenId}.json`);
         const data: NftData = await response.json();
         setNftData(data);
       } catch (error) {
@@ -128,7 +128,7 @@ const NFTProfilePage = () => {
               <Image
                 borderRadius="2xl"
                 mx="auto"
-                src={`https://raw.githubusercontent.com/ArielRin/Pigz-and-Robbers-Pirate-Pigz-Application/master/public/137nftdataV2/Images/${tokenId}.png`}
+                src={`https://raw.githubusercontent.com/ArielRin/Pigz-and-Robbers-Pirate-Pigz-Application/fixfoot/public/137nftdataV2/Images/${tokenId}.png`}
                 alt={nftData.name}
                 width="75%"
               />

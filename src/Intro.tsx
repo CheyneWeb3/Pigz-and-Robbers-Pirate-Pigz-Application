@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom'; // Import Link from react-router-dom
 import Footer from './Components/Footer/Footer';
 import ViewBsc from './Components/MintBsc/ViewCollectionBSC';
 import ViewPoly from './Components/MintPoly/ViewCollectionPOLY';
+import ViewPolyV2 from './Components/MintPolyV2/ViewCollectionPOLY';
 
 
 const flash = keyframes`
@@ -48,6 +49,15 @@ const imagePathsPiratesV2 = [
   '/images/v2pirates/256.png',
   '/images/v2pirates/257.png',
   '/images/v2pirates/258.png',
+  '/images/v2pirates/259.png',
+  '/images/v2pirates/260.png',
+  '/images/v2pirates/261.png',
+  '/images/v2pirates/262.png',
+  '/images/v2pirates/263.png',
+  '/images/v2pirates/264.png',
+  '/images/v2pirates/265.png',
+  '/images/v2pirates/266.png',
+  '/images/v2pirates/267.png',
 ];
 
 const NewPage = () => {
@@ -183,9 +193,20 @@ const NewPage = () => {
               borderRadius="2xl"
               boxShadow="md"
               textAlign="center"
-              bg="rgba(0, 0, 0, 0.61)"
+              bg="rgba(55, 5, 76, 0.61)"
+              border="2px"
+              borderColor="#7140d7"
             >
               <Link to="/mintpolyV2">
+              <Text
+        textAlign="center"
+        color="white"
+        fontSize="4xl"
+        fontWeight="bolder"
+        animation={`${flash} 2s infinite`}
+        >
+        V2 Minting Live!
+        </Text>
                 <Image src="/images/piratepigztextlogoV2.png" alt="header" mx="auto" width="40%" minW="250px" mt="28px" />
 
                   <Text textAlign="center" fontSize="lg" fontWeight="normal">
@@ -209,41 +230,11 @@ const NewPage = () => {
             </Box>
 {/*///////////////////////////////*/}
 
-              <Box
-                flex={1}
-                minW="300px"
-                m={2}
-                p={7}
-                borderRadius="2xl"
-                boxShadow="md"
-                textAlign="center"
-                bg="rgba(0, 0, 0, 0.61)"
-              >
-                <Link to="/mintbsc">
-                    <Image src="/images/pigzrobberstextlogo.png" alt="header" mx="auto" width="40%" minW="250px" mt="28px" />
-
-                      <Text textAlign="center" fontSize="lg" fontWeight="normal">
-                          On
-                      </Text>
-
-                    <Image src="/images/binance.png" alt="header" mx="auto" width="20%" minW="180px"  mb={2}  />
-
-                  <Flex justifyContent="center" flexWrap="wrap">
-                    <Text width="60%" textAlign="center" fontSize="lg" fontWeight="normal">
-                      Click to Enter
-                    </Text>
-                  </Flex>
-
-                <Flex justifyContent="center" flexWrap="wrap">
-                  <Text width="60%" textAlign="center" fontSize="lg" fontWeight="normal">
-                    Pigz and Robbers Minting
-                  </Text>
-                </Flex>
-                  <Image src={currentImage} alt="Pigz and Robbers" mx="auto" width="40%" minW="250px" mt="28px" borderRadius="2xl" />
-                </Link>
-              </Box>
 
               <Box
+
+                border="1px"
+                borderColor="#fff"
                 flex={1}
                 minW="300px"
                 m={2}
@@ -254,16 +245,26 @@ const NewPage = () => {
                 bg="rgba(0, 0, 0, 0.61)"
               >
                 <Link to="/mintpoly">
+
+                <Text
+              textAlign="center"
+              color="orange"
+              fontSize="4xl"
+              fontWeight="bolder"
+              animation={`${flash} 2s infinite`}
+              >
+              V1 Minting Completed!
+              </Text>
+
+
+
                   <Image src="/images/piratepigztextlogo.png" alt="header" mx="auto" width="40%" minW="250px" mt="28px" />
 
-                  <Text
-            textAlign="center"
-            fontSize="lg"
-            fontWeight="normal"
-            animation={`${flash} 1s infinite`}
-            >
-            Collection Minted in Full
-            </Text>
+
+
+                                  <Text textAlign="center" fontSize="lg" fontWeight="normal">
+                                      On
+                                  </Text>
 
 
                   <Image src="/images/polygon.png" alt="header" mx="auto" width="20%" minW="180px"  mb={2} />
@@ -283,6 +284,54 @@ const NewPage = () => {
               </Box>
 
 
+
+
+                            <Box
+
+                            border="2px"
+                            borderColor="#d19a19"
+                              flex={1}
+                              minW="300px"
+                              m={2}
+                              p={7}
+                              borderRadius="2xl"
+                              boxShadow="md"
+                              textAlign="center"
+                              bg="rgba(121, 88, 45, 0.61)"
+                            >
+                              <Link to="/mintbsc">
+                              <Text
+                        textAlign="center"
+                        color="white"
+                        fontSize="4xl"
+                        fontWeight="bolder"
+                        animation={`${flash} 2s infinite`}
+                        >
+                        BSC Minting Live!
+                        </Text>
+                                  <Image src="/images/pigzrobberstextlogo.png" alt="header" mx="auto" width="40%" minW="250px" mt="28px" />
+
+                                    <Text textAlign="center" fontSize="lg" fontWeight="normal">
+                                        On
+                                    </Text>
+
+                                  <Image src="/images/binance.png" alt="header" mx="auto" width="20%" minW="180px"  mb={2}  />
+
+                                <Flex justifyContent="center" flexWrap="wrap">
+                                  <Text width="60%" textAlign="center" fontSize="lg" fontWeight="normal">
+                                    Click to Enter
+                                  </Text>
+                                </Flex>
+
+                              <Flex justifyContent="center" flexWrap="wrap">
+                                <Text width="60%" textAlign="center" fontSize="lg" fontWeight="normal">
+                                  Pigz and Robbers Minting
+                                </Text>
+                              </Flex>
+                                <Image src={currentImage} alt="Pigz and Robbers" mx="auto" width="40%" minW="250px" mt="28px" borderRadius="2xl" />
+                              </Link>
+                            </Box>
+
             </Flex>
             <Box
               flex={1}
@@ -293,6 +342,7 @@ const NewPage = () => {
               boxShadow="md"
               textAlign="center"
             >
+            <ViewPolyV2 />
               <ViewBsc />
               <ViewPoly />
               <Text mb="200px" fontSize="xl">
