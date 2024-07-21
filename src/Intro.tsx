@@ -176,11 +176,12 @@ const NewPage = () => {
   h="100px" // Adjust height as needed to see the centering effect
 >
   <Text mb={2} ml={4} textAlign="left" fontSize="lg" fontWeight="bolder">
-    Welcome to Cosmic Rich Pigz NFT's!  Choose one of our "Pigz" collections below and start minting.
+    Welcome to Cosmic Rich Pigz NFT's!  Choose one of our Live "Pigz" collections below and start minting.
   </Text>
 
   <w3m-network-button  />
 </Flex>
+
 
 
 

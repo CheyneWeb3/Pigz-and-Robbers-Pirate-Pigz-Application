@@ -27,14 +27,14 @@ import { useNavigate } from 'react-router-dom';
 import Footer from '../Footer/Footer';
 import nftMintAbi from './mintBscAbi.json';
 // original live version = 0x721761446D1595346475A9F0d7dc13a1B93Ffcc3
-const NFTMINT_CONTRACT_ADDRESS = '0xA4F64d98ad39A25975D19AC174F9E7a35209369A';
+const NFTMINT_CONTRACT_ADDRESS = '0x721761446D1595346475A9F0d7dc13a1B93Ffcc3';
 const RPC_PROVIDER = 'https://polygon-rpc.com';
 const EXPLORER_LINK = 'https://polygonscan.com';
 const METADATA_BASE_URL = 'https://raw.githubusercontent.com/ArielRin/Pigz-and-Robbers-Pirate-Pigz-Application/fixfoot/public/137nftdataV2/Metadata/';
-const MAX_TOKEN_ID = 300;
+const MAX_TOKEN_ID = 511;
 
 const getExplorerLink = (tokenId: number) => `${EXPLORER_LINK}/token/${NFTMINT_CONTRACT_ADDRESS}?a=${tokenId}`;
-const getMarketplaceLinkElement = (tokenId: number) => `https://element.market/assets/bsc/${NFTMINT_CONTRACT_ADDRESS}/${tokenId}`;
+const getMarketplaceLinkElement = (tokenId: number) => `https://opensea.io/assets/matic/${NFTMINT_CONTRACT_ADDRESS}/${tokenId}`;
 const getMarketplaceLinkTofu = (tokenId: number) => `https://tofunft.com/nft/polygon/${NFTMINT_CONTRACT_ADDRESS}/${tokenId}`;
 
 declare global {

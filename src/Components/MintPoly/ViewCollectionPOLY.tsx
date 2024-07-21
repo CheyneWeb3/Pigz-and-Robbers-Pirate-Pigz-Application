@@ -34,7 +34,7 @@ const METADATA_BASE_URL = 'https://raw.githubusercontent.com/ArielRin/Pigz-and-R
 const MAX_TOKEN_ID = 300;
 
 const getExplorerLink = (tokenId: number) => `${EXPLORER_LINK}/token/${NFTMINT_CONTRACT_ADDRESS}?a=${tokenId}`;
-const getMarketplaceLinkElement = (tokenId: number) => `https://element.market/assets/bsc/${NFTMINT_CONTRACT_ADDRESS}/${tokenId}`;
+const getMarketplaceLinkElement = (tokenId: number) => `https://opensea.io/assets/matic/${NFTMINT_CONTRACT_ADDRESS}/${tokenId}`;
 const getMarketplaceLinkTofu = (tokenId: number) => `https://tofunft.com/nft/polygon/${NFTMINT_CONTRACT_ADDRESS}/${tokenId}`;
 
 declare global {

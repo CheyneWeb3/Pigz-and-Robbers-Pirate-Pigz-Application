@@ -25,7 +25,7 @@ const EXPLORER_LINK = 'https://polygonscan.com';
 const METADATA_BASE_URL = 'https://raw.githubusercontent.com/ArielRin/Pigz-and-Robbers-Pirate-Pigz-Application/master/public/137nftdata/Metadata/';
 
 const getExplorerLink = (tokenId: number) => `${EXPLORER_LINK}/token/${NFTMINT_CONTRACT_ADDRESS}?a=${tokenId}`;
-const getMarketplaceLink = (tokenId: number) => `https://element.market/assets/matic/${NFTMINT_CONTRACT_ADDRESS}/${tokenId}`;
+const getMarketplaceLink = (tokenId: number) => `https://opensea.io/assets/matic/${NFTMINT_CONTRACT_ADDRESS}/${tokenId}`;
 
 interface ContractError extends Error {
   data?: {
