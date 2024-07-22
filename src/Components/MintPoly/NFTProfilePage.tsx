@@ -3,7 +3,7 @@ import { Box, Image, Flex, Text } from '@chakra-ui/react';
 import { useParams, Link } from 'react-router-dom';
 import { css, keyframes } from '@emotion/react';
 import Footer from '../Footer/Footer';
-import MiniMintPoly from '../MintNowMiniPoly/MintNow2nopadding';
+import MiniMintPoly from '../MintNowMiniPolyV2/MintNow2nopadding';
 import MiniMintBsc from '../MintNowMini/MintNow2nopadding';
 
 interface NftAttribute {
