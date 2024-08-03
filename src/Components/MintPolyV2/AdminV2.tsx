@@ -15,7 +15,7 @@ const AdminPage = () => {
   const { walletProvider } = useWeb3ModalProvider();
 
   // Register contract address
-  const registerContractAddress = '0x479eC1f036313ca1896A994f83D83910ffCbE531';
+  const registerContractAddress = '0x806d861aFE5d2E4B3f6Eb07A4626E4a7621B90b3';
   const { hasCopied, onCopy } = useClipboard(registerContractAddress);
 
   useEffect(() => {

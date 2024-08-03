@@ -26,7 +26,7 @@ const NFTProfilePagepolyV2 = () => {
   const [isRegistered, setIsRegistered] = useState(false);
   const [loading, setLoading] = useState(false);
   const toast = useToast();
-  const registerContractAddress = '0x479eC1f036313ca1896A994f83D83910ffCbE531';
+  const registerContractAddress = '0x806d861aFE5d2E4B3f6Eb07A4626E4a7621B90b3';
   const nftContractAddress = '0x721761446D1595346475A9F0d7dc13a1B93Ffcc3';
   const { address, isConnected } = useWeb3ModalAccount();
   const { walletProvider } = useWeb3ModalProvider();
