@@ -1,7 +1,5 @@
-Sure, here's a `README.md` file that explains the contract operations from both a user perspective and a detailed breakdown of the contract functions:
 
-```markdown
-# NFTRegistration Smart Contract
+# PiratePigzNFTRegistration Smart Contract
 
 ## Overview
 

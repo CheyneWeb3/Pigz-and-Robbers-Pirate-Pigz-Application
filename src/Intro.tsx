@@ -6,6 +6,7 @@ import Footer from './Components/Footer/Footer';
 import ViewBsc from './Components/MintBsc/ViewCollectionBSC';
 import ViewPoly from './Components/MintPoly/ViewCollectionPOLY';
 import ViewPolyV2 from './Components/MintPolyV2/ViewCollectionPOLY';
+import ClaimPirateV2 from './Components/MintPolyV2/ClaimRewardsComponent/ClaimRewards';
 
 
 const flash = keyframes`
@@ -184,6 +185,9 @@ const NewPage = () => {
 
 
 
+      <ClaimPirateV2 />
+
+
 
             <Flex justifyContent="center" p={0} flexWrap="wrap" position="relative">
             <Box
@@ -353,6 +357,11 @@ const NewPage = () => {
         </Box>
       </Box>
       <Footer />
+
+
+
+
+
     </>
   );
 };

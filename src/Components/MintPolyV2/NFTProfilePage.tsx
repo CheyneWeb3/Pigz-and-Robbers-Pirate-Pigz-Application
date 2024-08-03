@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { Box, Image, Flex, Text } from '@chakra-ui/react';
+import { Box, Image, Flex, Text, Button, useToast } from '@chakra-ui/react';
 import { useParams, Link } from 'react-router-dom';
-import { css, keyframes } from '@emotion/react';
+import { ethers } from 'ethers';
 import Footer from '../Footer/Footer';
 import MiniMintPoly from '../MintNowMiniPolyV2/MintNow2nopadding';
 import MiniMintBsc from '../MintNowMini/MintNow2nopadding';
+import registerAbi from './registerAbi.json';
+import nftAbi from './nftMintAbi.json';
+import { useWeb3ModalAccount, useWeb3ModalProvider } from '@web3modal/ethers/react';
 
 interface NftAttribute {
   trait_type: string;
@@ -17,9 +20,16 @@ interface NftData {
   attributes: NftAttribute[];
 }
 
-const NFTProfilePage = () => {
+const NFTProfilePagepolyV2 = () => {
   const { tokenId } = useParams<{ tokenId: string }>();
   const [nftData, setNftData] = useState<NftData | null>(null);
+  const [isRegistered, setIsRegistered] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const toast = useToast();
+  const registerContractAddress = '0x479eC1f036313ca1896A994f83D83910ffCbE531';
+  const nftContractAddress = '0x721761446D1595346475A9F0d7dc13a1B93Ffcc3';
+  const { address, isConnected } = useWeb3ModalAccount();
+  const { walletProvider } = useWeb3ModalProvider();
 
   useEffect(() => {
     const fetchNFTData = async () => {
@@ -32,25 +42,124 @@ const NFTProfilePage = () => {
       }
     };
 
+    const checkRegistrationStatus = async () => {
+      if (!walletProvider) return;
+      try {
+        const provider = new ethers.BrowserProvider(walletProvider);
+        const registerContract = new ethers.Contract(registerContractAddress, registerAbi, provider);
+        const registeredNFTs = await registerContract.getRegisteredNFTs();
+        const isRegistered = registeredNFTs.some((nft: any) => nft.tokenId.toString() === tokenId);
+        setIsRegistered(isRegistered);
+      } catch (error) {
+        console.error('Error checking registration status:', error);
+      }
+    };
+
     fetchNFTData();
-  }, [tokenId]);
+    checkRegistrationStatus();
+  }, [tokenId, walletProvider]);
 
-  const glow = keyframes`
-    from {
-      box-shadow: 0 0 10px white;
+  const registerNFT = async () => {
+    if (!nftData || !walletProvider || !isConnected || !address) {
+      console.log('nftData:', nftData);
+      console.log('walletProvider:', walletProvider);
+      console.log('isConnected:', isConnected);
+      console.log('address:', address);
+      toast({
+        title: 'Wallet not connected',
+        description: 'Please connect your wallet to register the NFT.',
+        status: 'error',
+        duration: 5000,
+        isClosable: true,
+      });
+      return;
     }
-    to {
-      box-shadow: 0 0 20px white, 0 0 30px white, 0 0 40px white, 0 0 50px white;
+
+    const traitAttribute = nftData.attributes.find(attr => attr.trait_type === "Background");
+    if (!traitAttribute || !traitAttribute.value) {
+      console.error('Background trait not found:', traitAttribute);
+      toast({
+        title: 'Registration Error',
+        description: 'Could not find the Background trait for this NFT.',
+        status: 'error',
+        duration: 5000,
+        isClosable: true,
+      });
+      return;
     }
-  `;
 
-  const glowStyle = css`
-    animation: ${glow} 1.5s ease-in-out infinite alternate;
-  `;
+    const traitValue = traitAttribute.value;
+    console.log(`Using Background trait value: ${traitValue}`);
+    console.log('tokenId:', tokenId);
 
-  const textShadowStyle = css`
-    text-shadow: 1px 1px 2px black, 0 0 1em black, 0 0 0.2em black;
-  `;
+    let tokenIdNumber;
+    try {
+      tokenIdNumber = Number(tokenId);
+      if (isNaN(tokenIdNumber) || tokenIdNumber < 0 || tokenIdNumber > 511) {
+        throw new Error('Invalid tokenId range');
+      }
+      console.log('Validated tokenIdNumber:', tokenIdNumber);
+    } catch (error) {
+      console.error('Invalid tokenId:', error);
+      toast({
+        title: 'Invalid Token ID',
+        description: 'The tokenId is not valid. It must be a number between 0 and 511.',
+        status: 'error',
+        duration: 5000,
+        isClosable: true,
+      });
+      return;
+    }
+
+    setLoading(true);
+    try {
+      const provider = new ethers.BrowserProvider(walletProvider);
+      const signer = await provider.getSigner();
+      console.log('Signer address:', await signer.getAddress());
+
+      const nftContract = new ethers.Contract(nftContractAddress, nftAbi, provider);
+      const ownerAddress = await nftContract.ownerOf(tokenIdNumber);
+      console.log('Owner address:', ownerAddress);
+
+      if (ownerAddress.toLowerCase() !== address.toLowerCase()) {
+        console.log('Owner mismatch:', ownerAddress, address);
+        toast({
+          title: 'Registration Failed',
+          description: "You are not the owner of this NFT.",
+          status: 'error',
+          duration: 5000,
+          isClosable: true,
+        });
+        setLoading(false);
+        return;
+      }
+
+      console.log('Registering NFT with trait value:', traitValue);
+      const registerContract = new ethers.Contract(registerContractAddress, registerAbi, signer);
+      const tx = await registerContract.registerNFT(tokenIdNumber, traitValue);
+      await tx.wait();
+
+      toast({
+        title: 'NFT Registered',
+        description: 'Your NFT has been registered successfully!',
+        status: 'success',
+        duration: 5000,
+        isClosable: true,
+      });
+
+      setIsRegistered(true);
+    } catch (error) {
+      console.error('Error registering NFT:', error);
+      toast({
+        title: 'Registration Error',
+        description: 'An error occurred during registration. Please try again.',
+        status: 'error',
+        duration: 5000,
+        isClosable: true,
+      });
+    }
+    setLoading(false);
+  };
 
   if (!nftData) {
     return <Text>Loading...</Text>;
@@ -93,17 +202,14 @@ const NFTProfilePage = () => {
           flexDirection="column"
           color="white"
         >
-
-                  <Flex p={2} bg="rgba(0, 0, 0, 0.61)" justify="space-between" align="center">
-                    <Link to="/">
-                      <Image p={2} ml="4" src="/images/banner.png" alt="Heading" width="220px" />
-                    </Link>
-                    <Flex   align="right">
-
-                    <w3m-button />
-                  </Flex>
-                  </Flex>
-
+          <Flex p={2} bg="rgba(0, 0, 0, 0.61)" justify="space-between" align="center">
+            <Link to="/">
+              <Image p={2} ml="4" src="/images/banner.png" alt="Heading" width="220px" />
+            </Link>
+            <Flex align="right">
+              <w3m-button />
+            </Flex>
+          </Flex>
 
           <Box
             flex={1}
@@ -141,13 +247,29 @@ const NFTProfilePage = () => {
               borderRadius="2xl"
               boxShadow="md"
             >
-              <Text fontSize="4xl" mb={4} css={textShadowStyle}>{nftData.name}</Text>
+              <Text fontSize="4xl" mb={4}>{nftData.name}</Text>
               <Text fontSize="md" mb={4}>{nftData.description}</Text>
               {nftData.attributes.map((attribute: NftAttribute, index: number) => (
-                <Text key={index} fontSize="3xl" mb={2} css={textShadowStyle}>
+                <Text key={index} fontSize="3xl" mb={2}>
                   {attribute.trait_type}: {attribute.value}
                 </Text>
               ))}
+              {isRegistered ? (
+                <Text mt={4} color="green.500" fontSize="xl" fontWeight="bold">
+                  Already Registered
+                </Text>
+              ) : (
+                <Button
+    mt={4}
+    colorScheme="purple"
+    isLoading={loading}
+    onClick={registerNFT}
+    width="full"
+  >
+    Register NFT
+  </Button>
+
+              )}
             </Box>
           </Box>
           <Flex bg="rgba(0, 0, 0, 0.65)" borderRadius="2xl" p={0} mb={0} h="490px" justifyContent="center" alignItems="center">
@@ -166,8 +288,6 @@ const NFTProfilePage = () => {
               <MiniMintBsc />
             </Box>
           </Flex>
-
-
         </Box>
       </Box>
       <Footer />
@@ -175,4 +295,4 @@ const NFTProfilePage = () => {
   );
 };
 
-export default NFTProfilePage;
+export default NFTProfilePagepolyV2;

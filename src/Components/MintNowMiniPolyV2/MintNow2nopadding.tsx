@@ -30,8 +30,8 @@ const glow = keyframes`
   100% { border-color: white; box-shadow: 0 0 50px white; }
 `;
 
-const NFTMINT_CONTRACT_ADDRESS = '0x8Fc39D096204Ddc68f67aAfF0B63fE2207cB7738';
-const MINT_PRICE = 6;
+const NFTMINT_CONTRACT_ADDRESS = '0x721761446D1595346475A9F0d7dc13a1B93Ffcc3';
+const MINT_PRICE = 20;
 
 const MintNow2nopadding = () => {
   const { open } = useWeb3Modal();
@@ -244,7 +244,7 @@ const MintNow2nopadding = () => {
             <Text fontSize="2xl" fontWeight="semibold" textAlign="left">
               Mint 1 now for 20 MATIC
             </Text>
-          
+
           </Box>
         </Flex>
 

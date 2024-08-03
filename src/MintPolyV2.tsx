@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom'; // Import Link from react-router-dom
 import Footer from './Components/Footer/Footer';
 
 import ViewPoly from './Components/MintPolyV2/ViewCollectionPOLY';
+import ClaimPirateV2 from './Components/MintPolyV2/ClaimRewardsComponent/ClaimRewards';
 
 import MintPoly from './Components/MintPolyV2/NftMint0/NftMint0';
 import { useWeb3ModalProvider, useWeb3ModalAccount } from '@web3modal/ethers/react';
@@ -174,6 +175,7 @@ const NewPage = () => {
                     <w3m-button />
                   </Flex>
                   </Flex>
+                  <ClaimPirateV2/>
           <Box
             flex={1}
             p={0}

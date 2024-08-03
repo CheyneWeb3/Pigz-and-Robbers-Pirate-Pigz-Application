@@ -10,24 +10,25 @@ import {
   Link,
   useToast,
   Modal,
-  Flex,
   ModalOverlay,
   ModalContent,
   ModalBody,
   ModalCloseButton,
   useDisclosure,
-  VStack,
   Wrap,
   WrapItem,
   Grid,
   GridItem,
 } from '@chakra-ui/react';
+import { CheckCircleIcon } from '@chakra-ui/icons'; // Import Chakra UI icon
 
 import { useNavigate } from 'react-router-dom';
 import Footer from '../Footer/Footer';
 import nftMintAbi from './mintBscAbi.json';
-// original live version = 0x721761446D1595346475A9F0d7dc13a1B93Ffcc3
+import registerAbi from './registerAbi.json';
+
 const NFTMINT_CONTRACT_ADDRESS = '0x721761446D1595346475A9F0d7dc13a1B93Ffcc3';
+const REGISTER_CONTRACT_ADDRESS = '0x479eC1f036313ca1896A994f83D83910ffCbE531';
 const RPC_PROVIDER = 'https://polygon-rpc.com';
 const EXPLORER_LINK = 'https://polygonscan.com';
 const METADATA_BASE_URL = 'https://raw.githubusercontent.com/ArielRin/Pigz-and-Robbers-Pirate-Pigz-Application/fixfoot/public/137nftdataV2/Metadata/';
@@ -93,6 +94,7 @@ const fetchMetadata = async (tokenId: number) => {
 interface Nft {
   tokenId: number;
   imageUrl: string;
+  isRegistered: boolean;
 }
 
 function MyNfts() {
@@ -160,7 +162,8 @@ function MyNfts() {
     try {
       setLoading(true);
       const provider = new ethers.JsonRpcProvider(RPC_PROVIDER);
-      const contract = new ethers.Contract(NFTMINT_CONTRACT_ADDRESS, nftMintAbi, provider);
+      const nftContract = new ethers.Contract(NFTMINT_CONTRACT_ADDRESS, nftMintAbi, provider);
+      const registerContract = new ethers.Contract(REGISTER_CONTRACT_ADDRESS, registerAbi, provider);
       const nftList: Nft[] = [];
 
       const tokenFetchPromises = [];
@@ -168,12 +171,15 @@ function MyNfts() {
         tokenFetchPromises.push(
           (async () => {
             try {
-              const owner = await contract.ownerOf(i);
+              const owner = await nftContract.ownerOf(i);
               if (owner.toLowerCase() === address?.toLowerCase()) {
                 const imageUrl = await fetchMetadata(i);
-                nftList.push({ tokenId: i, imageUrl });
+                const registeredNFTs = await registerContract.getRegisteredNFTs();
+                const isRegistered = registeredNFTs.some((nft: any) => nft.tokenId.toString() === i.toString());
+                nftList.push({ tokenId: i, imageUrl, isRegistered });
               }
             } catch (err) {
+              // Handle cases where the token does not exist or other errors
             }
           })()
         );
@@ -290,7 +296,7 @@ function MyNfts() {
               </Text>
             ) : (
               <Wrap spacing="10px" justify="center">
-                {nfts.map(({ tokenId, imageUrl }) => (
+                {nfts.map(({ tokenId, imageUrl, isRegistered }) => (
                   <WrapItem key={tokenId} flexBasis={{ base: '100%', sm: '48%', md: '31%', lg: '12%' }}>
                     <Box
                       bg="rgba(0, 0, 0, 0)"
@@ -308,6 +314,11 @@ function MyNfts() {
                         }
                       }}
                     >
+                      {isRegistered && (
+                        <Box position="absolute" top="5px" right="5px" zIndex="1">
+                          <CheckCircleIcon color="green.400" boxSize={6} />
+                        </Box>
+                      )}
                       <Image
                         mt={9}
                         mb={9}
@@ -347,7 +358,6 @@ function MyNfts() {
                         <Text mt="2" color="white" textAlign="center">
                           Pirate Pigz TokenId {tokenId}
                         </Text>
-
 
                         <Link href={getMarketplaceLinkElement(tokenId)} isExternal>
                           <Button
@@ -395,6 +405,12 @@ function MyNfts() {
                         >
                           View Details
                         </Button>
+
+                        {isRegistered && (
+                          <Text mt="2" color="green.400" fontWeight="bold">
+                            Registered
+                          </Text>
+                        )}
 
                         <Link
                           style={{
