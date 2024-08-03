@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Box, Text, Button, Switch, useToast, useClipboard, Table, Thead, Tbody, Tr, Th, Td } from '@chakra-ui/react';
+import { Box, Flex, Link, Text, Button, Switch, useToast, useClipboard, Table, Thead, Tbody, Tr, Th, Td } from '@chakra-ui/react';
 import { ethers } from 'ethers';
 import { useWeb3ModalProvider } from '@web3modal/ethers/react';
 import registerAbi from './registerAbi.json';
@@ -125,8 +125,17 @@ const AdminPage = () => {
   };
 
   return (
-    <Box p={4}>
+    <Box>
+
+                        <Flex p={2} bg="rgba(0, 0, 0, 0.91)" justify="space-between" align="center">
+
+                          <Flex   align="right">
+
+                          <w3m-button />
+                        </Flex>
+                        </Flex>
       <Text fontSize="2xl" mb={4}>Pirate Pigz V2 Admin Panel</Text>
+
 
       <Box mb={4}>
         <Text fontSize="lg">Contract Balance: {contractBalance} MATIC</Text>
