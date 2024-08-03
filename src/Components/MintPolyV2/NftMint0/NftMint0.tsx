@@ -19,6 +19,7 @@ import nftMintAbi from './nftMintAbi.json';
 
 const MINT_PRICE = 20;
 const MINT_SUPPLY = 511;
+// og live ca nft = 0x721761446D1595346475A9F0d7dc13a1B93Ffcc3
 const NFTMINT_CONTRACT_ADDRESS = '0x721761446D1595346475A9F0d7dc13a1B93Ffcc3';
 const RPC_PROVIDER = 'https://polygon-rpc.com/';
 const EXPLORER_LINK = 'https://polygonscan.com';

@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { Box, Image, Flex, Text } from '@chakra-ui/react';
+import { Box, Image, Flex, Text, Button, Link as ChakraLink } from '@chakra-ui/react';
 import { css, keyframes } from '@emotion/react';
-import { Link } from 'react-router-dom'; // Import Link from react-router-dom
+import { Link as RouterLink } from 'react-router-dom'; // Import Link from react-router-dom
 import Footer from './Components/Footer/Footer';
 
 import ViewPoly from './Components/MintPolyV2/ViewCollectionPOLY';
 import ClaimPirateV2 from './Components/MintPolyV2/ClaimRewardsComponent/ClaimRewards';
-
 import MintPoly from './Components/MintPolyV2/NftMint0/NftMint0';
 import { useWeb3ModalProvider, useWeb3ModalAccount } from '@web3modal/ethers/react';
 
@@ -165,17 +164,46 @@ const NewPage = () => {
           flexDirection="column"
           color="white"
         >
+          <Flex p={2} bg="rgba(0, 0, 0, 0.61)" justify="space-between" align="center">
+            <RouterLink to="/">
+              <Image p={2} ml="4" src="/images/banner.png" alt="Heading" width="220px" />
+            </RouterLink>
+            <Flex align="right">
+              <w3m-button />
+            </Flex>
+          </Flex>
 
-                  <Flex p={2} bg="rgba(0, 0, 0, 0.61)" justify="space-between" align="center">
-                    <Link to="/">
-                      <Image p={2} ml="4" src="/images/banner.png" alt="Heading" width="220px" />
-                    </Link>
-                    <Flex   align="right">
+          <ClaimPirateV2 />
 
-                    <w3m-button />
-                  </Flex>
-                  </Flex>
-                  <ClaimPirateV2/>
+          <Flex
+            flex={1}
+            mt={2}
+            p={4}
+            borderRadius="2xl"
+            textAlign="center"
+            bg="rgba(0, 0, 0, 0.61)"
+            flexWrap="wrap"
+            alignItems="center"
+            justifyContent="space-between"
+            h="100px"
+          >
+            <Text mb={2} ml={4} textAlign="center" fontSize="xl" fontWeight="bolder">
+              View User Stats and collection details here
+            </Text>
+            <Button
+              as={RouterLink}
+              to="/user"
+              mx="auto"
+
+              textAlign="center"
+              colorScheme="purple"
+              size="md"
+              mt={4}
+            >
+              Go to User Page
+            </Button>
+          </Flex>
+
           <Box
             flex={1}
             p={0}
@@ -215,16 +243,15 @@ const NewPage = () => {
                 justifyContent="center"
                 alignItems="center"
               >
-                <Link to="/mintpoly">
+                <RouterLink to="/mintpoly">
                   <Flex justifyContent="center" flexWrap="wrap">
                     <Text width="60%" textAlign="center" fontSize="lg" fontWeight="normal"></Text>
                   </Flex>
                   <Image
-
-                  border="2px"
-                  borderColor="#7140d7"
-                   src={currentImage} alt="Pirate Pigz" mx="auto" width="85%" minW="380px" mt="90px" borderRadius="2xl" />
-                </Link>
+                    border="2px"
+                    borderColor="#7140d7"
+                    src={currentImage} alt="Pirate Pigz" mx="auto" width="85%" minW="380px" mt="90px" borderRadius="2xl" />
+                </RouterLink>
               </Box>
             </Flex>
 

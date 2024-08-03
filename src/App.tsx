@@ -7,6 +7,7 @@ import MintBsc from './MintBsc';
 import MintPoly from './MintPoly';
 import MintPolyV2 from './MintPolyV2';
 import Admin from './Components/MintPolyV2/AdminV2';
+import User from './Components/MintPolyV2/UserStats';
 
 
 
@@ -163,6 +164,7 @@ const modal = createWeb3Modal({
                     <Route path="/mintpoly" element={<MintPoly />} />
                       <Route path="/mintpolyv2" element={<MintPolyV2 />} />
                         <Route path="/admin" element={<Admin />} />
+                          <Route path="/user" element={<User />} />
       </Routes>
     </Router>
   );

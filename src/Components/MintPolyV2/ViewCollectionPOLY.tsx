@@ -27,8 +27,10 @@ import Footer from '../Footer/Footer';
 import nftMintAbi from './mintBscAbi.json';
 import registerAbi from './registerAbi.json';
 
+// og live ca nft = 0x721761446D1595346475A9F0d7dc13a1B93Ffcc3
 const NFTMINT_CONTRACT_ADDRESS = '0x721761446D1595346475A9F0d7dc13a1B93Ffcc3';
-const REGISTER_CONTRACT_ADDRESS = '0x806d861aFE5d2E4B3f6Eb07A4626E4a7621B90b3';
+// og live register = 0x806d861aFE5d2E4B3f6Eb07A4626E4a7621B90b3
+const REGISTER_CONTRACT_ADDRESS = '0xAEFcf2f35076C1eaf69a0E61EDCA84Ad9fD23202';
 const RPC_PROVIDER = 'https://polygon-rpc.com';
 const EXPLORER_LINK = 'https://polygonscan.com';
 const METADATA_BASE_URL = 'https://raw.githubusercontent.com/ArielRin/Pigz-and-Robbers-Pirate-Pigz-Application/fixfoot/public/137nftdataV2/Metadata/';
