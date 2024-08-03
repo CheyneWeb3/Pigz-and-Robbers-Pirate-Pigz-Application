@@ -136,7 +136,7 @@ const AdminPage = () => {
       </Box>
 
       <Box mb={4}>
-        <Text fontSize="lg">Ensure Contract Calance equals the Claim Balance to cover the valid claims by users.</Text>
+        <Text fontSize="lg">Ensure Contract Balance equals the Claim Balance to cover the valid claims by users.</Text>
       </Box>
 
       <Box mb={4}>
