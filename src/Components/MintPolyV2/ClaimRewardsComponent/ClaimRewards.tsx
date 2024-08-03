@@ -6,6 +6,7 @@ import registerAbi from './registerAbi.json';
 
 const ClaimReward = () => {
   const [claimCount, setClaimCount] = useState<number>(0);
+  const [collectedCount, setCollectedCount] = useState<number>(0);
   const [isClaimingEnabled, setIsClaimingEnabled] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
   const toast = useToast();
@@ -21,10 +22,13 @@ const ClaimReward = () => {
           const provider = new ethers.BrowserProvider(walletProvider);
           const registerContract = new ethers.Contract(registerContractAddress, registerAbi, provider);
 
+          // Get the total valid claim count
           const count = await registerContract.getClaimCountByUser(address);
-          console.log('Claim count from contract:', count);
-
           setClaimCount(Number(count));
+
+          // Get the number of collected claims
+          const collected = await registerContract.userClaimCounts(address);
+          setCollectedCount(Number(collected));
 
           const isEnabled = await registerContract.claimingEnabled();
           setIsClaimingEnabled(isEnabled);
@@ -78,7 +82,10 @@ const ClaimReward = () => {
     }
   };
 
-  if (claimCount === 0) return null;
+  // Determine the remaining valid claims that can be collected
+  const validClaimsToCollect = claimCount - collectedCount;
+
+  if (validClaimsToCollect <= 0) return null;
 
   return (
     <Box
@@ -89,17 +96,17 @@ const ClaimReward = () => {
       textAlign="center"
     >
       <Text fontSize="xl" mb={4}>
-        You have {claimCount} valid claim{claimCount !== 1 ? 's' : ''} to collect!
+        You have {validClaimsToCollect} valid claim{validClaimsToCollect !== 1 ? 's' : ''} to collect!
       </Text>
       <Button
         colorScheme="orange"
         onClick={handleClaim}
         isLoading={loading}
-        isDisabled={loading || claimCount === 0 || !isClaimingEnabled}
+        isDisabled={loading || validClaimsToCollect === 0 || !isClaimingEnabled}
       >
         Claim Reward
       </Button>
-      {!isClaimingEnabled && claimCount > 0 && (
+      {!isClaimingEnabled && validClaimsToCollect > 0 && (
         <Text fontSize="xl" mt={4}>
           Claiming is not enabled. Please wait for the claim date.
         </Text>
