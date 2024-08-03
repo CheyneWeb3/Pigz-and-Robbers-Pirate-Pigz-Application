@@ -174,7 +174,6 @@ const NewPage = () => {
           </Flex>
 
           <ClaimPirateV2 />
-
           <Flex
             flex={1}
             mt={2}
@@ -182,26 +181,25 @@ const NewPage = () => {
             borderRadius="2xl"
             textAlign="center"
             bg="rgba(0, 0, 0, 0.61)"
-            flexWrap="wrap"
-            alignItems="center"
-            justifyContent="space-between"
-            h="100px"
+            alignItems="flex-start"
+            justifyContent="center"
+            h="auto" // Adjust height as necessary
           >
-            <Text mb={2} ml={4} textAlign="center" fontSize="xl" fontWeight="bolder">
-              View User Stats and collection details here
-            </Text>
-            <Button
-              as={RouterLink}
-              to="/user"
-              mx="auto"
-
-              textAlign="center"
-              colorScheme="purple"
-              size="md"
-              mt={4}
-            >
-              Go to User Page
-            </Button>
+            <Box ml={4}>
+              <Text textAlign="left" fontSize="xl" fontWeight="bolder">
+                View User Stats and collection details here
+              </Text>
+              <Button
+                as={RouterLink}
+                to="/user"
+                colorScheme="purple"
+                size="md"
+                mt={4}
+                textAlign="left"
+              >
+                Go to User Page
+              </Button>
+            </Box>
           </Flex>
 
           <Box

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Box, Image, Flex, Text, Button, useToast } from '@chakra-ui/react';
+import { Box, Image, Flex, Text, Button, useToast, Link as ChakraLink } from '@chakra-ui/react';
+import { Link as RouterLink } from 'react-router-dom';
 import { useParams, Link } from 'react-router-dom';
 import { ethers } from 'ethers';
 import Footer from '../Footer/Footer';
@@ -210,7 +211,33 @@ const NFTProfilePagepolyV2 = () => {
               <w3m-button />
             </Flex>
           </Flex>
-
+          <Flex
+            flex={1}
+            mt={2}
+            p={4}
+            borderRadius="2xl"
+            textAlign="center"
+            bg="rgba(0, 0, 0, 0.61)"
+            alignItems="flex-start"
+            justifyContent="center"
+            h="auto" // Adjust height as necessary
+          >
+            <Box ml={4}>
+              <Text textAlign="left" fontSize="xl" fontWeight="bolder">
+                View User Stats and collection details here
+              </Text>
+              <Button
+                as={RouterLink}
+                to="/user"
+                colorScheme="purple"
+                size="md"
+                mt={4}
+                textAlign="left"
+              >
+                Go to User Page
+              </Button>
+            </Box>
+          </Flex>
           <Box
             flex={1}
             p={0}

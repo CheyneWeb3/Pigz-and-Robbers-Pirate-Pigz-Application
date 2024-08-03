@@ -6,6 +6,9 @@ import { useWeb3ModalAccount, useWeb3ModalProvider } from '@web3modal/ethers/rea
 import registerAbi from './registerAbi.json';
 import nftAbi from './nftMintAbi.json';
 import ClaimRewards from './ClaimRewardsComponent/ClaimRewards';
+import MiniMintPoly from '../MintNowMiniPolyV2/MintNow2nopadding';
+import MiniMintBsc from '../MintNowMini/MintNow2nopadding';
+
 import Footer from '../Footer/Footer';
 
 const NFTMINT_CONTRACT_ADDRESS = '0x721761446D1595346475A9F0d7dc13a1B93Ffcc3';
@@ -207,14 +210,14 @@ const UserStats = () => {
           <Box p={4} m={4} bg="rgba(0, 0, 0, 0.75)" borderRadius="md" display="flex" justifyContent="center">
             <Box maxWidth="600px" width="100%">
               <Text fontSize="2xl" mb={4}>User Stats</Text>
-
-              <Box mb={4}>
-                <Text fontSize="lg">Valid Claims: {validClaims}</Text>
-                <Text fontSize="lg">Collected Claims: {collectedClaims}</Text>
+                <Text fontSize="sm" mb={2}>Discover your valid claims, view the NFT Traits you've collected, and see what you're missing. You could be just one NFT away from a valid claim! Check out the marketplace, or mint another Pirate Pigz V2 today. Complete your collection and get those rewards! 🐷💎</Text>
+              <Box mb={4} mt={4}>
+                <Text fontWeight="bolder" fontSize="lg">Valid Claims: {validClaims}</Text>
+                <Text fontWeight="bolder" fontSize="lg">Collected Claims: {collectedClaims}</Text>
               </Box>
 
-              <Box mb={4}>
-                <Text fontSize="lg" mb={2}>Trait Count:</Text>
+              <Box mt={4} mb={4}>
+                <Text fontSize="xl" mb={2}>Trait Count:</Text>
                 <Table variant="simple" size="sm" width="100%">
                   <Thead>
                     <Tr>
@@ -234,7 +237,7 @@ const UserStats = () => {
               </Box>
 
               <Box mb={4}>
-                <Text fontSize="lg" mb={2}>Traits Needed for a Complete Collection:</Text>
+                <Text fontWeight="bolder" fontSize="xl" mb={2}>Traits Still Needed for a Complete Collection:</Text>
                 {missingTraits.length > 0 ? (
                   <Text>{missingTraits.join(', ')}</Text>
                 ) : (
@@ -255,7 +258,7 @@ const UserStats = () => {
                 <Table variant="simple" size="sm" width="100%">
                   <Thead>
                     <Tr>
-                      <Th>Token ID & Image</Th>
+                      <Th>NFT</Th>
                       <Th>Trait</Th>
                       <Th>Registered</Th>
                       <Th>Actions</Th>
@@ -291,7 +294,24 @@ const UserStats = () => {
             </Box>
           </Box>
         </Box>
+        <Flex bg="rgba(0, 0, 0, 0.65)" borderRadius="2xl" p={0} mb={0} h="490px" justifyContent="center" alignItems="center">
+          <Box
+            flex={1}
+            p={4}
+            m={2}
+            borderRadius="2xl"
+            boxShadow="md"
+            display="flex"
+            flexDirection="column"
+            justifyContent="center"
+            alignItems="center"
+          >
+            <MiniMintPoly />
+            <MiniMintBsc />
+          </Box>
+        </Flex>
       </Box>
+
       <Footer />
     </>
   );
