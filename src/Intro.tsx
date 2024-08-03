@@ -190,6 +190,58 @@ const NewPage = () => {
 
 
             <Flex justifyContent="center" p={0} flexWrap="wrap" position="relative">
+
+            {/*///////////////////////////////*/}
+
+
+            <Box
+              flex={1}
+              minW="300px"
+              m={2}
+              p={7}
+              borderRadius="2xl"
+              boxShadow="md"
+              textAlign="center"
+              bg="rgba(21, 45, 255, 0.61)"
+              border="2px"
+              borderColor="#152dff"
+            >
+              <Link to="/mintbase">
+              <Text
+          textAlign="center"
+          color="white"
+          fontSize="4xl"
+          fontWeight="bolder"
+          animation={`${flash} 2s infinite`}
+          >
+          Base Pigz Now Live!
+          </Text>
+                <Image src="/images/piratepigztextlogoV2.png" alt="header" mx="auto" width="40%" minW="250px" mt="28px" />
+
+                  <Text textAlign="center" fontSize="lg" fontWeight="normal">
+                      On
+                  </Text>
+
+                <Image src="/images/baselogo.png" alt="header" mx="auto" width="20%" minW="180px"  mb={2} />
+                  <Flex justifyContent="center" flexWrap="wrap">
+                    <Text mt="10px" width="60%" textAlign="center" fontSize="lg" fontWeight="normal">
+                      Click to Enter
+                    </Text>
+                  </Flex>
+
+                  <Flex justifyContent="center" flexWrap="wrap">
+                  <Text width="60%" textAlign="center" fontSize="lg" fontWeight="normal">
+                    Base Pigz  Minting
+                  </Text>
+                </Flex>
+                <Image src={currentImagePirateV2} alt="Pirate Pigz" mx="auto" width="40%" minW="250px" mt="28px" borderRadius="2xl" />
+              </Link>
+            </Box>
+
+
+            {/*///////////////////////////////*/}
+
+
             <Box
               flex={1}
               minW="300px"
@@ -288,6 +340,7 @@ const NewPage = () => {
                 </Link>
               </Box>
 
+              {/*///////////////////////////////*/}
 
 
 
@@ -336,6 +389,7 @@ const NewPage = () => {
                                 <Image src={currentImage} alt="Pigz and Robbers" mx="auto" width="40%" minW="250px" mt="28px" borderRadius="2xl" />
                               </Link>
                             </Box>
+                            {/*///////////////////////////////*/}
 
             </Flex>
             <Box

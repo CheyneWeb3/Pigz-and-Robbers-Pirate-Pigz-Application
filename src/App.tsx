@@ -3,23 +3,32 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './styles.css';
 
 import Intro from './Intro';
-import MintBsc from './MintBsc';
-import MintPoly from './MintPoly';
-import MintPolyV2 from './MintPolyV2';
-import Admin from './Components/MintPolyV2/AdminV2';
-import User from './Components/MintPolyV2/UserStats';
 
 
 
+//test for base
+import NFTProfilePageBase from './Components/MintBase/NFTProfilePage';
+import ViewCollectionBase from './Components/MintBase/ViewCollectionBase';
+import UserBase from './Components/MintBase/UserStats';
+import MintBase from './MintBase';
+import AdminBase from './Components/MintBase/AdminBase';
 
 
+//piratv2 poly
 import NFTProfilePagepolyV2 from './Components/MintPolyV2/NFTProfilePage';
 import ViewCollectionPolyV2 from './Components/MintPolyV2/ViewCollectionPOLY';
+import UserPolyV2 from './Components/MintPolyV2/UserStats';
+import MintPolyV2 from './MintPolyV2';
+import Admin from './Components/MintPolyV2/AdminV2';
 
+// piratev 1 poly
 import NFTProfilePagepoly from './Components/MintPoly/NFTProfilePage';
+import MintPoly from './MintPoly';
 
+// bsc this
 import NFTProfilePage from './Components/MintBsc/NFTProfilePage';
 import ViewCollectionBSC from './Components/MintBsc/ViewCollectionBSC';
+import MintBsc from './MintBsc';
 
 
 
@@ -39,6 +48,14 @@ if (!projectId) {
 }
 
 const chains = [
+
+  {
+    chainId: 8453,
+    name: 'Base',
+    currency: 'ETH',
+    explorerUrl: 'https://basescan.org',
+    rpcUrl: 'https://mainnet.base.org'
+  },
   {
     chainId: 56,
     name: 'Binance Smart Chain',
@@ -155,16 +172,30 @@ const modal = createWeb3Modal({
       <Routes>
         <Route path="/" element={<Intro />} />
           <Route path="/home" element={<Intro />} />
+
+
               <Route path="/viewbsc" element={<ViewCollectionBSC />} />
-                  <Route path="/viewpolyv2" element={<ViewCollectionPolyV2 />} />
                 <Route path="/nft/:tokenId" element={<NFTProfilePage />} />
-                  <Route path="/nftpoly/:tokenId" element={<NFTProfilePagepoly />} />
-                    <Route path="/nftpolyv2/:tokenId" element={<NFTProfilePagepolyV2 />} />
+
+
                   <Route path="/mintbsc" element={<MintBsc />} />
                     <Route path="/mintpoly" element={<MintPoly />} />
-                      <Route path="/mintpolyv2" element={<MintPolyV2 />} />
-                        <Route path="/admin" element={<Admin />} />
-                          <Route path="/user" element={<User />} />
+                      <Route path="/nftpoly/:tokenId" element={<NFTProfilePagepoly />} />
+
+
+
+
+                            <Route path="/user" element={<UserPolyV2 />} />
+                            <Route path="/mintpolyv2" element={<MintPolyV2 />} />
+                            <Route path="/viewpolyv2" element={<ViewCollectionPolyV2 />} />
+                            <Route path="/nftpolyv2/:tokenId" element={<NFTProfilePagepolyV2 />} />
+                            <Route path="/admin" element={<Admin />} />
+
+
+                    <Route path="/mintbase" element={<MintBase />} />
+                    <Route path="/nftbase/:tokenId" element={<NFTProfilePageBase />} />
+                    <Route path="/baseuser" element={<UserBase />} />
+                    <Route path="/adminbase" element={<AdminBase />} />
       </Routes>
     </Router>
   );
