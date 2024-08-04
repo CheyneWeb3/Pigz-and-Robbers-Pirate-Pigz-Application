@@ -217,21 +217,21 @@ const UserStats = () => {
 
               <RouterLink to="/mintpolyV2">
               <Text color="blue.500" fontSize="lg"mt={4} mb={2}>
-              Proceed to Minting Page here.
+              Head to the Minting Page here.
               </Text>
               </RouterLink>
 
-              <Text fontSize="lg"mt={4} mb={2}>
+              <Text fontSize="md"mt={4} >
               Also you can Trade, Buy, Offer, or Action  Pirate Pigz V2 Collection at
               </Text>
 
-              <Box mt={4}>
+              <Box mt={2}>
                 <ChakraLink href={openSeaMarketplaceUrl} color="blue.500" isExternal>
                  OpenSea
                 </ChakraLink>
               </Box>
 
-              <Box mb={4}>
+              <Box mb={9}>
                 <ChakraLink href={marketplaceUrl} color="blue.500" isExternal>
                    Element NFT Marketplace
                 </ChakraLink>
@@ -245,7 +245,7 @@ const UserStats = () => {
               ) : (
                 <>
                   <Box mt={4} mb={4}>
-                    <Text fontSize="xl" mb={2}>Pirate Pigz V2 Trait Count:</Text>
+                    <Text fontWeight="bolder" fontSize="xl" mb={2}>Pirate Pigz V2 Trait Count:</Text>
                     <Table variant="simple" size="sm" width="100%">
                       <Thead>
                         <Tr>
@@ -284,7 +284,7 @@ const UserStats = () => {
                       <Text>You have all traits needed for a complete collection!</Text>
                     )}
 
-                    <Text mt={9} fontSize="xl" mb={1}>
+                    <Text mt={9} fontWeight="bolder" fontSize="xl" mb={1}>
                       Register your PIGZ below to Validate your Claims!
                     </Text>
                     <Box mb={4} mt={4}>
