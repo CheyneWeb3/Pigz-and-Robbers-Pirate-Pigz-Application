@@ -15,6 +15,8 @@ const REGISTER_CONTRACT_ADDRESS = '0x806d861aFE5d2E4B3f6Eb07A4626E4a7621B90b3';
 const METADATA_BASE_URL = 'https://raw.githubusercontent.com/ArielRin/Pigz-and-Robbers-Pirate-Pigz-Application/fixfoot/public/137nftdataV2/Metadata/';
 const requiredTraits = ['Pirate Ship', 'Tavern', 'Island', 'Treasure Chest', 'Market'];
 const marketplaceUrl = 'https://element.market/collections/pirate-pigz-v2';
+const openSeaMarketplaceUrl = 'https://opensea.io/collection/pirate-pigz-v2';
+
 const POLYGON_CHAIN_ID = '0x89';
 
 const UserStats = () => {
@@ -213,6 +215,28 @@ const UserStats = () => {
                 Discover your valid claims, view the NFT Traits you've collected, and see what you're missing. You could be just one NFT away from a valid claim! Check out the marketplace, or mint another Pirate Pigz V2 today. Complete your collection and get those rewards! 🐷💎
               </Text>
 
+              <RouterLink to="/mintpolyV2">
+              <Text color="blue.500" fontSize="lg"mt={4} mb={2}>
+              Proceed to Minting Page here.
+              </Text>
+              </RouterLink>
+
+              <Text fontSize="lg"mt={4} mb={2}>
+              Also you can Trade, Buy, Offer, or Action  Pirate Pigz V2 Collection at
+              </Text>
+
+              <Box mt={4}>
+                <ChakraLink href={openSeaMarketplaceUrl} color="blue.500" isExternal>
+                 OpenSea
+                </ChakraLink>
+              </Box>
+
+              <Box mb={4}>
+                <ChakraLink href={marketplaceUrl} color="blue.500" isExternal>
+                   Element NFT Marketplace
+                </ChakraLink>
+              </Box>
+
               {loading ? (
                 <Box textAlign="center" mt={4}>
                   <Spinner size="xl" />
@@ -221,7 +245,7 @@ const UserStats = () => {
               ) : (
                 <>
                   <Box mt={4} mb={4}>
-                    <Text fontSize="xl" mb={2}>Trait Count:</Text>
+                    <Text fontSize="xl" mb={2}>Pirate Pigz V2 Trait Count:</Text>
                     <Table variant="simple" size="sm" width="100%">
                       <Thead>
                         <Tr>
@@ -260,8 +284,8 @@ const UserStats = () => {
                       <Text>You have all traits needed for a complete collection!</Text>
                     )}
 
-                    <Text mt={6} fontSize="xl" mb={2}>
-                      Register to Validate your Claims!
+                    <Text mt={9} fontSize="xl" mb={1}>
+                      Register your PIGZ below to Validate your Claims!
                     </Text>
                     <Box mb={4} mt={4}>
                       <Text fontWeight="bolder" fontSize="lg">Valid Claims: {validClaims}</Text>
@@ -269,16 +293,11 @@ const UserStats = () => {
                     </Box>
                   </Box>
 
-                  <Box mb={4}>
-                    <ChakraLink href={marketplaceUrl} color="blue.500" isExternal>
-                      View Marketplace Collection
-                    </ChakraLink>
-                  </Box>
 
                   <ClaimRewards />
 
                   <Box mb={4} overflowX="auto">
-                    <Text fontSize="lg" mb={2}>Your NFT Traits:</Text>
+                    <Text fontSize="lg" mb={2}>Your Pirate Pigz V2 NFT's:</Text>
                     <Table variant="simple" size="sm" width="100%">
                       <Thead>
                         <Tr>
