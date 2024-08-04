@@ -8,10 +8,11 @@ import nftAbi from './nftMintAbi.json';
 import ClaimRewards from './ClaimRewardsComponent/ClaimRewards';
 import MiniMintPoly from '../MintNowMiniPolyV2/MintNow2nopadding';
 import MiniMintBsc from '../MintNowMini/MintNow2nopadding';
-
 import Footer from '../Footer/Footer';
 
+// og test ca nft = 0xA4F64d98ad39A25975D19AC174F9E7a35209369A
 const NFTMINT_CONTRACT_ADDRESS = '0x721761446D1595346475A9F0d7dc13a1B93Ffcc3';
+// og test register = 0x806d861aFE5d2E4B3f6Eb07A4626E4a7621B90b3
 const REGISTER_CONTRACT_ADDRESS = '0x806d861aFE5d2E4B3f6Eb07A4626E4a7621B90b3';
 const METADATA_BASE_URL = 'https://raw.githubusercontent.com/ArielRin/Pigz-and-Robbers-Pirate-Pigz-Application/fixfoot/public/137nftdataV2/Metadata/';
 const requiredTraits = ['Pirate Ship', 'Tavern', 'Island', 'Treasure Chest', 'Market'];
@@ -210,31 +211,46 @@ const UserStats = () => {
           <Box p={4} m={4} bg="rgba(0, 0, 0, 0.75)" borderRadius="md" display="flex" justifyContent="center">
             <Box maxWidth="600px" width="100%">
               <Text fontSize="2xl" mb={4}>User Stats</Text>
-                <Text fontSize="sm" mb={2}>Discover your valid claims, view the NFT Traits you've collected, and see what you're missing. You could be just one NFT away from a valid claim! Check out the marketplace, or mint another Pirate Pigz V2 today. Complete your collection and get those rewards! 🐷💎</Text>
+              <Text fontSize="sm" mb={2}>
+                Discover your valid claims, view the NFT Traits you've collected, and see what you're missing. You could be just one NFT away from a valid claim! Check out the marketplace, or mint another Pirate Pigz V2 today. Complete your collection and get those rewards! 🐷💎
+              </Text>
               <Box mb={4} mt={4}>
                 <Text fontWeight="bolder" fontSize="lg">Valid Claims: {validClaims}</Text>
                 <Text fontWeight="bolder" fontSize="lg">Collected Claims: {collectedClaims}</Text>
               </Box>
 
               <Box mt={4} mb={4}>
-                <Text fontSize="xl" mb={2}>Trait Count:</Text>
-                <Table variant="simple" size="sm" width="100%">
-                  <Thead>
-                    <Tr>
-                      <Th>Trait</Th>
-                      <Th>Count</Th>
-                    </Tr>
-                  </Thead>
-                  <Tbody>
-                    {Object.entries(traitCounts).map(([trait, count]) => (
-                      <Tr key={trait}>
-                        <Td>{trait}</Td>
-                        <Td>{count}</Td>
-                      </Tr>
-                    ))}
-                  </Tbody>
-                </Table>
-              </Box>
+  <Text fontSize="xl" mb={2}>Trait Count:</Text>
+  <Table variant="simple" size="sm" width="100%">
+    <Thead>
+      <Tr>
+        <Th>Icon</Th>
+        <Th>Name</Th>
+        <Th>Count</Th>
+      </Tr>
+    </Thead>
+    <Tbody>
+      {Object.entries(traitCounts).map(([trait, count]) => {
+        // Standardize the trait name for the image filename
+        const traitImageName = trait.toLowerCase().replace(/ /g, '').replace(/_/g, '');
+        return (
+          <Tr key={trait}>
+            <Td>
+              <Image
+                src={`/images/icons/${traitImageName}.png`}
+                alt={trait}
+                boxSize="40px"
+              />
+            </Td>
+            <Td>{trait}</Td>
+            <Td>{count}</Td>
+          </Tr>
+        );
+      })}
+    </Tbody>
+  </Table>
+</Box>
+
 
               <Box mb={4}>
                 <Text fontWeight="bolder" fontSize="xl" mb={2}>Traits Still Needed for a Complete Collection:</Text>
