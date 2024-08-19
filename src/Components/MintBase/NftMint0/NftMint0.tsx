@@ -17,9 +17,9 @@ import {
 } from '@web3modal/ethers/react';
 import nftMintAbi from './nftMintAbi.json';
 
-const MINT_PRICE = 0.00333173;
+const MINT_PRICE = 0.04;
 const MINT_SUPPLY = 511;
-const NFTMINT_CONTRACT_ADDRESS = '0x721761446D1595346475A9F0d7dc13a1B93Ffcc3';
+const NFTMINT_CONTRACT_ADDRESS = '0x605923BE39B14AEA67F0087652a2b4bd64c18Bb8';
 const BASE_CHAIN_ID = '8453'; // Base chain ID
 const RPC_PROVIDER = 'https://mainnet.base.org';
 const EXPLORER_LINK = 'https://basescan.org';
@@ -323,7 +323,7 @@ function NftMint() {
           >
             <div>
               <Text fontSize="xl" style={{ color: 'white', textAlign: 'center', fontWeight: 'bolder' }}>
-                Pirate Pigz a Bace Chain Collection
+                Pirate Pigz a Base Chain Collection
               </Text>
               <Image src="/images/baselogo.png" alt="header" mx="auto" width="20%" minW="100px" mt="18px" />
 
@@ -385,7 +385,7 @@ function NftMint() {
                 </Box>
 
                 <Text className="contractaddr" style={{ color: 'white', textAlign: 'center', fontWeight: 'bolder', marginTop: '20px' }}>
-                  Will Switch to Bace Chain automatically on mint (If not already connected).
+                  Will Switch to Base Chain automatically on mint (If not already connected).
                 </Text>
               </>
             ) : (

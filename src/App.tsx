@@ -58,14 +58,14 @@ const chains = [
   },
   {
     chainId: 56,
-    name: 'Binance Smart Chain',
+    name: 'BSC',
     currency: 'BNB',
     explorerUrl: 'https://bscscan.com',
     rpcUrl: 'https://bsc-dataseed.binance.org'
   },
   {
     chainId: 137,
-    name: 'Polygon Mainnet',
+    name: 'POLY',
     currency: 'MATIC',
     explorerUrl: 'https://polygonscan.com',
     rpcUrl: 'https://polygon-rpc.com/'
@@ -103,7 +103,6 @@ const modal = createWeb3Modal({
       56: 'https://thatdamndawg.com/images/networklogos/bsc.png',
       137: 'https://thatdamndawg.com/images/networklogos/polygon.png',
       42161: 'https://cryptologos.cc/logos/arbitrum-arb-logo.png',
-      8453: 'https://www.kunai.finance/static/media/Base_Network_Logo.cfdb6720.png',
       10: 'https://assets.coingecko.com/coins/images/25244/large/OP.jpeg?1651026279',
       7777777: 'https://media.licdn.com/dms/image/C4E0BAQE2QFmWjvYbLw/company-logo_200_200/0/1679507991235/ourzora_logo?e=2147483647&v=beta&t=fm_w5of8cLl7CsiMbZG_ouXOirfFqTE2PBHfprsktWc',
       666666666: 'https://dd.dexscreener.com/ds-data/tokens/base/0x4ed4e862860bed51a9570b96d89af5e1b0efefed.png?size=lg&key=e17c44',

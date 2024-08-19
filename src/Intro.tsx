@@ -6,6 +6,7 @@ import Footer from './Components/Footer/Footer';
 import ViewBsc from './Components/MintBsc/ViewCollectionBSC';
 import ViewPoly from './Components/MintPoly/ViewCollectionPOLY';
 import ViewPolyV2 from './Components/MintPolyV2/ViewCollectionPOLY';
+import ViewBase from './Components/MintBase/ViewCollectionBase';
 import ClaimPirateV2 from './Components/MintPolyV2/ClaimRewardsComponent/ClaimRewards';
 
 
@@ -61,10 +62,21 @@ const imagePathsPiratesV2 = [
   '/images/v2pirates/267.png',
 ];
 
+
+const imagePathsBaseArmy = [
+  '/images/basepigz/1.png',
+  '/images/basepigz/2.png',
+  '/images/basepigz/3.png',
+  '/images/basepigz/4.png',
+  '/images/basepigz/5.png',
+  '/images/basepigz/6.png',
+];
+
 const NewPage = () => {
   const [currentImage, setCurrentImage] = useState<string>(imagePaths[0]);
   const [currentImagePirate, setCurrentImagePirate] = useState<string>(imagePathsPirates[0]);
   const [currentImagePirateV2, setCurrentImagePirateV2] = useState<string>(imagePathsPiratesV2[0]);
+  const [currentImageBaseArmy, setCurrentImageBaseArmy] = useState<string>(imagePathsBaseArmy[0]);
 
   useEffect(() => {
     const intervalId = setInterval(() => {
@@ -88,6 +100,14 @@ const NewPage = () => {
       }, 2000);
 
       return () => clearInterval(intervalIdPirateV2);
+    }, []);
+
+    useEffect(() => {
+      const intervalIdBaseArmy = setInterval(() => {
+        setCurrentImageBaseArmy(imagePathsBaseArmy[Math.floor(Math.random() * imagePathsBaseArmy.length)]);
+      }, 2000);
+
+      return () => clearInterval(intervalIdBaseArmy);
     }, []);
 
   const glow = keyframes`
@@ -145,7 +165,7 @@ const NewPage = () => {
 
                     <Flex p={2} bg="rgba(0, 0, 0, 0.61)" justify="space-between" align="center">
                       <Link to="/">
-                        <Image p={2} ml="4" src="/images/banner.png" alt="Heading" width="220px" />
+                        <Image p={2} ml="4" src="/images/mainlogovert.png" alt="Heading" width="80px" />
                       </Link>
                       <Flex   align="right">
 
@@ -165,23 +185,43 @@ const NewPage = () => {
             color="white"
           >
           <Flex
-  flex={1}
-  mt={2}
-  p={4}
-  borderRadius="2xl"
-  textAlign="center"
-  bg="rgba(0, 0, 0, 0.61)"
-  flexWrap="wrap"
-  alignItems="center"
-  justifyContent="space-between" // Use this to space items correctly
-  h="100px" // Adjust height as needed to see the centering effect
->
-  <Text mb={2} ml={4} textAlign="left" fontSize="lg" fontWeight="bolder">
-    Welcome to Cosmic Rich Pigz NFT's!  Choose one of our Live "Pigz" collections below and start minting.
-  </Text>
+            flex={1}
+            mt={2}
+            p={4}
+            borderRadius="2xl"
+            textAlign="center"
+            bg="rgba(0, 0, 0, 0.61)"
+            flexWrap="wrap"
+            alignItems="center"
+            justifyContent="center" // Center items horizontally
+            h="auto" // Allow height to adjust based on content
+            flexDirection="column" // Stack items vertically
+          >
+            <Image
+              src="/images/mainlogopigsmiddle.png"
+              alt="header"
+              mx="auto"
+              width="40%"
+              minW="250px"
+              mt="28px"
+            />
 
-  <w3m-network-button  />
-</Flex>
+            <Text
+              mb={2}
+              ml={4}
+              mx="auto"
+              textAlign="center"
+              fontSize="lg"
+              fontWeight="bolder"
+            >
+              Welcome to Cosmic Pigz NFT's!  Choose one of our Live "Pigz" collections below and start minting.
+            </Text>
+
+            <Flex justifyContent="center" mt={4}>
+              <w3m-network-button />
+            </Flex>
+          </Flex>
+
 
 
 
@@ -214,15 +254,15 @@ const NewPage = () => {
           fontWeight="bolder"
           animation={`${flash} 2s infinite`}
           >
-          Base Pigz Now Live!
+          Base Pigz Live!
           </Text>
-                <Image src="/images/piratepigztextlogoV2.png" alt="header" mx="auto" width="40%" minW="250px" mt="28px" />
+                <Image src="/images/baseArmyTextLogo.png" alt="header" mx="auto" width="40%" minW="250px" mt="28px" />
 
                   <Text textAlign="center" fontSize="lg" fontWeight="normal">
                       On
                   </Text>
 
-                <Image src="/images/baselogo.png" alt="header" mx="auto" width="20%" minW="180px"  mb={2} />
+                <Image src="/images/baselogo.png" alt="header" mx="auto" width="20%" minW="160px"  mb={2} />
                   <Flex justifyContent="center" flexWrap="wrap">
                     <Text mt="10px" width="60%" textAlign="center" fontSize="lg" fontWeight="normal">
                       Click to Enter
@@ -234,7 +274,7 @@ const NewPage = () => {
                     Base Pigz  Minting
                   </Text>
                 </Flex>
-                <Image src={currentImagePirateV2} alt="Pirate Pigz" mx="auto" width="40%" minW="250px" mt="28px" borderRadius="2xl" />
+                <Image src={currentImageBaseArmy} alt="Pirate Pigz" mx="auto" width="40%" minW="250px" mt="28px" borderRadius="2xl" />
               </Link>
             </Box>
 
@@ -310,7 +350,7 @@ const NewPage = () => {
               fontWeight="bolder"
               animation={`${flash} 2s infinite`}
               >
-              V1 Minting Completed!
+              V1 Completed!
               </Text>
 
 
@@ -401,6 +441,7 @@ const NewPage = () => {
               boxShadow="md"
               textAlign="center"
             >
+            <ViewBase />
             <ViewPolyV2 />
               <ViewBsc />
               <ViewPoly />

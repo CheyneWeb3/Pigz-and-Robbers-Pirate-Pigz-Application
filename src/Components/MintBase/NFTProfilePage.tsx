@@ -28,7 +28,7 @@ const NFTProfilePagepolyV2 = () => {
   const [loading, setLoading] = useState(false);
   const toast = useToast();
   const registerContractAddress = '0x806d861aFE5d2E4B3f6Eb07A4626E4a7621B90b3';
-  const nftContractAddress = '0x721761446D1595346475A9F0d7dc13a1B93Ffcc3';
+  const nftContractAddress = '0x605923BE39B14AEA67F0087652a2b4bd64c18Bb8';
   const { address, isConnected } = useWeb3ModalAccount();
   const { walletProvider } = useWeb3ModalProvider();
 
@@ -205,7 +205,7 @@ const NFTProfilePagepolyV2 = () => {
         >
           <Flex p={2} bg="rgba(0, 0, 0, 0.61)" justify="space-between" align="center">
             <Link to="/">
-              <Image p={2} ml="4" src="/images/banner.png" alt="Heading" width="220px" />
+              <Image p={2} ml="4" src="/images/mainlogovert.png" alt="Heading" width="80px" />
             </Link>
             <Flex align="right">
               <w3m-button />

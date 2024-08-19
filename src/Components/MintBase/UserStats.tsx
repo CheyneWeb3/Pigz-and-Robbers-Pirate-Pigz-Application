@@ -11,7 +11,7 @@ import MiniMintBase from '../MintNowMiniBase/MintNow2nopadding';
 import MiniMintBsc from '../MintNowMini/MintNow2nopadding';
 import Footer from '../Footer/Footer';
 
-const NFTMINT_CONTRACT_ADDRESS = '0x721761446D1595346475A9F0d7dc13a1B93Ffcc3';
+const NFTMINT_CONTRACT_ADDRESS = '0x605923BE39B14AEA67F0087652a2b4bd64c18Bb8';
 const REGISTER_CONTRACT_ADDRESS = '0x806d861aFE5d2E4B3f6Eb07A4626E4a7621B90b3';
 const METADATA_BASE_URL = 'https://raw.githubusercontent.com/ArielRin/Pigz-and-Robbers-Pirate-Pigz-Application/fixfoot/public/137nftdataV2/Metadata/';
 const requiredTraits = ['Pirate Ship', 'Tavern', 'Island', 'Treasure Chest', 'Market'];
@@ -200,7 +200,7 @@ const UserStats = () => {
         >
           <Flex p={2} bg="rgba(0, 0, 0, 0.61)" justify="space-between" align="center">
             <RouterLink to="/">
-              <Image p={2} ml="4" src="/images/banner.png" alt="Heading" width="220px" />
+              <Image p={2} ml="4" src="/images/mainlogovert.png" alt="Heading" width="80px" />
             </RouterLink>
             <Flex align="right">
               <w3m-button />

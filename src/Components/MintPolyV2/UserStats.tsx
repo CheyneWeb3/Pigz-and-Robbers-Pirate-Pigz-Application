@@ -7,16 +7,16 @@ import registerAbi from './registerAbi.json';
 import nftAbi from './nftMintAbi.json';
 import ClaimRewards from './ClaimRewardsComponent/ClaimRewards';
 import MiniMintPoly from '../MintNowMiniPolyV2/MintNow2nopadding';
+import MiniMintBase from '../MintNowMiniBase/MintNow2nopadding';
 import MiniMintBsc from '../MintNowMini/MintNow2nopadding';
-
 import Footer from '../Footer/Footer';
 
-const NFTMINT_CONTRACT_ADDRESS = '0x721761446D1595346475A9F0d7dc13a1B93Ffcc3';
+const NFTMINT_CONTRACT_ADDRESS = '0x605923BE39B14AEA67F0087652a2b4bd64c18Bb8';
 const REGISTER_CONTRACT_ADDRESS = '0x806d861aFE5d2E4B3f6Eb07A4626E4a7621B90b3';
 const METADATA_BASE_URL = 'https://raw.githubusercontent.com/ArielRin/Pigz-and-Robbers-Pirate-Pigz-Application/fixfoot/public/137nftdataV2/Metadata/';
 const requiredTraits = ['Pirate Ship', 'Tavern', 'Island', 'Treasure Chest', 'Market'];
 const marketplaceUrl = 'https://element.market/collections/pirate-pigz-v2';
-const POLYGON_CHAIN_ID = '0x89'; // Hexadecimal representation of 137
+const BASE_CHAIN_ID = '0x2105'; // Hexadecimal representation of 8453
 
 const UserStats = () => {
   const [nftTraits, setNftTraits] = useState<{ tokenId: number; trait: string; isRegistered: boolean; imageUrl: string }[]>([]);
@@ -30,15 +30,15 @@ const UserStats = () => {
   const { walletProvider } = useWeb3ModalProvider();
 
   useEffect(() => {
-    const switchToPolygon = async () => {
+    const switchToBase = async () => {
       try {
         const ethereum = window.ethereum as any;
         if (ethereum) {
           const currentChainId = await ethereum.request({ method: 'eth_chainId' });
-          if (currentChainId !== POLYGON_CHAIN_ID) {
+          if (currentChainId !== BASE_CHAIN_ID) {
             await ethereum.request({
               method: 'wallet_switchEthereumChain',
-              params: [{ chainId: POLYGON_CHAIN_ID }],
+              params: [{ chainId: BASE_CHAIN_ID }],
             });
           }
         } else {
@@ -48,7 +48,7 @@ const UserStats = () => {
         console.error('Error switching network:', error);
         toast({
           title: 'Network Error',
-          description: 'Please switch to the Polygon network manually.',
+          description: 'Please switch to the Base network manually.',
           status: 'error',
           duration: 5000,
           isClosable: true,
@@ -56,7 +56,7 @@ const UserStats = () => {
       }
     };
 
-    switchToPolygon();
+    switchToBase();
 
     const fetchUserStats = async () => {
       if (!address || !walletProvider) return;
@@ -200,7 +200,7 @@ const UserStats = () => {
         >
           <Flex p={2} bg="rgba(0, 0, 0, 0.61)" justify="space-between" align="center">
             <RouterLink to="/">
-              <Image p={2} ml="4" src="/images/banner.png" alt="Heading" width="220px" />
+              <Image p={2} ml="4" src="/images/mainlogovert.png" alt="Heading" width="80px" />
             </RouterLink>
             <Flex align="right">
               <w3m-button />
@@ -210,7 +210,7 @@ const UserStats = () => {
           <Box p={4} m={4} bg="rgba(0, 0, 0, 0.75)" borderRadius="md" display="flex" justifyContent="center">
             <Box maxWidth="600px" width="100%">
               <Text fontSize="2xl" mb={4}>User Stats</Text>
-                <Text fontSize="sm" mb={2}>Discover your valid claims, view the NFT Traits you've collected, and see what you're missing. You could be just one NFT away from a valid claim! Check out the marketplace, or mint another Pirate Pigz V2 today. Complete your collection and get those rewards! 🐷💎</Text>
+              <Text fontSize="sm" mb={2}>Discover your valid claims, view the NFT Traits you've collected, and see what you're missing. You could be just one NFT away from a valid claim! Check out the marketplace, or mint another Pirate Pigz V2 today. Complete your collection and get those rewards! 🐷💎</Text>
               <Box mb={4} mt={4}>
                 <Text fontWeight="bolder" fontSize="lg">Valid Claims: {validClaims}</Text>
                 <Text fontWeight="bolder" fontSize="lg">Collected Claims: {collectedClaims}</Text>
@@ -294,7 +294,7 @@ const UserStats = () => {
             </Box>
           </Box>
         </Box>
-        <Flex bg="rgba(0, 0, 0, 0.65)" borderRadius="2xl" p={0} mb={0} h="490px" justifyContent="center" alignItems="center">
+        <Flex bg="rgba(0, 0, 0, 0.65)" borderRadius="2xl" p={0} mb={0} minH="490px" justifyContent="center" alignItems="center">
           <Box
             flex={1}
             p={4}
@@ -306,6 +306,7 @@ const UserStats = () => {
             justifyContent="center"
             alignItems="center"
           >
+            <MiniMintBase />
             <MiniMintPoly />
             <MiniMintBsc />
           </Box>

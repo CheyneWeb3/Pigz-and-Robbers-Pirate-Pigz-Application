@@ -28,7 +28,7 @@ import nftMintAbi from './mintBscAbi.json';
 import registerAbi from './registerAbi.json';
 
 // og test ca nft = 0xA4F64d98ad39A25975D19AC174F9E7a35209369A
-const NFTMINT_CONTRACT_ADDRESS = '0x721761446D1595346475A9F0d7dc13a1B93Ffcc3';
+const NFTMINT_CONTRACT_ADDRESS = '0x605923BE39B14AEA67F0087652a2b4bd64c18Bb8';
 // og test register = 0x806d861aFE5d2E4B3f6Eb07A4626E4a7621B90b3
 const REGISTER_CONTRACT_ADDRESS = '0x806d861aFE5d2E4B3f6Eb07A4626E4a7621B90b3';
 const RPC_PROVIDER = 'https://polygon-rpc.com';
@@ -235,7 +235,7 @@ function MyNfts() {
           <Grid templateColumns={{ base: '1fr', md: '1fr 2fr 1fr' }} width="100%" mx="auto" marginTop="10px">
             <GridItem></GridItem>
             <GridItem display="flex" justifyContent="center">
-              <Image src="/images/piratepigztextlogosideV2.png" alt="header" mx="auto" width="45%" minW="100px" mt="18px" />
+              <Image src="/images/basearmytextlogoside.png" alt="header" mx="auto" width="45%" minW="100px" mt="18px" />
             </GridItem>
             <GridItem display="flex" justifyContent="center"></GridItem>
             <GridItem display={{ base: 'flex', md: 'block' }} justifyContent="center">
@@ -248,7 +248,7 @@ function MyNfts() {
             borderRadius="2xl"
             maxW="100%"
           >
-            Your Polygon Collection
+            Your Base Collection
           </Box>
 
           <Box

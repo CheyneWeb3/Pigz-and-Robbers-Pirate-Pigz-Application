@@ -46,7 +46,7 @@ const Footer: React.FC = () => {
         <Text fontSize="xl" mb={2}>&copy;  Cosmic Rich Pigz {currentYear} </Text>
         <Flex p={2} bg="rgba(0, 0, 0, 0.61)" mt="15px" justify="center" align="center" gap={4}>
 
-          <Image p={2} ml="4" src="/images/banner.png" alt="Heading" width="380px" />
+          <Image p={2} ml="4" src="/images/mainlogovert.png" alt="Heading" width="100px" />
 
         </Flex>
 

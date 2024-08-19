@@ -165,7 +165,7 @@ const NewPage = () => {
 
                   <Flex p={2} bg="rgba(0, 0, 0, 0.61)" justify="space-between" align="center">
                     <Link to="/">
-                      <Image p={2} ml="4" src="/images/banner.png" alt="Heading" width="220px" />
+                      <Image p={2} ml="4" src="/images/mainlogovert.png" alt="Heading" width="80px" />
                     </Link>
                     <Flex   align="right">
 

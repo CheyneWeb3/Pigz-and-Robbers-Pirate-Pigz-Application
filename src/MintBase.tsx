@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Box, Image, Flex, Text } from '@chakra-ui/react';
 import { css, keyframes } from '@emotion/react';
-import { Link } from 'react-router-dom'; // Import Link from react-router-dom
+import { Link } from 'react-router-dom';
 import Footer from './Components/Footer/Footer';
 
 import ViewBase from './Components/MintBase/ViewCollectionBase';
@@ -10,18 +10,12 @@ import MintBase from './Components/MintBase/NftMint0/NftMint0';
 import { useWeb3ModalProvider, useWeb3ModalAccount } from '@web3modal/ethers/react';
 
 const imagePaths = [
-  '/images/pirates/256.png',
-  '/images/pirates/257.png',
-  '/images/pirates/258.png',
-  '/images/pirates/259.png',
-  '/images/pirates/260.png',
-  '/images/pirates/261.png',
-  '/images/pirates/262.png',
-  '/images/pirates/263.png',
-  '/images/pirates/264.png',
-  '/images/pirates/265.png',
-  '/images/pirates/266.png',
-  '/images/pirates/267.png',
+  '/images/basepigz/1.png',
+  '/images/basepigz/2.png',
+  '/images/basepigz/3.png',
+  '/images/basepigz/4.png',
+  '/images/basepigz/5.png',
+  '/images/basepigz/6.png',
 ];
 
 const NewPage = () => {
@@ -31,57 +25,56 @@ const NewPage = () => {
   const { isConnected } = useWeb3ModalAccount();
 
   useEffect(() => {
-    const switchToPolygonMainnet = async () => {
+    const switchToBaseMainnet = async () => {
       if (walletProvider?.request) {
         try {
           await walletProvider.request({
             method: 'wallet_switchEthereumChain',
-            params: [{ chainId: '0x89' }], // Chain ID for Polygon Mainnet
+            params: [{ chainId: '0x2105' }], // Chain ID for Base Mainnet
           });
-          console.log('Switched to Polygon Mainnet');
+          console.log('Switched to Base Mainnet');
         } catch (switchError) {
           if ((switchError as { code: number }).code === 4902) {
-            console.log('Polygon Mainnet not found. Adding network...');
+            console.log('Base Mainnet not found. Adding network...');
             try {
               await walletProvider.request({
                 method: 'wallet_addEthereumChain',
                 params: [
                   {
-                    chainId: '0x89',
-                    chainName: 'Polygon Mainnet',
+                    chainId: '0x2105',
+                    chainName: 'Base Mainnet',
                     nativeCurrency: {
-                      name: 'MATIC',
-                      symbol: 'MATIC',
+                      name: 'BASE',
+                      symbol: 'BASE',
                       decimals: 18,
                     },
-                    rpcUrls: ['https://polygon-rpc.com/'],
-                    blockExplorerUrls: ['https://polygonscan.com'],
+                    rpcUrls: ['https://mainnet.base.org'],
+                    blockExplorerUrls: ['https://basescan.org'],
                   },
                 ],
               });
-              console.log('Added and switched to Polygon Mainnet');
+              console.log('Added and switched to Base Mainnet');
             } catch (addError) {
-              console.error('Error adding Polygon Mainnet:', addError);
+              console.error('Error adding Base Mainnet:', addError);
             }
           } else {
-            console.error('Error switching to Polygon Mainnet:', switchError);
+            console.error('Error switching to Base Mainnet:', switchError);
           }
         }
       }
     };
 
     if (isConnected) {
-      switchToPolygonMainnet();
+      switchToBaseMainnet();
     } else {
       // Listen for when the user connects the wallet and then switch
-      (window as any).ethereum?.on('connect', switchToPolygonMainnet);
+      (window as any).ethereum?.on('connect', switchToBaseMainnet);
     }
 
     return () => {
-      (window as any).ethereum?.removeListener('connect', switchToPolygonMainnet);
+      (window as any).ethereum?.removeListener('connect', switchToBaseMainnet);
     };
   }, [isConnected, walletProvider]);
-
 
   useEffect(() => {
     const intervalId = setInterval(() => {
@@ -151,15 +144,15 @@ const NewPage = () => {
           color="white"
         >
 
-                  <Flex p={2} bg="rgba(0, 0, 0, 0.61)" justify="space-between" align="center">
-                    <Link to="/">
-                      <Image p={2} ml="4" src="/images/banner.png" alt="Heading" width="220px" />
-                    </Link>
-                    <Flex   align="right">
+          <Flex p={2} bg="rgba(0, 0, 0, 0.61)" justify="space-between" align="center">
+            <Link to="/">
+              <Image p={2} ml="4" src="/images/mainlogovert.png" alt="Heading" width="80px" />
+            </Link>
+            <Flex align="right">
+              <w3m-button />
+            </Flex>
+          </Flex>
 
-                    <w3m-button />
-                  </Flex>
-                  </Flex>
           <Box
             flex={1}
             p={0}
@@ -182,7 +175,7 @@ const NewPage = () => {
                 textAlign="center"
                 bg="rgba(0, 0, 0, 0.61)"
               >
-                <Image src="images/piratepigztextlogo.png" alt="header" mx="auto" width="40%" minW="250px" mb="28px" mt="28px" />
+                <Image src="images/baseArmyTextLogo.png" alt="header" mx="auto" width="40%" minW="250px" mb="28px" mt="28px" />
                 <MintBase />
               </Box>
 
@@ -204,10 +197,9 @@ const NewPage = () => {
                     <Text width="60%" textAlign="center" fontSize="lg" fontWeight="normal"></Text>
                   </Flex>
                   <Image
-
-                  border="2px"
-                  borderColor="#152dff"
-                   src={currentImage} alt="Pirate Pigz" mx="auto" width="85%" minW="380px" mt="90px" borderRadius="2xl" />
+                    border="2px"
+                    borderColor="#152dff"
+                    src={currentImage} alt="Pirate Pigz" mx="auto" width="85%" minW="380px" mt="90px" borderRadius="2xl" />
                 </Link>
               </Box>
             </Flex>

@@ -30,8 +30,8 @@ const glow = keyframes`
   100% { border-color: white; box-shadow: 0 0 50px white; }
 `;
 
-const NFTMINT_CONTRACT_ADDRESS = '0x721761446D1595346475A9F0d7dc13a1B93Ffcc3';
-const MINT_PRICE = 0.00333173; // in ETH (Base chain native currency)
+const NFTMINT_CONTRACT_ADDRESS = '0x605923BE39B14AEA67F0087652a2b4bd64c18Bb8';
+const MINT_PRICE = 0.04; // in ETH (Base chain native currency)
 const BASE_CHAIN_ID = '0x2105'; // Hexadecimal representation of 8453
 
 const MintNow2nopadding = () => {
@@ -237,13 +237,13 @@ const MintNow2nopadding = () => {
         maxWidth="600px"
       >
         <Flex color="white" alignItems="center" mb="1">
-          <Image src="/images/minimntpirate.png" alt="" boxSize="120px" borderRadius="xl" mr="5" />
+          <Image src="/images/minimntAArmy.png" alt="" boxSize="120px" borderRadius="xl" mr="5" />
           <Box textAlign="left">
             <Text fontSize="md" fontWeight="semibold" textAlign="left">
-              Mint another Base Pigz Right Now!
+              Mint another Pigz Army Right Now!
             </Text>
             <Text fontSize="2xl" fontWeight="semibold" textAlign="left">
-              Mint 1 now for 0.00333173 ETH (Base)
+              Mint 1 now for 0.04 ETH (Base)
             </Text>
           </Box>
         </Flex>
@@ -256,7 +256,7 @@ const MintNow2nopadding = () => {
             bg="#152dff"
             _hover={{ bg: '#136bff' }}
           >
-            Mint another Base Pigz NFT!
+            Mint another Pigz Army NFT!
           </Button>
         </Box>
       </Box>
@@ -269,7 +269,7 @@ const MintNow2nopadding = () => {
           <ModalBody>
             {modalContent.tokenId && (
               <>
-                <Text mt="4">You Just Minted a Base Pigz NFT!</Text>
+                <Text mt="4">You Just Minted a Pigz Army NFT!</Text>
                 <a href={`https://basescan.org/tx/${modalContent.txHash}`} target="_blank" rel="noopener noreferrer" style={{ color: 'blue', textDecoration: 'underline' }}>
                   View on BaseScan
                 </a>
