@@ -224,8 +224,9 @@ const NewPage = () => {
 
 
 
+          {/*//////////////  <ClaimPirateV2 />/////////////////*/}
 
-      <ClaimPirateV2 />
+
 
 
 
