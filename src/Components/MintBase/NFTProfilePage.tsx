@@ -4,7 +4,6 @@ import { Link as RouterLink } from 'react-router-dom';
 import { useParams, Link } from 'react-router-dom';
 import { ethers } from 'ethers';
 import Footer from '../Footer/Footer';
-import MiniMintBase from '../MintNowMiniBase/MintNow2nopadding';
 import MiniMintBsc from '../MintNowMini/MintNow2nopadding';
 import registerAbi from './registerAbi.json';
 import nftAbi from './nftMintAbi.json';
@@ -267,7 +266,7 @@ const NFTProfilePagepolyV2 = () => {
                   {attribute.trait_type}: {attribute.value}
                 </Text>
               ))}
-              
+
             </Box>
           </Box>
           <Flex bg="rgba(0, 0, 0, 0.65)" borderRadius="2xl" p={0} mb={0} h="490px" justifyContent="center" alignItems="center">
@@ -282,7 +281,6 @@ const NFTProfilePagepolyV2 = () => {
               justifyContent="center"
               alignItems="center"
             >
-              <MiniMintBase />
               <MiniMintBsc />
             </Box>
           </Flex>

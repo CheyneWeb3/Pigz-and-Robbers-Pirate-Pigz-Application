@@ -10,7 +10,6 @@ import Intro from './Intro';
 import NFTProfilePageBase from './Components/MintBase/NFTProfilePage';
 import ViewCollectionBase from './Components/MintBase/ViewCollectionBase';
 import MintBase from './MintBase';
-import AdminBase from './Components/MintBase/AdminBase';
 
 
 //piratv2 poly
@@ -192,7 +191,6 @@ const modal = createWeb3Modal({
 
                     <Route path="/mintbase" element={<MintBase />} />
                     <Route path="/nftbase/:tokenId" element={<NFTProfilePageBase />} />
-                    <Route path="/adminbase" element={<AdminBase />} />
       </Routes>
     </Router>
   );
