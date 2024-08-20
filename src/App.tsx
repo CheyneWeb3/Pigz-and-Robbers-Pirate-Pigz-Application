@@ -9,7 +9,6 @@ import Intro from './Intro';
 //test for base
 import NFTProfilePageBase from './Components/MintBase/NFTProfilePage';
 import ViewCollectionBase from './Components/MintBase/ViewCollectionBase';
-import UserBase from './Components/MintBase/UserStats';
 import MintBase from './MintBase';
 import AdminBase from './Components/MintBase/AdminBase';
 
@@ -193,7 +192,6 @@ const modal = createWeb3Modal({
 
                     <Route path="/mintbase" element={<MintBase />} />
                     <Route path="/nftbase/:tokenId" element={<NFTProfilePageBase />} />
-                    <Route path="/baseuser" element={<UserBase />} />
                     <Route path="/adminbase" element={<AdminBase />} />
       </Routes>
     </Router>

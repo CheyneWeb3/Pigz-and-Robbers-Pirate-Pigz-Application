@@ -35,7 +35,7 @@ const NFTProfilePagepolyV2 = () => {
   useEffect(() => {
     const fetchNFTData = async () => {
       try {
-        const response = await fetch(`https://raw.githubusercontent.com/ArielRin/Pigz-and-Robbers-Pirate-Pigz-Application/fixfoot/public/baseArmyNFTData/Metadata/${tokenId}.json`);
+        const response = await fetch(`https://raw.githubusercontent.com/ArielRin/Pigz-and-Robbers-Pirate-Pigz-Application/base-test/public/baseArmyNFTData/Metadata/${tokenId}.json`);
         const data: NftData = await response.json();
         setNftData(data);
       } catch (error) {
@@ -96,7 +96,7 @@ const NFTProfilePagepolyV2 = () => {
     let tokenIdNumber;
     try {
       tokenIdNumber = Number(tokenId);
-      if (isNaN(tokenIdNumber) || tokenIdNumber < 0 || tokenIdNumber > 511) {
+      if (isNaN(tokenIdNumber) || tokenIdNumber < 0 || tokenIdNumber > 255) {
         throw new Error('Invalid tokenId range');
       }
       console.log('Validated tokenIdNumber:', tokenIdNumber);
@@ -104,7 +104,7 @@ const NFTProfilePagepolyV2 = () => {
       console.error('Invalid tokenId:', error);
       toast({
         title: 'Invalid Token ID',
-        description: 'The tokenId is not valid. It must be a number between 0 and 511.',
+        description: 'The tokenId is not valid. It must be a number between 0 and 255.',
         status: 'error',
         duration: 5000,
         isClosable: true,
@@ -222,22 +222,7 @@ const NFTProfilePagepolyV2 = () => {
             justifyContent="center"
             h="auto" // Adjust height as necessary
           >
-            <Box ml={4}>
-              <Text textAlign="left" fontSize="xl" fontWeight="bolder">
-                View User Stats and collection details here
-              </Text>
-              <Button
-                as={RouterLink}
-                to="/baseuser"
-                bg="#152dff"
-                color="white"
-                size="md"
-                mt={4}
-                textAlign="left"
-              >
-                Go to User Page
-              </Button>
-            </Box>
+
           </Flex>
           <Box
             flex={1}
@@ -262,7 +247,7 @@ const NFTProfilePagepolyV2 = () => {
               <Image
                 borderRadius="2xl"
                 mx="auto"
-                src={`https://raw.githubusercontent.com/ArielRin/Pigz-and-Robbers-Pirate-Pigz-Application/fixfoot/public/baseArmyNFTData/Images/${tokenId}.png`}
+                src={`https://raw.githubusercontent.com/ArielRin/Pigz-and-Robbers-Pirate-Pigz-Application/base-test/public/baseArmyNFTData/Images/${tokenId}.png`}
                 alt={nftData.name}
                 width="75%"
               />
@@ -282,22 +267,7 @@ const NFTProfilePagepolyV2 = () => {
                   {attribute.trait_type}: {attribute.value}
                 </Text>
               ))}
-              {isRegistered ? (
-                <Text mt={4} color="green.500" fontSize="xl" fontWeight="bold">
-                  Already Registered
-                </Text>
-              ) : (
-                <Button
-    mt={4}
-    colorScheme="blue"
-    isLoading={loading}
-    onClick={registerNFT}
-    width="full"
-  >
-    Register NFT
-  </Button>
-
-              )}
+              
             </Box>
           </Box>
           <Flex bg="rgba(0, 0, 0, 0.65)" borderRadius="2xl" p={0} mb={0} h="490px" justifyContent="center" alignItems="center">

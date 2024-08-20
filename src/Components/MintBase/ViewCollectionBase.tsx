@@ -31,10 +31,10 @@ import registerAbi from './registerAbi.json';
 const NFTMINT_CONTRACT_ADDRESS = '0x605923BE39B14AEA67F0087652a2b4bd64c18Bb8';
 // og test register = 0x806d861aFE5d2E4B3f6Eb07A4626E4a7621B90b3
 const REGISTER_CONTRACT_ADDRESS = '0x806d861aFE5d2E4B3f6Eb07A4626E4a7621B90b3';
-const RPC_PROVIDER = 'https://polygon-rpc.com';
-const EXPLORER_LINK = 'https://polygonscan.com';
-const METADATA_BASE_URL = 'https://raw.githubusercontent.com/ArielRin/Pigz-and-Robbers-Pirate-Pigz-Application/fixfoot/public/baseArmyNFTData/Metadata/';
-const MAX_TOKEN_ID = 511;
+const RPC_PROVIDER = 'https://mainnet.base.org';
+const EXPLORER_LINK = 'https://basescan.org';
+const METADATA_BASE_URL = 'https://raw.githubusercontent.com/ArielRin/Pigz-and-Robbers-Pirate-Pigz-Application/base-test/public/baseArmyNFTData/Metadata/';
+const MAX_TOKEN_ID = 255;
 
 const getExplorerLink = (tokenId: number) => `${EXPLORER_LINK}/token/${NFTMINT_CONTRACT_ADDRESS}?a=${tokenId}`;
 const getMarketplaceLinkElement = (tokenId: number) => `https://opensea.io/assets/matic/${NFTMINT_CONTRACT_ADDRESS}/${tokenId}`;
@@ -82,7 +82,7 @@ const fetchMetadata = async (tokenId: number) => {
     const response = await fetch(`${METADATA_BASE_URL}${tokenId}.json`);
     if (response.ok) {
       const metadata = await response.json();
-      const imageUrl = `https://raw.githubusercontent.com/ArielRin/Pigz-and-Robbers-Pirate-Pigz-Application/fixfoot/public/baseArmyNFTData/Images/${tokenId}.png`;
+      const imageUrl = `https://raw.githubusercontent.com/ArielRin/Pigz-and-Robbers-Pirate-Pigz-Application/base-test/public/baseArmyNFTData/Images/${tokenId}.png`;
       return imageUrl;
     } else {
       throw new Error('Failed to fetch metadata');
@@ -309,7 +309,7 @@ function MyNfts() {
                       position="relative"
                       overflow="hidden"
                       border="5px solid"
-                      borderColor="#7140d7"
+                      borderColor="#152dff"
                       _hover={{
                         '.overlay': {
                           opacity: 1,
@@ -358,14 +358,14 @@ function MyNfts() {
                         transition="opacity 0.3s ease-in-out"
                       >
                         <Text mt="2" color="white" textAlign="center">
-                          Pirate Pigz TokenId {tokenId}
+                         Pigz Army TokenId {tokenId}
                         </Text>
 
                         <Link href={getMarketplaceLinkElement(tokenId)} isExternal>
                           <Button
                             mt="2"
                             width="160px"
-                            bg="#7140d7"
+                            bg="#152dff"
                             textColor="white"
                             _hover={{ bg: '#c45b79' }}
                           >
@@ -376,7 +376,7 @@ function MyNfts() {
                           <Button
                             mt="2"
                             width="160px"
-                            bg="#7140d7"
+                            bg="#152dff"
                             textColor="white"
                             _hover={{ bg: '#c45b79' }}
                           >
@@ -387,7 +387,7 @@ function MyNfts() {
                         <Button
                           mt="2"
                           width="160px"
-                          bg="#7140d7"
+                          bg="#152dff"
                           textColor="white"
                           _hover={{ bg: '#c45b79' }}
                           onClick={() => {
@@ -400,7 +400,7 @@ function MyNfts() {
                         <Button
                           mt="2"
                           width="160px"
-                          bg="#7140d7"
+                          bg="#152dff"
                           textColor="white"
                           _hover={{ bg: '#c45b79' }}
                           onClick={() => navigate(`/nftpolyv2/${tokenId}`)}
@@ -428,7 +428,7 @@ function MyNfts() {
                           color="white"
                           textAlign="center"
                         >
-                          View on PolygonScan
+                          View on BaseScan
                         </Link>
                       </Box>
                     </Box>

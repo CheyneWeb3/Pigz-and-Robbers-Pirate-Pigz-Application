@@ -7,7 +7,6 @@ import registerAbi from './registerAbi.json';
 import nftAbi from './nftMintAbi.json';
 import ClaimRewards from './ClaimRewardsComponent/ClaimRewards';
 import MiniMintPoly from '../MintNowMiniPolyV2/MintNow2nopadding';
-import MiniMintBase from '../MintNowMiniBase/MintNow2nopadding';
 import MiniMintBsc from '../MintNowMini/MintNow2nopadding';
 import Footer from '../Footer/Footer';
 
@@ -306,9 +305,6 @@ const UserStats = () => {
             justifyContent="center"
             alignItems="center"
           >
-            <MiniMintBase />
-            <MiniMintPoly />
-            <MiniMintBsc />
           </Box>
         </Flex>
       </Box>
