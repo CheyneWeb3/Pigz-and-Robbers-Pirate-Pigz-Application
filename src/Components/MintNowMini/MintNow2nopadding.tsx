@@ -206,7 +206,7 @@ const MintNow2nopadding = () => {
             <Text fontSize="2xl" fontWeight="semibold" textAlign="left">
               Mint 1 now for 0.09 BNB
             </Text>
-        
+
           </Box>
         </Flex>
         <Button
@@ -232,7 +232,7 @@ const MintNow2nopadding = () => {
             {modalContent.tokenId && (
               <>
                 <Text mt="4">You Just Minted a Pigz and Robbers NFT! #{modalContent.tokenId}</Text>
-                <a href={`https://testnet.bscscan.com/tx/${modalContent.txHash}`} target="_blank" rel="noopener noreferrer" style={{ color: 'blue', textDecoration: 'underline' }}>
+                <a href={`https://bscscan.com/tx/${modalContent.txHash}`} target="_blank" rel="noopener noreferrer" style={{ color: 'blue', textDecoration: 'underline' }}>
                   View on BscScan
                 </a>
               </>

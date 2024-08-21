@@ -1,12 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { Box, Image, Flex, Text, Button, useToast, Link as ChakraLink } from '@chakra-ui/react';
+import { Box, Image, Flex, Text, Link as ChakraLink } from '@chakra-ui/react';
 import { Link as RouterLink } from 'react-router-dom';
 import { useParams, Link } from 'react-router-dom';
-import { ethers } from 'ethers';
 import Footer from '../Footer/Footer';
 import MiniMintBsc from '../MintNowMini/MintNow2nopadding';
-import registerAbi from './registerAbi.json';
-import nftAbi from './nftMintAbi.json';
 import { useWeb3ModalAccount, useWeb3ModalProvider } from '@web3modal/ethers/react';
 
 interface NftAttribute {
@@ -23,12 +20,6 @@ interface NftData {
 const NFTProfilePagepolyV2 = () => {
   const { tokenId } = useParams<{ tokenId: string }>();
   const [nftData, setNftData] = useState<NftData | null>(null);
-  const [isRegistered, setIsRegistered] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const toast = useToast();
-  const registerContractAddress = '0x806d861aFE5d2E4B3f6Eb07A4626E4a7621B90b3';
-  const nftContractAddress = '0x605923BE39B14AEA67F0087652a2b4bd64c18Bb8';
-  const { address, isConnected } = useWeb3ModalAccount();
   const { walletProvider } = useWeb3ModalProvider();
 
   useEffect(() => {
@@ -42,124 +33,8 @@ const NFTProfilePagepolyV2 = () => {
       }
     };
 
-    const checkRegistrationStatus = async () => {
-      if (!walletProvider) return;
-      try {
-        const provider = new ethers.BrowserProvider(walletProvider);
-        const registerContract = new ethers.Contract(registerContractAddress, registerAbi, provider);
-        const registeredNFTs = await registerContract.getRegisteredNFTs();
-        const isRegistered = registeredNFTs.some((nft: any) => nft.tokenId.toString() === tokenId);
-        setIsRegistered(isRegistered);
-      } catch (error) {
-        console.error('Error checking registration status:', error);
-      }
-    };
-
     fetchNFTData();
-    checkRegistrationStatus();
   }, [tokenId, walletProvider]);
-
-  const registerNFT = async () => {
-    if (!nftData || !walletProvider || !isConnected || !address) {
-      console.log('nftData:', nftData);
-      console.log('walletProvider:', walletProvider);
-      console.log('isConnected:', isConnected);
-      console.log('address:', address);
-      toast({
-        title: 'Wallet not connected',
-        description: 'Please connect your wallet to register the NFT.',
-        status: 'error',
-        duration: 5000,
-        isClosable: true,
-      });
-      return;
-    }
-
-    const traitAttribute = nftData.attributes.find(attr => attr.trait_type === "Background");
-    if (!traitAttribute || !traitAttribute.value) {
-      console.error('Background trait not found:', traitAttribute);
-      toast({
-        title: 'Registration Error',
-        description: 'Could not find the Background trait for this NFT.',
-        status: 'error',
-        duration: 5000,
-        isClosable: true,
-      });
-      return;
-    }
-
-    const traitValue = traitAttribute.value;
-    console.log(`Using Background trait value: ${traitValue}`);
-    console.log('tokenId:', tokenId);
-
-    let tokenIdNumber;
-    try {
-      tokenIdNumber = Number(tokenId);
-      if (isNaN(tokenIdNumber) || tokenIdNumber < 0 || tokenIdNumber > 255) {
-        throw new Error('Invalid tokenId range');
-      }
-      console.log('Validated tokenIdNumber:', tokenIdNumber);
-    } catch (error) {
-      console.error('Invalid tokenId:', error);
-      toast({
-        title: 'Invalid Token ID',
-        description: 'The tokenId is not valid. It must be a number between 0 and 255.',
-        status: 'error',
-        duration: 5000,
-        isClosable: true,
-      });
-      return;
-    }
-
-    setLoading(true);
-    try {
-      const provider = new ethers.BrowserProvider(walletProvider);
-      const signer = await provider.getSigner();
-      console.log('Signer address:', await signer.getAddress());
-
-      const nftContract = new ethers.Contract(nftContractAddress, nftAbi, provider);
-      const ownerAddress = await nftContract.ownerOf(tokenIdNumber);
-      console.log('Owner address:', ownerAddress);
-
-      if (ownerAddress.toLowerCase() !== address.toLowerCase()) {
-        console.log('Owner mismatch:', ownerAddress, address);
-        toast({
-          title: 'Registration Failed',
-          description: "You are not the owner of this NFT.",
-          status: 'error',
-          duration: 5000,
-          isClosable: true,
-        });
-        setLoading(false);
-        return;
-      }
-
-      console.log('Registering NFT with trait value:', traitValue);
-      const registerContract = new ethers.Contract(registerContractAddress, registerAbi, signer);
-      const tx = await registerContract.registerNFT(tokenIdNumber, traitValue);
-      await tx.wait();
-
-      toast({
-        title: 'NFT Registered',
-        description: 'Your NFT has been registered successfully!',
-        status: 'success',
-        duration: 5000,
-        isClosable: true,
-      });
-
-      setIsRegistered(true);
-    } catch (error) {
-      console.error('Error registering NFT:', error);
-      toast({
-        title: 'Registration Error',
-        description: 'An error occurred during registration. Please try again.',
-        status: 'error',
-        duration: 5000,
-        isClosable: true,
-      });
-    }
-    setLoading(false);
-  };
 
   if (!nftData) {
     return <Text>Loading...</Text>;
