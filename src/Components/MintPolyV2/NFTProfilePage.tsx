@@ -35,7 +35,7 @@ const NFTProfilePagepolyV2 = () => {
   useEffect(() => {
     const fetchNFTData = async () => {
       try {
-        const response = await fetch(`https://raw.githubusercontent.com/ArielRin/Pigz-and-Robbers-Pirate-Pigz-Application/fixfoot/public/137nftdataV2/Metadata/${tokenId}.json`);
+        const response = await fetch(`/137nftdataV2/Metadata/${tokenId}.json`);
         const data: NftData = await response.json();
         setNftData(data);
       } catch (error) {
@@ -261,7 +261,7 @@ const NFTProfilePagepolyV2 = () => {
               <Image
                 borderRadius="2xl"
                 mx="auto"
-                src={`https://raw.githubusercontent.com/ArielRin/Pigz-and-Robbers-Pirate-Pigz-Application/fixfoot/public/137nftdataV2/Images/${tokenId}.png`}
+                src={`/137nftdataV2/Images/${tokenId}.png`}
                 alt={nftData.name}
                 width="75%"
               />

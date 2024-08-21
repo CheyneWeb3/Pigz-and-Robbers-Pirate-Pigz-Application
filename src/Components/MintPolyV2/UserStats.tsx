@@ -12,7 +12,7 @@ import Footer from '../Footer/Footer';
 
 const NFTMINT_CONTRACT_ADDRESS = '0x721761446D1595346475A9F0d7dc13a1B93Ffcc3';
 const REGISTER_CONTRACT_ADDRESS = '0x806d861aFE5d2E4B3f6Eb07A4626E4a7621B90b3';
-const METADATA_BASE_URL = 'https://raw.githubusercontent.com/ArielRin/Pigz-and-Robbers-Pirate-Pigz-Application/fixfoot/public/137nftdataV2/Metadata/';
+const METADATA_BASE_URL = '/137nftdataV2/Metadata/';
 const requiredTraits = ['Pirate Ship', 'Tavern', 'Island', 'Treasure Chest', 'Market'];
 const marketplaceUrl = 'https://element.market/collections/pirate-pigz-v2';
 const openSeaMarketplaceUrl = 'https://opensea.io/collection/pirate-pigz-v2';
@@ -79,7 +79,7 @@ const UserStats = () => {
             const metadataResponse = await fetch(`${METADATA_BASE_URL}${tokenId}.json`);
             const metadata = await metadataResponse.json();
             const trait = metadata.attributes.find((attr: any) => attr.trait_type === "Background")?.value || 'Unknown';
-            const imageUrl = `https://raw.githubusercontent.com/ArielRin/Pigz-and-Robbers-Pirate-Pigz-Application/fixfoot/public/137nftdataV2/Images/${tokenId}.png`;
+            const imageUrl = `/137nftdataV2/Images/${tokenId}.png`;
 
             const registeredNFTs = await registerContract.getRegisteredNFTs();
             const isRegistered = registeredNFTs.some((nft: any) => nft.tokenId.toString() === tokenId.toString());

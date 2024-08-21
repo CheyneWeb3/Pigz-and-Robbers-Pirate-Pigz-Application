@@ -23,7 +23,7 @@ const MINT_SUPPLY = 511;
 const NFTMINT_CONTRACT_ADDRESS = '0x721761446D1595346475A9F0d7dc13a1B93Ffcc3';
 const RPC_PROVIDER = 'https://polygon-rpc.com/';
 const EXPLORER_LINK = 'https://polygonscan.com';
-const METADATA_BASE_URL = 'https://raw.githubusercontent.com/ArielRin/Pigz-and-Robbers-Pirate-Pigz-Application/fixfoot/public/137nftdataV2/Metadata/';
+const METADATA_BASE_URL = '/137nftdataV2/Metadata/';
 
 const getExplorerLink = (tokenId: number) => `${EXPLORER_LINK}/token/${NFTMINT_CONTRACT_ADDRESS}?a=${tokenId}`;
 const getMarketplaceLink = (tokenId: number) => `https://opensea.io/assets/matic/${NFTMINT_CONTRACT_ADDRESS}/${tokenId}`;
