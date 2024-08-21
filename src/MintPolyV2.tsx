@@ -4,7 +4,7 @@ import { css, keyframes } from '@emotion/react';
 import { Link as RouterLink } from 'react-router-dom'; // Import Link from react-router-dom
 import Footer from './Components/Footer/Footer';
 
-import ViewPoly from './Components/MintPolyV2/ViewCollectionPOLY';
+import ViewPoly from './Components/MintPolyV2/withRegViewCollectionPOLY';
 import ClaimPirateV2 from './Components/MintPolyV2/ClaimRewardsComponent/ClaimRewards';
 import MintPoly from './Components/MintPolyV2/NftMint0/NftMint0';
 import { useWeb3ModalProvider, useWeb3ModalAccount } from '@web3modal/ethers/react';
@@ -166,7 +166,7 @@ const NewPage = () => {
         >
           <Flex p={2} bg="rgba(0, 0, 0, 0.61)" justify="space-between" align="center">
             <RouterLink to="/">
-              <Image p={2} ml="4" src="/images/banner.png" alt="Heading" width="220px" />
+              <Image p={2} ml="4" src="/images/mainlogovert.png" alt="Heading" width="80px" />
             </RouterLink>
             <Flex align="right">
               <w3m-button />

@@ -3,23 +3,30 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './styles.css';
 
 import Intro from './Intro';
-import MintBsc from './MintBsc';
-import MintPoly from './MintPoly';
-import MintPolyV2 from './MintPolyV2';
-import Admin from './Components/MintPolyV2/AdminV2';
-import User from './Components/MintPolyV2/UserStats';
 
 
 
+//test for base
+import NFTProfilePageBase from './Components/MintBase/NFTProfilePage';
+import ViewCollectionBase from './Components/MintBase/ViewCollectionBase';
+import MintBase from './MintBase';
 
 
+//piratv2 poly
 import NFTProfilePagepolyV2 from './Components/MintPolyV2/NFTProfilePage';
 import ViewCollectionPolyV2 from './Components/MintPolyV2/ViewCollectionPOLY';
+import UserPolyV2 from './Components/MintPolyV2/UserStats';
+import MintPolyV2 from './MintPolyV2';
+import Admin from './Components/MintPolyV2/AdminV2';
 
+// piratev 1 poly
 import NFTProfilePagepoly from './Components/MintPoly/NFTProfilePage';
+import MintPoly from './MintPoly';
 
+// bsc this
 import NFTProfilePage from './Components/MintBsc/NFTProfilePage';
 import ViewCollectionBSC from './Components/MintBsc/ViewCollectionBSC';
+import MintBsc from './MintBsc';
 
 
 
@@ -39,16 +46,24 @@ if (!projectId) {
 }
 
 const chains = [
+
+  {
+    chainId: 8453,
+    name: 'Base',
+    currency: 'ETH',
+    explorerUrl: 'https://basescan.org',
+    rpcUrl: 'https://mainnet.base.org'
+  },
   {
     chainId: 56,
-    name: 'Binance Smart Chain',
+    name: 'BSC',
     currency: 'BNB',
     explorerUrl: 'https://bscscan.com',
     rpcUrl: 'https://bsc-dataseed.binance.org'
   },
   {
     chainId: 137,
-    name: 'Polygon Mainnet',
+    name: 'POLY',
     currency: 'MATIC',
     explorerUrl: 'https://polygonscan.com',
     rpcUrl: 'https://polygon-rpc.com/'
@@ -86,7 +101,6 @@ const modal = createWeb3Modal({
       56: 'https://thatdamndawg.com/images/networklogos/bsc.png',
       137: 'https://thatdamndawg.com/images/networklogos/polygon.png',
       42161: 'https://cryptologos.cc/logos/arbitrum-arb-logo.png',
-      8453: 'https://www.kunai.finance/static/media/Base_Network_Logo.cfdb6720.png',
       10: 'https://assets.coingecko.com/coins/images/25244/large/OP.jpeg?1651026279',
       7777777: 'https://media.licdn.com/dms/image/C4E0BAQE2QFmWjvYbLw/company-logo_200_200/0/1679507991235/ourzora_logo?e=2147483647&v=beta&t=fm_w5of8cLl7CsiMbZG_ouXOirfFqTE2PBHfprsktWc',
       666666666: 'https://dd.dexscreener.com/ds-data/tokens/base/0x4ed4e862860bed51a9570b96d89af5e1b0efefed.png?size=lg&key=e17c44',
@@ -155,16 +169,28 @@ const modal = createWeb3Modal({
       <Routes>
         <Route path="/" element={<Intro />} />
           <Route path="/home" element={<Intro />} />
+
+
               <Route path="/viewbsc" element={<ViewCollectionBSC />} />
-                  <Route path="/viewpolyv2" element={<ViewCollectionPolyV2 />} />
                 <Route path="/nft/:tokenId" element={<NFTProfilePage />} />
-                  <Route path="/nftpoly/:tokenId" element={<NFTProfilePagepoly />} />
-                    <Route path="/nftpolyv2/:tokenId" element={<NFTProfilePagepolyV2 />} />
+
+
                   <Route path="/mintbsc" element={<MintBsc />} />
                     <Route path="/mintpoly" element={<MintPoly />} />
-                      <Route path="/mintpolyv2" element={<MintPolyV2 />} />
-                        <Route path="/admin" element={<Admin />} />
-                          <Route path="/user" element={<User />} />
+                      <Route path="/nftpoly/:tokenId" element={<NFTProfilePagepoly />} />
+
+
+
+
+                            <Route path="/user" element={<UserPolyV2 />} />
+                            <Route path="/mintpolyv2" element={<MintPolyV2 />} />
+                            <Route path="/viewpolyv2" element={<ViewCollectionPolyV2 />} />
+                            <Route path="/nftpolyv2/:tokenId" element={<NFTProfilePagepolyV2 />} />
+                            <Route path="/admin" element={<Admin />} />
+
+
+                    <Route path="/mintbase" element={<MintBase />} />
+                    <Route path="/nftbase/:tokenId" element={<NFTProfilePageBase />} />
       </Routes>
     </Router>
   );

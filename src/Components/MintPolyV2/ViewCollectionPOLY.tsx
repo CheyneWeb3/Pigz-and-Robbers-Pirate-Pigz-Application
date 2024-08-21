@@ -25,12 +25,9 @@ import { CheckCircleIcon } from '@chakra-ui/icons'; // Import Chakra UI icon
 import { useNavigate } from 'react-router-dom';
 import Footer from '../Footer/Footer';
 import nftMintAbi from './mintBscAbi.json';
-import registerAbi from './registerAbi.json';
 
 // og test ca nft = 0xA4F64d98ad39A25975D19AC174F9E7a35209369A
 const NFTMINT_CONTRACT_ADDRESS = '0x721761446D1595346475A9F0d7dc13a1B93Ffcc3';
-// og test register = 0x806d861aFE5d2E4B3f6Eb07A4626E4a7621B90b3
-const REGISTER_CONTRACT_ADDRESS = '0x806d861aFE5d2E4B3f6Eb07A4626E4a7621B90b3';
 const RPC_PROVIDER = 'https://polygon-rpc.com';
 const EXPLORER_LINK = 'https://polygonscan.com';
 const METADATA_BASE_URL = 'https://raw.githubusercontent.com/ArielRin/Pigz-and-Robbers-Pirate-Pigz-Application/fixfoot/public/137nftdataV2/Metadata/';
@@ -96,7 +93,6 @@ const fetchMetadata = async (tokenId: number) => {
 interface Nft {
   tokenId: number;
   imageUrl: string;
-  isRegistered: boolean;
 }
 
 function MyNfts() {
@@ -165,7 +161,6 @@ function MyNfts() {
       setLoading(true);
       const provider = new ethers.JsonRpcProvider(RPC_PROVIDER);
       const nftContract = new ethers.Contract(NFTMINT_CONTRACT_ADDRESS, nftMintAbi, provider);
-      const registerContract = new ethers.Contract(REGISTER_CONTRACT_ADDRESS, registerAbi, provider);
       const nftList: Nft[] = [];
 
       const tokenFetchPromises = [];
@@ -176,9 +171,7 @@ function MyNfts() {
               const owner = await nftContract.ownerOf(i);
               if (owner.toLowerCase() === address?.toLowerCase()) {
                 const imageUrl = await fetchMetadata(i);
-                const registeredNFTs = await registerContract.getRegisteredNFTs();
-                const isRegistered = registeredNFTs.some((nft: any) => nft.tokenId.toString() === i.toString());
-                nftList.push({ tokenId: i, imageUrl, isRegistered });
+                nftList.push({ tokenId: i, imageUrl });
               }
             } catch (err) {
               // Handle cases where the token does not exist or other errors
@@ -298,7 +291,7 @@ function MyNfts() {
               </Text>
             ) : (
               <Wrap spacing="10px" justify="center">
-                {nfts.map(({ tokenId, imageUrl, isRegistered }) => (
+                {nfts.map(({ tokenId, imageUrl }) => (
                   <WrapItem key={tokenId} flexBasis={{ base: '100%', sm: '48%', md: '31%', lg: '12%' }}>
                     <Box
                       bg="rgba(0, 0, 0, 0)"
@@ -316,11 +309,6 @@ function MyNfts() {
                         }
                       }}
                     >
-                      {isRegistered && (
-                        <Box position="absolute" top="5px" right="5px" zIndex="1">
-                          <CheckCircleIcon color="green.400" boxSize={6} />
-                        </Box>
-                      )}
                       <Image
                         mt={9}
                         mb={9}
@@ -407,12 +395,6 @@ function MyNfts() {
                         >
                           View Details
                         </Button>
-
-                        {isRegistered && (
-                          <Text mt="2" color="green.400" fontWeight="bold">
-                            Registered
-                          </Text>
-                        )}
 
                         <Link
                           style={{
