@@ -80,20 +80,6 @@ const NewPage = () => {
     };
   }, [isConnected, walletProvider]);
 
-  useEffect(() => {
-    const fetchTokenData = async () => {
-      try {
-        const response = await fetch('https://api.geckoterminal.com/api/v2/networks/degenchain/pools/0x401cd27b11e64527cc09bcad1febcf8fcae8e945');
-        const data = await response.json();
-        console.log('API Response:', data);
-        setTokenData(data.data.attributes);
-      } catch (error) {
-        console.error('Error fetching token data:', error);
-      }
-    };
-
-    fetchTokenData();
-  }, []);
 
   useEffect(() => {
     const intervalId = setInterval(() => {

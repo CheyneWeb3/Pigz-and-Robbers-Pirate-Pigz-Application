@@ -77,8 +77,8 @@ const ethersConfig = defaultConfig({
     url: '',
     icons: ['images/favicon.png']
   },
-  defaultChainId: 56,
-  rpcUrl: 'https://bsc-dataseed.binance.org',
+  defaultChainId: 137,
+  rpcUrl: 'https://polygon-rpc.com/',
   auth: {
     email: false,
     showWallets: true,

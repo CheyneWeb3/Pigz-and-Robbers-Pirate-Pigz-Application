@@ -34,8 +34,8 @@ const METADATA_BASE_URL = '/baseArmyNFTData/Metadata/';
 const MAX_TOKEN_ID = 255;
 
 const getExplorerLink = (tokenId: number) => `${EXPLORER_LINK}/token/${NFTMINT_CONTRACT_ADDRESS}?a=${tokenId}`;
-const getMarketplaceLinkElement = (tokenId: number) => `https://opensea.io/assets/matic/${NFTMINT_CONTRACT_ADDRESS}/${tokenId}`;
-const getMarketplaceLinkTofu = (tokenId: number) => `https://tofunft.com/nft/polygon/${NFTMINT_CONTRACT_ADDRESS}/${tokenId}`;
+const getMarketplaceLinkElement = (tokenId: number) => `https://opensea.io/assets/base/${NFTMINT_CONTRACT_ADDRESS}/${tokenId}`;
+const getMarketplaceLinkTofu = (tokenId: number) => `https://element.market/assets/base/${NFTMINT_CONTRACT_ADDRESS}/${tokenId}`;
 
 declare global {
   interface Window {
@@ -357,7 +357,7 @@ function MyNfts() {
                             textColor="white"
                             _hover={{ bg: '#c45b79' }}
                           >
-                            Element Market
+                            Opensea Market
                           </Button>
                         </Link>
                         <Link href={getMarketplaceLinkTofu(tokenId)} isExternal>
@@ -368,7 +368,7 @@ function MyNfts() {
                             textColor="white"
                             _hover={{ bg: '#c45b79' }}
                           >
-                            Tofu NFT
+                            Element NFT
                           </Button>
                         </Link>
 

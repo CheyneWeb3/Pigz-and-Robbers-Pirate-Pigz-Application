@@ -439,10 +439,6 @@ const NewPage = () => {
               boxShadow="md"
               textAlign="center"
             >
-            <ViewBase />
-            <ViewPolyV2 />
-              <ViewBsc />
-              <ViewPoly />
               <Text mb="200px" fontSize="xl">
               </Text>
             </Box>
