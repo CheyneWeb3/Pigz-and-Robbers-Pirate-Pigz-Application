@@ -30,7 +30,7 @@ import nftMintAbi from './mintBscAbi.json';
 const NFTMINT_CONTRACT_ADDRESS = '0x605923BE39B14AEA67F0087652a2b4bd64c18Bb8';
 const RPC_PROVIDER = 'https://mainnet.base.org';
 const EXPLORER_LINK = 'https://basescan.org';
-const METADATA_BASE_URL = 'https://raw.githubusercontent.com/ArielRin/Pigz-and-Robbers-Pirate-Pigz-Application/base-test/public/baseArmyNFTData/Metadata/';
+const METADATA_BASE_URL = 'https://raw.githubusercontent.com/ArielRin/Pigz-and-Robbers-Pirate-Pigz-Application/fixfoot/public/baseArmyNFTData/Metadata/';
 const MAX_TOKEN_ID = 255;
 
 const getExplorerLink = (tokenId: number) => `${EXPLORER_LINK}/token/${NFTMINT_CONTRACT_ADDRESS}?a=${tokenId}`;
@@ -79,7 +79,7 @@ const fetchMetadata = async (tokenId: number) => {
     const response = await fetch(`${METADATA_BASE_URL}${tokenId}.json`);
     if (response.ok) {
       const metadata = await response.json();
-      const imageUrl = `https://raw.githubusercontent.com/ArielRin/Pigz-and-Robbers-Pirate-Pigz-Application/base-test/public/baseArmyNFTData/Images/${tokenId}.png`;
+      const imageUrl = `https://raw.githubusercontent.com/ArielRin/Pigz-and-Robbers-Pirate-Pigz-Application/fixfoot/public/baseArmyNFTData/Images/${tokenId}.png`;
       return imageUrl;
     } else {
       throw new Error('Failed to fetch metadata');

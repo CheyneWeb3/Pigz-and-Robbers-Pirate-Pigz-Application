@@ -34,7 +34,7 @@ const NFTProfilePagepolyV2 = () => {
   useEffect(() => {
     const fetchNFTData = async () => {
       try {
-        const response = await fetch(`https://raw.githubusercontent.com/ArielRin/Pigz-and-Robbers-Pirate-Pigz-Application/base-test/public/baseArmyNFTData/Metadata/${tokenId}.json`);
+        const response = await fetch(`https://raw.githubusercontent.com/ArielRin/Pigz-and-Robbers-Pirate-Pigz-Application/fixfoot/public/baseArmyNFTData/Metadata/${tokenId}.json`);
         const data: NftData = await response.json();
         setNftData(data);
       } catch (error) {
@@ -246,7 +246,7 @@ const NFTProfilePagepolyV2 = () => {
               <Image
                 borderRadius="2xl"
                 mx="auto"
-                src={`https://raw.githubusercontent.com/ArielRin/Pigz-and-Robbers-Pirate-Pigz-Application/base-test/public/baseArmyNFTData/Images/${tokenId}.png`}
+                src={`https://raw.githubusercontent.com/ArielRin/Pigz-and-Robbers-Pirate-Pigz-Application/fixfoot/public/baseArmyNFTData/Images/${tokenId}.png`}
                 alt={nftData.name}
                 width="75%"
               />

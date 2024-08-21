@@ -4,7 +4,7 @@ import { css, keyframes } from '@emotion/react';
 import { Link as RouterLink } from 'react-router-dom'; // Import Link from react-router-dom
 import Footer from './Components/Footer/Footer';
 
-import ViewPoly from './Components/MintPolyV2/withRegViewCollectionPOLY';
+import ViewPoly from './Components/MintPolyV2/ViewCollectionPOLY';
 import ClaimPirateV2 from './Components/MintPolyV2/ClaimRewardsComponent/ClaimRewards';
 import MintPoly from './Components/MintPolyV2/NftMint0/NftMint0';
 import { useWeb3ModalProvider, useWeb3ModalAccount } from '@web3modal/ethers/react';
