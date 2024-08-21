@@ -174,6 +174,8 @@ const NewPage = () => {
                 boxShadow="md"
                 textAlign="center"
                 bg="rgba(0, 0, 0, 0.61)"
+                  border="2px"
+                  borderColor="#152dff"
               >
                 <Image src="images/baseArmyTextLogo.png" alt="header" mx="auto" width="40%" minW="250px" mb="28px" mt="28px" />
                 <MintBase />
@@ -191,14 +193,14 @@ const NewPage = () => {
                 flexDirection="column"
                 justifyContent="center"
                 alignItems="center"
+                  border="2px"
+                  borderColor="#152dff"
               >
                 <Link to="/mintbase">
                   <Flex justifyContent="center" flexWrap="wrap">
                     <Text width="60%" textAlign="center" fontSize="lg" fontWeight="normal"></Text>
                   </Flex>
                   <Image
-                    border="2px"
-                    borderColor="#152dff"
                     src={currentImage} alt="Pirate Pigz" mx="auto" width="85%" minW="380px" mt="90px" borderRadius="2xl" />
                 </Link>
               </Box>

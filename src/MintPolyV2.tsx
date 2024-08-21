@@ -223,6 +223,8 @@ const NewPage = () => {
                 boxShadow="md"
                 textAlign="center"
                 bg="rgba(0, 0, 0, 0.61)"
+                  border="2px"
+                  borderColor="#7140d7"
               >
                 <Image src="images/piratepigztextlogoV2.png" alt="header" mx="auto" width="40%" minW="250px" mb="28px" mt="28px" />
                 <MintPoly />
@@ -240,14 +242,14 @@ const NewPage = () => {
                 flexDirection="column"
                 justifyContent="center"
                 alignItems="center"
+                  border="2px"
+                  borderColor="#7140d7"
               >
                 <RouterLink to="/mintpoly">
                   <Flex justifyContent="center" flexWrap="wrap">
                     <Text width="60%" textAlign="center" fontSize="lg" fontWeight="normal"></Text>
                   </Flex>
                   <Image
-                    border="2px"
-                    borderColor="#7140d7"
                     src={currentImage} alt="Pirate Pigz" mx="auto" width="85%" minW="380px" mt="90px" borderRadius="2xl" />
                 </RouterLink>
               </Box>

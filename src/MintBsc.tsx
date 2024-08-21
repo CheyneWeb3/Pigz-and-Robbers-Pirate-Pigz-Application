@@ -193,6 +193,8 @@ const NewPage = () => {
                 boxShadow="md"
                 textAlign="center"
                 bg="rgba(0, 0, 0, 0.61)"
+                                  border="2px"
+                                  borderColor="#d19a19"
               >
                 <Image src="images/pigzrobberstextlogo.png" alt="header" mx="auto" width="40%" minW="250px" mb="28px" mt="28px" />
                 <MintBsc />
@@ -210,6 +212,8 @@ const NewPage = () => {
                 flexDirection="column"
                 justifyContent="center"
                 alignItems="center"
+                                  border="2px"
+                                  borderColor="#d19a19"
               >
                 <Link to="/mintbsc">
                   <Flex justifyContent="center" flexWrap="wrap">
@@ -217,8 +221,6 @@ const NewPage = () => {
                   </Flex>
                   <Image
 
-                  border="2px"
-                  borderColor="#d19a19"
                   src={currentImage} alt="Pigz and Robbers" mx="auto" width="85%" minW="380px" mt="90px" borderRadius="2xl" />
                 </Link>
               </Box>
