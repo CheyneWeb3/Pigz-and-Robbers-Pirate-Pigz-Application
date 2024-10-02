@@ -725,3 +725,4 @@ dist/images/.DS_Store
 dist/images/2024-07-04 12.29.00.jpg
 dist/index.html
 public/chainwithtext.png
+/dist
