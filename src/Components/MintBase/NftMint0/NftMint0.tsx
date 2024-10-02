@@ -323,7 +323,7 @@ function NftMint() {
           >
             <div>
               <Text fontSize="xl" style={{ color: 'white', textAlign: 'center', fontWeight: 'bolder' }}>
-                Pirate Pigz a Base Chain Collection
+                Pigz Army a Base Chain Collection
               </Text>
               <Image src="/images/baselogo.png" alt="header" mx="auto" width="20%" minW="100px" mt="18px" />
 
